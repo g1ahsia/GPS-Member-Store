@@ -60,5 +60,19 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansTC-Black.otf</string>
+		<string>NotoSansTC-Bold.otf</string>
+		<string>NotoSansTC-Light.otf</string>
+		<string>NotoSansTC-Medium.otf</string>
+		<string>NotoSansTC-Regular.otf</string>
+		<string>NotoSansTC-Thin.otf</string>
+		<string>UFONTS.COM_DIN-MEDIUM.TTF</string>
+	</array>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allows app to scan barcode</string>
 </dict>
 </plist>
