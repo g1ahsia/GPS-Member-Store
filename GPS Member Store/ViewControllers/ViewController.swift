@@ -20,11 +20,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.presentLoginVC(notification:)), name: Notification.Name("Logout"), object: nil)
+
         createTabBarController()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { // Change `0.05` to the desired number of seconds.
-            self.presentLoginVC()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { // Change `0.05` to the desired number of seconds.
+//            self.presentLoginVC()
+            
+            NotificationCenter.default.post(name: Notification.Name("Logout"), object: nil)
+
         }
+        
     }
 
     func createTabBarController() {
@@ -32,7 +39,8 @@ class ViewController: UIViewController {
         tabBarCtrl?.tabBar.tintColor = PIGMENT_GREEN
 
         let productSearchVC = ProductSearchViewController()
-        
+        productSearchVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         let productSearchNav = UINavigationController()
         productSearchNav.navigationBar.tintColor = ATLANTIS_GREEN
         productSearchNav.setNavigationBarHidden(false, animated: false)
@@ -40,16 +48,18 @@ class ViewController: UIViewController {
         let customTabBarItem1:UITabBarItem = UITabBarItem(title: "產品播放", image: #imageLiteral(resourceName: " tab_ic_search_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_search_green"))
         productSearchNav.tabBarItem = customTabBarItem1
         
-        let transferGoodsVC = TransferGoodsViewController()
-        
-        let transferGoodsNav = UINavigationController()
-        transferGoodsNav.navigationBar.tintColor = ATLANTIS_GREEN
-        transferGoodsNav.setNavigationBarHidden(false, animated: false)
-        transferGoodsNav.pushViewController(transferGoodsVC, animated: true)
+        let requestVC = RequestViewController()
+        requestVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
+        let requestNav = UINavigationController()
+        requestNav.navigationBar.tintColor = ATLANTIS_GREEN
+        requestNav.setNavigationBarHidden(false, animated: false)
+        requestNav.pushViewController(requestVC, animated: true)
         let customTabBarItem2:UITabBarItem = UITabBarItem(title: "調撥平台", image: #imageLiteral(resourceName: " tab_ic_truck_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_truck_green"))
-        transferGoodsNav.tabBarItem = customTabBarItem2
+        requestNav.tabBarItem = customTabBarItem2
         
         let messageVC = MessageViewController()
+        messageVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         let messageNav = UINavigationController()
         messageNav.navigationBar.tintColor = ATLANTIS_GREEN
@@ -59,7 +69,8 @@ class ViewController: UIViewController {
         messageNav.tabBarItem = customTabBarItem3
 
         let consumerSearchVC = ConsumerSearchViewController()
-        
+        consumerSearchVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         let consumerSearchNav = UINavigationController()
         consumerSearchNav.navigationBar.tintColor = ATLANTIS_GREEN
         consumerSearchNav.setNavigationBarHidden(false, animated: false)
@@ -70,7 +81,8 @@ class ViewController: UIViewController {
         consumerSearchNav.tabBarItem = customTabBarItem4
         
         let accountVC = AccountViewController()
-        
+        accountVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         let accountNav = UINavigationController()
         accountNav.navigationBar.tintColor = ATLANTIS_GREEN
         accountNav.setNavigationBarHidden(false, animated: false)
@@ -79,12 +91,24 @@ class ViewController: UIViewController {
         let customTabBarItem5:UITabBarItem = UITabBarItem(title: "我的帳號", image: #imageLiteral(resourceName: " tab_ic_user_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_user_green"))
         accountNav.tabBarItem = customTabBarItem5
 
-        tabBarCtrl.viewControllers = [productSearchNav, transferGoodsNav, messageNav, consumerSearchNav, accountNav]
+        tabBarCtrl.viewControllers = [productSearchNav, requestNav, messageNav, consumerSearchNav, accountNav]
         
         self.view.addSubview(tabBarCtrl.view)
 
     }
-    func presentLoginVC() {
+//    func presentLoginVC() {
+//        let loginVC = LoginViewController()
+//        loginVC.view.backgroundColor = .white
+//
+//        let loginNav = UINavigationController()
+//        loginNav.navigationBar.tintColor = ATLANTIS_GREEN
+//        loginNav.modalPresentationStyle = .fullScreen
+//        loginNav.pushViewController(loginVC, animated: true)
+//
+//        self.present(loginNav, animated: false) {
+//        }
+//    }
+    @objc func presentLoginVC(notification: Notification) {
         let loginVC = LoginViewController()
         loginVC.view.backgroundColor = .white
 
@@ -92,8 +116,8 @@ class ViewController: UIViewController {
         loginNav.navigationBar.tintColor = ATLANTIS_GREEN
         loginNav.modalPresentationStyle = .fullScreen
         loginNav.pushViewController(loginVC, animated: true)
-
         self.present(loginNav, animated: false) {
+            self.tabBarCtrl?.selectedIndex = 0
         }
     }
 }

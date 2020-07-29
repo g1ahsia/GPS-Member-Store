@@ -8,10 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */; };
-		9F67E89924CFDF16004A8003 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89824CFDF16004A8003 /* MessageCell.swift */; };
 		9F67E89B24CFDF65004A8003 /* MessageComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */; };
 		9F67E89D24CFDF9A004A8003 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */; };
-		9F67E89F24CFDFAD004A8003 /* MessageContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89E24CFDFAD004A8003 /* MessageContentCell.swift */; };
+		9F67E89F24CFDFAD004A8003 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89E24CFDFAD004A8003 /* MessageCell.swift */; };
 		9F67E8A724CFE368004A8003 /* NotoSansTC-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */; };
 		9F67E8A824CFE368004A8003 /* NotoSansTC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */; };
 		9F67E8A924CFE368004A8003 /* NotoSansTC-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A424CFE32D004A8003 /* NotoSansTC-Light.otf */; };
@@ -36,15 +35,18 @@
 		9F69DC3F24CADD2B00C67A6B /* GPS_Member_StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC3E24CADD2B00C67A6B /* GPS_Member_StoreTests.swift */; };
 		9F69DC4A24CADD2B00C67A6B /* GPS_Member_StoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC4924CADD2B00C67A6B /* GPS_Member_StoreUITests.swift */; };
 		9F69DC5D24CADE9800C67A6B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC5C24CADE9800C67A6B /* LoginViewController.swift */; };
-		9F69DC6024CADEB800C67A6B /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC5F24CADEB800C67A6B /* FormCell.swift */; };
 		9F69DC6224CADEC900C67A6B /* ForgetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6124CADEC900C67A6B /* ForgetPasswordViewController.swift */; };
 		9F69DC6424CADF0600C67A6B /* ProductSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6324CADF0600C67A6B /* ProductSearchViewController.swift */; };
-		9F69DC6624CADFBA00C67A6B /* TransferGoodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6524CADFBA00C67A6B /* TransferGoodViewController.swift */; };
+		9F69DC6624CADFBA00C67A6B /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */; };
 		9F69DC6824CAE04000C67A6B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6724CAE04000C67A6B /* MessageViewController.swift */; };
 		9F69DC6A24CAE07300C67A6B /* ConsumerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */; };
 		9F69DC6C24CAE0B000C67A6B /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6B24CAE0B000C67A6B /* AccountViewController.swift */; };
 		9F69DC6E24CAE11300C67A6B /* AccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6D24CAE11300C67A6B /* AccountDetailViewController.swift */; };
-		9F69DC7024CAE14500C67A6B /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6F24CAE14500C67A6B /* NetworkManager.swift */; };
+		9F731A9D24D116DF00FCB267 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731A9C24D116DF00FCB267 /* NetworkManager.swift */; };
+		9F731A9F24D11BC900FCB267 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731A9E24D11BC900FCB267 /* FormCell.swift */; };
+		9F731AA724D136C700FCB267 /* ThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AA624D136C700FCB267 /* ThreadCell.swift */; };
+		9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AA824D14C6600FCB267 /* RequestCell.swift */; };
+		9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,10 +68,9 @@
 
 /* Begin PBXFileReference section */
 		9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = ../../GPS/GPS/GlobalVariables.swift; sourceTree = "<group>"; };
-		9F67E89824CFDF16004A8003 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = ../../../GPS/GPS/Cells/MessageCell.swift; sourceTree = "<group>"; };
 		9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageComposeViewController.swift; path = ../../../GPS/GPS/ViewControllers/MessageComposeViewController.swift; sourceTree = "<group>"; };
 		9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageDetailViewController.swift; path = ../../../GPS/GPS/ViewControllers/MessageDetailViewController.swift; sourceTree = "<group>"; };
-		9F67E89E24CFDFAD004A8003 /* MessageContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageContentCell.swift; path = ../../../GPS/GPS/Cells/MessageContentCell.swift; sourceTree = "<group>"; };
+		9F67E89E24CFDFAD004A8003 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = ../../../GPS/GPS/Cells/MessageCell.swift; sourceTree = "<group>"; };
 		9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Black.otf"; sourceTree = "<group>"; };
 		9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Bold.otf"; sourceTree = "<group>"; };
 		9F67E8A324CFE32D004A8003 /* NotoSansTC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Regular.otf"; sourceTree = "<group>"; };
@@ -100,15 +101,18 @@
 		9F69DC4924CADD2B00C67A6B /* GPS_Member_StoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPS_Member_StoreUITests.swift; sourceTree = "<group>"; };
 		9F69DC4B24CADD2B00C67A6B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F69DC5C24CADE9800C67A6B /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		9F69DC5F24CADEB800C67A6B /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		9F69DC6124CADEC900C67A6B /* ForgetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetPasswordViewController.swift; sourceTree = "<group>"; };
 		9F69DC6324CADF0600C67A6B /* ProductSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSearchViewController.swift; sourceTree = "<group>"; };
-		9F69DC6524CADFBA00C67A6B /* TransferGoodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferGoodViewController.swift; sourceTree = "<group>"; };
+		9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		9F69DC6724CAE04000C67A6B /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageViewController.swift; sourceTree = "<group>"; };
 		9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerSearchViewController.swift; sourceTree = "<group>"; };
 		9F69DC6B24CAE0B000C67A6B /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		9F69DC6D24CAE11300C67A6B /* AccountDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountDetailViewController.swift; sourceTree = "<group>"; };
-		9F69DC6F24CAE14500C67A6B /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		9F731A9C24D116DF00FCB267 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = ../../GPS/GPS/NetworkManager.swift; sourceTree = "<group>"; };
+		9F731A9E24D11BC900FCB267 /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCell.swift; path = ../../../GPS/GPS/Cells/FormCell.swift; sourceTree = "<group>"; };
+		9F731AA624D136C700FCB267 /* ThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadCell.swift; path = ../../../GPS/GPS/Cells/ThreadCell.swift; sourceTree = "<group>"; };
+		9F731AA824D14C6600FCB267 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
+		9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestComposeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,7 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */,
-				9F69DC6F24CAE14500C67A6B /* NetworkManager.swift */,
+				9F731A9C24D116DF00FCB267 /* NetworkManager.swift */,
 				9F69DC2724CADD2800C67A6B /* AppDelegate.swift */,
 				9F69DC2924CADD2800C67A6B /* SceneDelegate.swift */,
 				9F69DC3524CADD2B00C67A6B /* Info.plist */,
@@ -214,8 +218,8 @@
 				9F67E8B724D00B67004A8003 /* ElectronicDocViewController.swift */,
 				9F67E8B924D00E44004A8003 /* ElectronicDocDetailViewController.swift */,
 				9F69DC6124CADEC900C67A6B /* ForgetPasswordViewController.swift */,
-				9F69DC6724CAE04000C67A6B /* MessageViewController.swift */,
 				9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */,
+				9F69DC6724CAE04000C67A6B /* MessageViewController.swift */,
 				9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */,
 				9F67E8B124CFFFA3004A8003 /* ProductDetailViewController.swift */,
 				9F69DC6324CADF0600C67A6B /* ProductSearchViewController.swift */,
@@ -223,7 +227,8 @@
 				9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */,
 				9F67E8BD24D0297A004A8003 /* ConsumerDetailViewController.swift */,
 				9F67E8AD24CFFD47004A8003 /* SearchResultViewController.swift */,
-				9F69DC6524CADFBA00C67A6B /* TransferGoodViewController.swift */,
+				9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */,
+				9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */,
 				9F69DC2B24CADD2800C67A6B /* ViewController.swift */,
 			);
 			path = ViewControllers;
@@ -233,11 +238,12 @@
 			isa = PBXGroup;
 			children = (
 				9F67E8BB24D02124004A8003 /* ConsumerCell.swift */,
-				9F69DC5F24CADEB800C67A6B /* FormCell.swift */,
-				9F67E8AF24CFFEFD004A8003 /* ProductCell.swift */,
-				9F67E89824CFDF16004A8003 /* MessageCell.swift */,
 				9F67E8B524D00A81004A8003 /* ElectronicDocCell.swift */,
-				9F67E89E24CFDFAD004A8003 /* MessageContentCell.swift */,
+				9F731A9E24D11BC900FCB267 /* FormCell.swift */,
+				9F67E8AF24CFFEFD004A8003 /* ProductCell.swift */,
+				9F67E89E24CFDFAD004A8003 /* MessageCell.swift */,
+				9F731AA824D14C6600FCB267 /* RequestCell.swift */,
+				9F731AA624D136C700FCB267 /* ThreadCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -379,10 +385,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F731A9D24D116DF00FCB267 /* NetworkManager.swift in Sources */,
+				9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */,
 				9F69DC2C24CADD2800C67A6B /* ViewController.swift in Sources */,
-				9F69DC6024CADEB800C67A6B /* FormCell.swift in Sources */,
 				9F67E89D24CFDF9A004A8003 /* MessageDetailViewController.swift in Sources */,
 				9F69DC6E24CAE11300C67A6B /* AccountDetailViewController.swift in Sources */,
+				9F731A9F24D11BC900FCB267 /* FormCell.swift in Sources */,
 				9F67E89B24CFDF65004A8003 /* MessageComposeViewController.swift in Sources */,
 				9F69DC6C24CAE0B000C67A6B /* AccountViewController.swift in Sources */,
 				9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */,
@@ -393,12 +401,12 @@
 				9F69DC6824CAE04000C67A6B /* MessageViewController.swift in Sources */,
 				9F69DC6224CADEC900C67A6B /* ForgetPasswordViewController.swift in Sources */,
 				9F67E8BC24D02124004A8003 /* ConsumerCell.swift in Sources */,
-				9F69DC6624CADFBA00C67A6B /* TransferGoodViewController.swift in Sources */,
-				9F67E89F24CFDFAD004A8003 /* MessageContentCell.swift in Sources */,
-				9F67E89924CFDF16004A8003 /* MessageCell.swift in Sources */,
+				9F69DC6624CADFBA00C67A6B /* RequestViewController.swift in Sources */,
+				9F67E89F24CFDFAD004A8003 /* MessageCell.swift in Sources */,
 				9F67E8BA24D00E44004A8003 /* ElectronicDocDetailViewController.swift in Sources */,
+				9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */,
+				9F731AA724D136C700FCB267 /* ThreadCell.swift in Sources */,
 				9F67E8B224CFFFA3004A8003 /* ProductDetailViewController.swift in Sources */,
-				9F69DC7024CAE14500C67A6B /* NetworkManager.swift in Sources */,
 				9F67E8BE24D0297A004A8003 /* ConsumerDetailViewController.swift in Sources */,
 				9F69DC5D24CADE9800C67A6B /* LoginViewController.swift in Sources */,
 				9F67E8B824D00B67004A8003 /* ElectronicDocViewController.swift in Sources */,

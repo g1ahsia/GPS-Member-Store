@@ -46,7 +46,7 @@ class LoginViewController: UIViewController {
         tableView.dataSource = self
         tableView.allowsSelection = false
         tableView.isScrollEnabled = false
-        tableView.backgroundColor = UIColor .green
+        tableView.backgroundColor = .clear
         tableView.register(FormCell.self, forCellReuseIdentifier: "form")
         return tableView
 
@@ -114,6 +114,11 @@ class LoginViewController: UIViewController {
 //        self.view.addSubview(registration)
 
         self.setupLayout()
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+
     }
     
     @objc private func menuButtonTapped(sender: UIButton!) {

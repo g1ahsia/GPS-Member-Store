@@ -28,9 +28,7 @@ class AccountViewController: UIViewController {
         title = "我的帳號"
         view.addSubview(accountTableView)
         accountTableView.tableFooterView = UIView(frame: .zero)
-
         setupLayout()
-
     }
     
     private func setupLayout() {
@@ -105,9 +103,10 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource, UIS
                 break
             case 3:
                 break
-            case 4:
+            case 7:
                 GlobalVariables.showAlertWithOptions(title: "登出", message: "確定要登出", confirmString: "登出", vc: self) {
                     print("已登出")
+                    NotificationCenter.default.post(name: Notification.Name("Logout"), object: nil)
                 }
                 break
             default:

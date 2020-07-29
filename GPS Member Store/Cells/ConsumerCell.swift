@@ -50,15 +50,6 @@ class ConsumerCell: UITableViewCell {
         textLabel.clipsToBounds = true
         return textLabel
     }()
-    
-    var arrow : UIImageView = {
-        var imageView = UIImageView()
-        imageView.clipsToBounds = true
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: " arw_right_sm_grey")
-        return imageView
-    }()
-
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier : reuseIdentifier)
@@ -67,8 +58,6 @@ class ConsumerCell: UITableViewCell {
         lastNameBackground.addSubview(lastNameLabel)
         self.addSubview(nameLabel)
         self.addSubview(mobilePhoneLabel)
-        self.addSubview(arrow)
-
     }
     
     override func layoutSubviews() {
@@ -99,9 +88,6 @@ class ConsumerCell: UITableViewCell {
         mobilePhoneLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 36).isActive = true
         mobilePhoneLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -44).isActive = true
         mobilePhoneLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        
-        arrow.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        arrow.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -8).isActive = true
     }
     
     required init?(coder aDecoder: NSCoder) {

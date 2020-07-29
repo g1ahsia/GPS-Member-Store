@@ -11,6 +11,18 @@ import UIKit
 
 class ConsumerSearchViewController: UIViewController {
     var consumers = [Consumer]()
+    
+    var consumerSearchBar : UISearchBar = {
+        var searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
+        searchBar.searchBarStyle = UISearchBar.Style.prominent
+        searchBar.placeholder = "關鍵字搜尋"
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.backgroundImage = UIImage()
+        searchBar.setShowsCancelButton(false, animated: true)
+        return searchBar
+    }()
 
     lazy var consumerTableView : UITableView = {
         var tableView = UITableView()
@@ -19,7 +31,7 @@ class ConsumerSearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ConsumerCell.self, forCellReuseIdentifier: "consumer")
-        tableView.backgroundColor = .blue
+//        tableView.backgroundColor = .blue
         return tableView
     }()
 
@@ -34,13 +46,10 @@ class ConsumerSearchViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = SNOW
         title = "客戶搜尋"
+        view.addSubview(consumerSearchBar)
         view.addSubview(consumerTableView)
-        
-        consumers = [Consumer.init(id: 1, email: "abc@gmail.com", name: "王大寶", dateOfBirth: "2001/20/34", mobilePhone: "0912345678", address: "12342 road", gender: 1, storeId: 1, consumerNumber: "23234", serialNumber: "A121919743"),
-                    Consumer.init(id: 1, email: "abc@gmail.com", name: "王大寶", dateOfBirth: "2001/20/34", mobilePhone: "0912345678", address: "12342 road", gender: 1, storeId: 1, consumerNumber: "23234", serialNumber: "A121919743"),
-                    Consumer.init(id: 1, email: "abc@gmail.com", name: "王大寶", dateOfBirth: "2001/20/34", mobilePhone: "0912345678", address: "12342 road", gender: 1, storeId: 1, consumerNumber: "23234", serialNumber: "A121919743"),
-                    Consumer.init(id: 1, email: "abc@gmail.com", name: "王大寶", dateOfBirth: "2001/20/34", mobilePhone: "0912345678", address: "12342 road", gender: 1, storeId: 1, consumerNumber: "23234", serialNumber: "A121919743"),
-                    Consumer.init(id: 1, email: "abc@gmail.com", name: "王大寶", dateOfBirth: "2001/20/34", mobilePhone: "0912345678", address: "12342 road", gender: 1, storeId: 1, consumerNumber: "23234", serialNumber: "A121919743")]
+        consumerSearchBar.delegate = self
+        consumerTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
 
 //            NetworkManager.fetchElectronicDocs() { (electronicDocs) in
@@ -49,10 +58,19 @@ class ConsumerSearchViewController: UIViewController {
 //                    self.electronicDocTableView.reloadData()
 //                }
 //            }
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     private func setupLayout() {
-        consumerTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        consumerSearchBar.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+        consumerSearchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 6).isActive = true
+        consumerSearchBar.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        consumerSearchBar.heightAnchor.constraint(equalToConstant: 36).isActive = true
+
+        consumerTableView.topAnchor.constraint(equalTo: consumerSearchBar.bottomAnchor, constant: 8).isActive = true
         consumerTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         consumerTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         consumerTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
@@ -76,8 +94,34 @@ extension ConsumerSearchViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//            let electronicDetailVC = ElectronicDocDetailViewController()
-//            electronicDetailVC.fileUrl = electronicDocs[indexPath.row].fileUrl
-//            self.navigationController?.pushViewController(electronicDetailVC, animated: true)
+        let consumerDetailVC = ConsumerDetailViewController()
+        consumerDetailVC.id = consumers[indexPath.row].id
+        self.navigationController?.pushViewController(consumerDetailVC, animated: true)
+
+    }
+}
+
+extension ConsumerSearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        // When there is no text, filteredData is the same as the original data
+        // When user has entered text into the search box
+        // Use the filter method to iterate over all items in the data array
+        // For each item, return true if the item should be included and false if the
+        // item should NOT be included
+        if (searchText.count == 0) {
+            consumers = []
+            consumerTableView.reloadData()
+        }
+        
+    }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+        consumers = [Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
+                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
+                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
+                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
+                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344")]
+        
+        consumerTableView.reloadData()
     }
 }
