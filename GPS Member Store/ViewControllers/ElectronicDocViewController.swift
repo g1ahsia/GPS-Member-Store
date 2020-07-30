@@ -25,6 +25,7 @@ class ElectronicDocViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
         if (self.electronicDocTableView.indexPathForSelectedRow != nil) {
             self.electronicDocTableView.deselectRow(at: self.electronicDocTableView.indexPathForSelectedRow!, animated: true)
         }
@@ -72,8 +73,9 @@ extension ElectronicDocViewController: UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let electronicDetailVC = ElectronicDocDetailViewController()
-        electronicDetailVC.fileUrl = electronicDocs[indexPath.row].fileUrl
-        self.navigationController?.pushViewController(electronicDetailVC, animated: true)
+        let pdfVC = PDFViewController()
+        pdfVC.fileUrl = electronicDocs[indexPath.row].fileUrl
+        pdfVC.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
+        self.present(pdfVC, animated: true)
     }
 }

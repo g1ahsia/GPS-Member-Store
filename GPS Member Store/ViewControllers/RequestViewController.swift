@@ -37,7 +37,7 @@ class RequestViewController: UIViewController {
         requestTableView.tableFooterView = UIView(frame: .zero)
         view.addSubview(requestTableView)
 
-        var image = UIImage(#imageLiteral(resourceName: " ic_circle_add"))
+        var image = UIImage(#imageLiteral(resourceName: " ic_fill_add"))
         image = image.withRenderingMode(.alwaysOriginal)
         let add = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(self.addButtonTapped)) //
         self.navigationItem.rightBarButtonItem  = add

@@ -53,7 +53,6 @@ class AccountDetailViewController: UIViewController {
         return button
     }()
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SNOW

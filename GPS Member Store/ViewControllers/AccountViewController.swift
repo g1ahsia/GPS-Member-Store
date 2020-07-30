@@ -92,8 +92,6 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource, UIS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
             case 0:
-                let accountDetailVC = AccountDetailViewController()
-                self.navigationController?.pushViewController(accountDetailVC, animated: true)
                 break
             case 1:
                 let electronicDocVC = ElectronicDocViewController()
@@ -102,6 +100,10 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource, UIS
             case 2:
                 break
             case 3:
+                break
+            case 6:
+                let accountDetailVC = AccountDetailViewController()
+                self.navigationController?.pushViewController(accountDetailVC, animated: true)
                 break
             case 7:
                 GlobalVariables.showAlertWithOptions(title: "登出", message: "確定要登出", confirmString: "登出", vc: self) {

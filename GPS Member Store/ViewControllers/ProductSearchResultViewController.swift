@@ -1,5 +1,5 @@
 //
-//  SearchResultViewController.swift
+//  ProductSearchResultViewController.swift
 //  GPS
 //
 //  Created by Allen Hsiao on 2020/7/21.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchResultViewController: UIViewController {
+class ProductSearchResultViewController: UIViewController {
     
     var products = [Product]()
 
@@ -17,6 +17,7 @@ class SearchResultViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 110
         tableView.register(ProductCell.self, forCellReuseIdentifier: "product")
         return tableView
     }()
@@ -32,12 +33,15 @@ class SearchResultViewController: UIViewController {
         view.backgroundColor = SNOW
         title = "搜尋結果"
         setupLayout()
-        NetworkManager.fetchProducts() { (products) in
-            self.products = products
-            DispatchQueue.main.async {
-                self.productTableView.reloadData()
-            }
-        }
+//        NetworkManager.fetchProducts() { (products) in
+//            self.products = products
+//            DispatchQueue.main.async {
+//                self.productTableView.reloadData()
+//            }
+//        }
+        products = [
+            Product.init(id : 1, storeId : 1, isPublic : true, name: "金固強優敏複方膠囊教育版10903 ", description: "內部教育資料，請勿外流。", barcode: "aaaaa", videoUrl : "https://d1een0o27yi8f5.cloudfront.net/video/kinguchiang-education-10903.mp4", pdfUrl : "https://d1.awsstatic.com/whitepapers/Migration/amazon-aurora-migration-handbook.pdf?did=wp_card&trk=wp_card", imageUrls : [], thumbnailUrl : "")
+        ]
     }
     
     private func setupLayout() {
@@ -50,20 +54,26 @@ class SearchResultViewController: UIViewController {
 
 }
 
-extension SearchResultViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 232
-    }
-    
+extension ProductSearchResultViewController: UITableViewDelegate, UITableViewDataSource {
+        
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return products.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "product", for: indexPath) as! ProductCell
-        cell.selectionStyle = .none
-
+//        cell.selectionStyle = .none
+        cell.name = products[indexPath.row].name
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let productDetailVC = ProductDetailViewController()
+        productDetailVC.name = products[indexPath.row].name
+        productDetailVC.desc = products[indexPath.row].description
+        productDetailVC.videoUrl = products[indexPath.row].videoUrl
+        productDetailVC.pdfUrl = products[indexPath.row].pdfUrl
+        self.navigationController?.pushViewController(productDetailVC, animated: true)
     }
 }

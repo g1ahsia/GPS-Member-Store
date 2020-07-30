@@ -16,6 +16,7 @@ class ConsumerDetailViewController: UIViewController {
     
     lazy var infoTableView : UITableView = {
         var tableView = UITableView()
+        tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.rowHeight = 50

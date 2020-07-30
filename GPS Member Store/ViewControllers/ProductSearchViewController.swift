@@ -83,8 +83,8 @@ class ProductSearchViewController: UIViewController {
         search.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
     }
     @objc private func searchButtonTapped() {
-        let searchResultVC = SearchResultViewController()
-        self.navigationController?.pushViewController(searchResultVC, animated: true)
+        let productSearchResultVC = ProductSearchResultViewController()
+        self.navigationController?.pushViewController(productSearchResultVC, animated: true)
     }
     
     @objc private func barcodeButtonTapped(sender: UIButton!) {
@@ -107,8 +107,8 @@ extension ProductSearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
-        let searchResultVC = SearchResultViewController()
-        self.navigationController?.pushViewController(searchResultVC, animated: true)
+        let productSearchResultVC = ProductSearchResultViewController()
+        self.navigationController?.pushViewController(productSearchResultVC, animated: true)
     }
 
 }

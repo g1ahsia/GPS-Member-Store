@@ -18,8 +18,22 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Allows app to scan barcode</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansTC-Black.otf</string>
+		<string>NotoSansTC-Bold.otf</string>
+		<string>NotoSansTC-Light.otf</string>
+		<string>NotoSansTC-Medium.otf</string>
+		<string>NotoSansTC-Regular.otf</string>
+		<string>NotoSansTC-Thin.otf</string>
+		<string>UFONTS.COM_DIN-MEDIUM.TTF</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -50,8 +64,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -60,19 +72,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>UIAppFonts</key>
-	<array>
-		<string>NotoSansTC-Black.otf</string>
-		<string>NotoSansTC-Bold.otf</string>
-		<string>NotoSansTC-Light.otf</string>
-		<string>NotoSansTC-Medium.otf</string>
-		<string>NotoSansTC-Regular.otf</string>
-		<string>NotoSansTC-Thin.otf</string>
-		<string>UFONTS.COM_DIN-MEDIUM.TTF</string>
-	</array>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
-	<key>NSCameraUsageDescription</key>
-	<string>Allows app to scan barcode</string>
 </dict>
 </plist>

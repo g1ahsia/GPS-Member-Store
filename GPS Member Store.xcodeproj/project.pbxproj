@@ -17,13 +17,13 @@
 		9F67E8AA24CFE368004A8003 /* NotoSansTC-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A524CFE32D004A8003 /* NotoSansTC-Medium.otf */; };
 		9F67E8AB24CFE368004A8003 /* NotoSansTC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A324CFE32D004A8003 /* NotoSansTC-Regular.otf */; };
 		9F67E8AC24CFE368004A8003 /* NotoSansTC-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A624CFE32E004A8003 /* NotoSansTC-Thin.otf */; };
-		9F67E8AE24CFFD47004A8003 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8AD24CFFD47004A8003 /* SearchResultViewController.swift */; };
+		9F67E8AE24CFFD47004A8003 /* ProductSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8AD24CFFD47004A8003 /* ProductSearchResultViewController.swift */; };
 		9F67E8B024CFFEFD004A8003 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8AF24CFFEFD004A8003 /* ProductCell.swift */; };
 		9F67E8B224CFFFA3004A8003 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8B124CFFFA3004A8003 /* ProductDetailViewController.swift */; };
 		9F67E8B424D00240004A8003 /* BarcodeScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8B324D00240004A8003 /* BarcodeScannerViewController.swift */; };
 		9F67E8B624D00A81004A8003 /* ElectronicDocCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8B524D00A81004A8003 /* ElectronicDocCell.swift */; };
 		9F67E8B824D00B67004A8003 /* ElectronicDocViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8B724D00B67004A8003 /* ElectronicDocViewController.swift */; };
-		9F67E8BA24D00E44004A8003 /* ElectronicDocDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8B924D00E44004A8003 /* ElectronicDocDetailViewController.swift */; };
+		9F67E8BA24D00E44004A8003 /* PDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8B924D00E44004A8003 /* PDFViewController.swift */; };
 		9F67E8BC24D02124004A8003 /* ConsumerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8BB24D02124004A8003 /* ConsumerCell.swift */; };
 		9F67E8BE24D0297A004A8003 /* ConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E8BD24D0297A004A8003 /* ConsumerDetailViewController.swift */; };
 		9F69DC2824CADD2800C67A6B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC2724CADD2800C67A6B /* AppDelegate.swift */; };
@@ -47,6 +47,7 @@
 		9F731AA724D136C700FCB267 /* ThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AA624D136C700FCB267 /* ThreadCell.swift */; };
 		9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AA824D14C6600FCB267 /* RequestCell.swift */; };
 		9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */; };
+		9F79CB1624D28A060070F883 /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB1524D28A060070F883 /* ImagesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,13 +78,13 @@
 		9F67E8A424CFE32D004A8003 /* NotoSansTC-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Light.otf"; sourceTree = "<group>"; };
 		9F67E8A524CFE32D004A8003 /* NotoSansTC-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Medium.otf"; sourceTree = "<group>"; };
 		9F67E8A624CFE32E004A8003 /* NotoSansTC-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Thin.otf"; sourceTree = "<group>"; };
-		9F67E8AD24CFFD47004A8003 /* SearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
+		9F67E8AD24CFFD47004A8003 /* ProductSearchResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSearchResultViewController.swift; sourceTree = "<group>"; };
 		9F67E8AF24CFFEFD004A8003 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		9F67E8B124CFFFA3004A8003 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		9F67E8B324D00240004A8003 /* BarcodeScannerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeScannerViewController.swift; sourceTree = "<group>"; };
 		9F67E8B524D00A81004A8003 /* ElectronicDocCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElectronicDocCell.swift; sourceTree = "<group>"; };
 		9F67E8B724D00B67004A8003 /* ElectronicDocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectronicDocViewController.swift; sourceTree = "<group>"; };
-		9F67E8B924D00E44004A8003 /* ElectronicDocDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectronicDocDetailViewController.swift; sourceTree = "<group>"; };
+		9F67E8B924D00E44004A8003 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		9F67E8BB24D02124004A8003 /* ConsumerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerCell.swift; sourceTree = "<group>"; };
 		9F67E8BD24D0297A004A8003 /* ConsumerDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerDetailViewController.swift; sourceTree = "<group>"; };
 		9F69DC2424CADD2800C67A6B /* GPS Member Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GPS Member Store.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +114,7 @@
 		9F731AA624D136C700FCB267 /* ThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadCell.swift; path = ../../../GPS/GPS/Cells/ThreadCell.swift; sourceTree = "<group>"; };
 		9F731AA824D14C6600FCB267 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestComposeViewController.swift; sourceTree = "<group>"; };
+		9F79CB1524D28A060070F883 /* ImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,17 +218,18 @@
 				9F69DC6D24CAE11300C67A6B /* AccountDetailViewController.swift */,
 				9F67E8B324D00240004A8003 /* BarcodeScannerViewController.swift */,
 				9F67E8B724D00B67004A8003 /* ElectronicDocViewController.swift */,
-				9F67E8B924D00E44004A8003 /* ElectronicDocDetailViewController.swift */,
 				9F69DC6124CADEC900C67A6B /* ForgetPasswordViewController.swift */,
 				9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */,
 				9F69DC6724CAE04000C67A6B /* MessageViewController.swift */,
 				9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */,
+				9F67E8B924D00E44004A8003 /* PDFViewController.swift */,
+				9F79CB1524D28A060070F883 /* ImagesViewController.swift */,
 				9F67E8B124CFFFA3004A8003 /* ProductDetailViewController.swift */,
 				9F69DC6324CADF0600C67A6B /* ProductSearchViewController.swift */,
+				9F67E8AD24CFFD47004A8003 /* ProductSearchResultViewController.swift */,
 				9F69DC5C24CADE9800C67A6B /* LoginViewController.swift */,
 				9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */,
 				9F67E8BD24D0297A004A8003 /* ConsumerDetailViewController.swift */,
-				9F67E8AD24CFFD47004A8003 /* SearchResultViewController.swift */,
 				9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */,
 				9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */,
 				9F69DC2B24CADD2800C67A6B /* ViewController.swift */,
@@ -396,6 +399,7 @@
 				9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */,
 				9F69DC2824CADD2800C67A6B /* AppDelegate.swift in Sources */,
 				9F67E8B424D00240004A8003 /* BarcodeScannerViewController.swift in Sources */,
+				9F79CB1624D28A060070F883 /* ImagesViewController.swift in Sources */,
 				9F69DC2A24CADD2800C67A6B /* SceneDelegate.swift in Sources */,
 				9F69DC6A24CAE07300C67A6B /* ConsumerSearchViewController.swift in Sources */,
 				9F69DC6824CAE04000C67A6B /* MessageViewController.swift in Sources */,
@@ -403,7 +407,7 @@
 				9F67E8BC24D02124004A8003 /* ConsumerCell.swift in Sources */,
 				9F69DC6624CADFBA00C67A6B /* RequestViewController.swift in Sources */,
 				9F67E89F24CFDFAD004A8003 /* MessageCell.swift in Sources */,
-				9F67E8BA24D00E44004A8003 /* ElectronicDocDetailViewController.swift in Sources */,
+				9F67E8BA24D00E44004A8003 /* PDFViewController.swift in Sources */,
 				9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */,
 				9F731AA724D136C700FCB267 /* ThreadCell.swift in Sources */,
 				9F67E8B224CFFFA3004A8003 /* ProductDetailViewController.swift in Sources */,
@@ -412,7 +416,7 @@
 				9F67E8B824D00B67004A8003 /* ElectronicDocViewController.swift in Sources */,
 				9F67E8B624D00A81004A8003 /* ElectronicDocCell.swift in Sources */,
 				9F67E8B024CFFEFD004A8003 /* ProductCell.swift in Sources */,
-				9F67E8AE24CFFD47004A8003 /* SearchResultViewController.swift in Sources */,
+				9F67E8AE24CFFD47004A8003 /* ProductSearchResultViewController.swift in Sources */,
 				9F69DC6424CADF0600C67A6B /* ProductSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
