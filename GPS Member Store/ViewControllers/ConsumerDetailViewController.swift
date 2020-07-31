@@ -146,9 +146,14 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
                 break
             case 6:
                 break
+            case 7:
+                let tagsVC = TagsViewController()
+                tagsVC.tagsString = "#心臟病 #高血壓 #中風"
+                self.navigationController?.pushViewController(tagsVC, animated: true)
+                break
             default:
                 break
-            }
+        }
     }
 }
 

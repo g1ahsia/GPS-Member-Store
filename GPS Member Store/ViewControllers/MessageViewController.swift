@@ -99,6 +99,7 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource, UIS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let messageDetailVC = MessageDetailViewController()
+        messageDetailVC.role = Role.MemberStore
         messageDetailVC.title = "預約領取處方"
         self.navigationController?.pushViewController(messageDetailVC, animated: true)
     }

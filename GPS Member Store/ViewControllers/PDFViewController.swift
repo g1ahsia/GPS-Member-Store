@@ -43,31 +43,25 @@ class PDFViewController: UIViewController {
     }
         
     private func setupLayout() {
-        if let url = fileUrl {
-            guard let url = URL(string: url) else {return}
-            do{
-//                let data = try Data(contentsOf: url)
-//                let pdfDOC = PDFDocument(data: data)
-                let pdfDOC = PDFDocument(url: url)
-                pdfView.displayMode = .singlePageContinuous
-                pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                pdfView.displaysAsBook = true
-                pdfView.displayDirection = .vertical
-                pdfView.document = pdfDOC
-                pdfView.autoScales = true
-                pdfView.maxScaleFactor = 4.0
-                pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
-            }catch let err{
-                print(err.localizedDescription)
+        if let fileUrl = fileUrl {
+            NetworkManager.fetchPDF(urlString: fileUrl) { (data) in
+                DispatchQueue.main.async {
+                    let pdfDOC = PDFDocument(data: data)
+                    //                let pdfDOC = PDFDocument(url: url)
+                    self.pdfView.displayMode = .singlePageContinuous
+                    self.pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                    self.pdfView.displaysAsBook = true
+                    self.pdfView.displayDirection = .vertical
+                    self.pdfView.document = pdfDOC
+                    self.pdfView.autoScales = true
+                    self.pdfView.maxScaleFactor = 4.0
+                    self.pdfView.minScaleFactor = self.pdfView.scaleFactorForSizeToFit
+                }
             }
         }
         close.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         close.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
 
-//        pdfView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        pdfView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
     }
     @objc private func closeButtonTapped(sender: UIButton!) {

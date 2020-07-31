@@ -75,7 +75,7 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource, UIS
         case 5:
             cell.textLabel?.text = "商品批價"
         case 6:
-            cell.textLabel?.text = "個人資料"
+            cell.textLabel?.text = "更改密碼"
         case 7:
             cell.textLabel?.text = "登出"
             break
@@ -102,8 +102,8 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource, UIS
             case 3:
                 break
             case 6:
-                let accountDetailVC = AccountDetailViewController()
-                self.navigationController?.pushViewController(accountDetailVC, animated: true)
+                let changePasswordVC = ChangePasswordViewController()
+                self.navigationController?.pushViewController(changePasswordVC, animated: true)
                 break
             case 7:
                 GlobalVariables.showAlertWithOptions(title: "登出", message: "確定要登出", confirmString: "登出", vc: self) {

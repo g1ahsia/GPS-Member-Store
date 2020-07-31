@@ -32,6 +32,7 @@ class ProductSearchResultViewController: UIViewController {
         view.addSubview(productTableView)
         view.backgroundColor = SNOW
         title = "搜尋結果"
+        productTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
 //        NetworkManager.fetchProducts() { (products) in
 //            self.products = products

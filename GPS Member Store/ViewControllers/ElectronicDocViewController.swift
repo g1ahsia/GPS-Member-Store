@@ -19,7 +19,7 @@ class ElectronicDocViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ElectronicDocCell.self, forCellReuseIdentifier: "electronicDoc")
-        tableView.backgroundColor = .blue
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
@@ -36,7 +36,7 @@ class ElectronicDocViewController: UIViewController {
         self.view.backgroundColor = SNOW
         title = "電子公文"
         view.addSubview(electronicDocTableView)
-        
+        electronicDocTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
 
         NetworkManager.fetchElectronicDocs() { (electronicDocs) in
