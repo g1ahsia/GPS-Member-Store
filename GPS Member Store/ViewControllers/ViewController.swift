@@ -69,6 +69,7 @@ class ViewController: UIViewController {
         messageNav.tabBarItem = customTabBarItem3
 
         let consumerSearchVC = ConsumerSearchViewController()
+        consumerSearchVC.purpose = ConsumerSearchPurpose.LookUp
         consumerSearchVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         let consumerSearchNav = UINavigationController()
@@ -96,18 +97,7 @@ class ViewController: UIViewController {
         self.view.addSubview(tabBarCtrl.view)
 
     }
-//    func presentLoginVC() {
-//        let loginVC = LoginViewController()
-//        loginVC.view.backgroundColor = .white
-//
-//        let loginNav = UINavigationController()
-//        loginNav.navigationBar.tintColor = ATLANTIS_GREEN
-//        loginNav.modalPresentationStyle = .fullScreen
-//        loginNav.pushViewController(loginVC, animated: true)
-//
-//        self.present(loginNav, animated: false) {
-//        }
-//    }
+
     @objc func presentLoginVC(notification: Notification) {
         let loginVC = LoginViewController()
         loginVC.view.backgroundColor = .white
@@ -122,3 +112,10 @@ class ViewController: UIViewController {
     }
 }
 
+extension UIViewController {
+    func hideKeyboardWhenTappedOnView() {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+}

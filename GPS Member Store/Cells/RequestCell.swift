@@ -74,7 +74,8 @@ class RequestCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier : reuseIdentifier)
-        
+        self.backgroundColor = .clear
+
         self.contentView.addSubview(mainImageView)
         self.contentView.addSubview(senderLabel)
         self.contentView.addSubview(subjectLabel)
@@ -127,7 +128,7 @@ class RequestCell: UITableViewCell {
         messageLabel.leftAnchor.constraint(equalTo: self.mainImageView.rightAnchor, constant: 8).isActive = true
         messageLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 69).isActive = true
         messageLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -44).isActive = true
-        messageLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        messageLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         dateLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16).isActive = true
         dateLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -20).isActive = true

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F1C8D1C24D7F6410043F791 /* LineImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D1B24D7F6410043F791 /* LineImageCell.swift */; };
+		9F1C8D1E24D7FC630043F791 /* RewardCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D1D24D7FC630043F791 /* RewardCardsViewController.swift */; };
+		9F1C8D2024D7FCA50043F791 /* RewardCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D1F24D7FCA50043F791 /* RewardCardCell.swift */; };
+		9F1C8D2224D7FCB40043F791 /* PointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D2124D7FCB40043F791 /* PointCell.swift */; };
+		9F1C8D2624D813F60043F791 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D2524D813F60043F791 /* TableCell.swift */; };
 		9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */; };
 		9F67E89B24CFDF65004A8003 /* MessageComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */; };
 		9F67E89D24CFDF9A004A8003 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */; };
@@ -49,6 +54,7 @@
 		9F79CB1824D3C17E0070F883 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB1724D3C17E0070F883 /* TagsViewController.swift */; };
 		9F79CB1C24D3DAA60070F883 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB1B24D3DAA60070F883 /* ChangePasswordViewController.swift */; };
 		9F79CB2624D3E5660070F883 /* ConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */; };
+		9F79CB2A24D425D00070F883 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2924D425D00070F883 /* QRCodeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +75,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9F1C8D1B24D7F6410043F791 /* LineImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineImageCell.swift; path = ../../../GPS/GPS/Cells/LineImageCell.swift; sourceTree = "<group>"; };
+		9F1C8D1D24D7FC630043F791 /* RewardCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardsViewController.swift; path = ../../../GPS/GPS/ViewControllers/RewardCardsViewController.swift; sourceTree = "<group>"; };
+		9F1C8D1F24D7FCA50043F791 /* RewardCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardCell.swift; path = ../../../GPS/GPS/Cells/RewardCardCell.swift; sourceTree = "<group>"; };
+		9F1C8D2124D7FCB40043F791 /* PointCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PointCell.swift; path = ../../../GPS/GPS/Cells/PointCell.swift; sourceTree = "<group>"; };
+		9F1C8D2524D813F60043F791 /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableCell.swift; path = ../../../GPS/GPS/Cells/TableCell.swift; sourceTree = "<group>"; };
 		9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = ../../GPS/GPS/GlobalVariables.swift; sourceTree = "<group>"; };
 		9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageComposeViewController.swift; path = ../../../GPS/GPS/ViewControllers/MessageComposeViewController.swift; sourceTree = "<group>"; };
 		9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageDetailViewController.swift; path = ../../../GPS/GPS/ViewControllers/MessageDetailViewController.swift; sourceTree = "<group>"; };
@@ -87,7 +98,7 @@
 		9F67E8B724D00B67004A8003 /* ElectronicDocViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectronicDocViewController.swift; sourceTree = "<group>"; };
 		9F67E8B924D00E44004A8003 /* PDFViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFViewController.swift; sourceTree = "<group>"; };
 		9F67E8BB24D02124004A8003 /* ConsumerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerCell.swift; sourceTree = "<group>"; };
-		9F69DC2424CADD2800C67A6B /* GPS Member Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GPS Member Store.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F69DC2424CADD2800C67A6B /* GPS會員店.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GPS會員店.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F69DC2724CADD2800C67A6B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F69DC2924CADD2800C67A6B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9F69DC2B24CADD2800C67A6B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +128,7 @@
 		9F79CB1724D3C17E0070F883 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		9F79CB1B24D3DAA60070F883 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordViewController.swift; path = ../../../GPS/GPS/ViewControllers/ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumerDetailViewController.swift; sourceTree = "<group>"; };
+		9F79CB2924D425D00070F883 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,7 +182,7 @@
 		9F69DC2524CADD2800C67A6B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9F69DC2424CADD2800C67A6B /* GPS Member Store.app */,
+				9F69DC2424CADD2800C67A6B /* GPS會員店.app */,
 				9F69DC3A24CADD2B00C67A6B /* GPS Member StoreTests.xctest */,
 				9F69DC4524CADD2B00C67A6B /* GPS Member StoreUITests.xctest */,
 			);
@@ -228,13 +240,15 @@
 				9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */,
 				9F67E8B924D00E44004A8003 /* PDFViewController.swift */,
 				9F79CB1524D28A060070F883 /* ImagesViewController.swift */,
-				9F67E8B124CFFFA3004A8003 /* ProductDetailViewController.swift */,
 				9F69DC6324CADF0600C67A6B /* ProductSearchViewController.swift */,
 				9F67E8AD24CFFD47004A8003 /* ProductSearchResultViewController.swift */,
+				9F67E8B124CFFFA3004A8003 /* ProductDetailViewController.swift */,
 				9F69DC5C24CADE9800C67A6B /* LoginViewController.swift */,
 				9F79CB1724D3C17E0070F883 /* TagsViewController.swift */,
+				9F1C8D1D24D7FC630043F791 /* RewardCardsViewController.swift */,
 				9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */,
 				9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */,
+				9F79CB2924D425D00070F883 /* QRCodeViewController.swift */,
 				9F69DC2B24CADD2800C67A6B /* ViewController.swift */,
 			);
 			path = ViewControllers;
@@ -246,9 +260,13 @@
 				9F67E8BB24D02124004A8003 /* ConsumerCell.swift */,
 				9F67E8B524D00A81004A8003 /* ElectronicDocCell.swift */,
 				9F731A9E24D11BC900FCB267 /* FormCell.swift */,
+				9F1C8D2524D813F60043F791 /* TableCell.swift */,
+				9F1C8D1B24D7F6410043F791 /* LineImageCell.swift */,
 				9F67E8AF24CFFEFD004A8003 /* ProductCell.swift */,
 				9F67E89E24CFDFAD004A8003 /* MessageCell.swift */,
+				9F1C8D1F24D7FCA50043F791 /* RewardCardCell.swift */,
 				9F731AA824D14C6600FCB267 /* RequestCell.swift */,
+				9F1C8D2124D7FCB40043F791 /* PointCell.swift */,
 				9F731AA624D136C700FCB267 /* ThreadCell.swift */,
 			);
 			path = Cells;
@@ -271,7 +289,7 @@
 			);
 			name = "GPS Member Store";
 			productName = "GPS Member Store";
-			productReference = 9F69DC2424CADD2800C67A6B /* GPS Member Store.app */;
+			productReference = 9F69DC2424CADD2800C67A6B /* GPS會員店.app */;
 			productType = "com.apple.product-type.application";
 		};
 		9F69DC3924CADD2B00C67A6B /* GPS Member StoreTests */ = {
@@ -392,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F731A9D24D116DF00FCB267 /* NetworkManager.swift in Sources */,
+				9F1C8D1E24D7FC630043F791 /* RewardCardsViewController.swift in Sources */,
 				9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */,
 				9F69DC2C24CADD2800C67A6B /* ViewController.swift in Sources */,
 				9F67E89D24CFDF9A004A8003 /* MessageDetailViewController.swift in Sources */,
@@ -409,17 +428,22 @@
 				9F69DC6A24CAE07300C67A6B /* ConsumerSearchViewController.swift in Sources */,
 				9F69DC6824CAE04000C67A6B /* MessageViewController.swift in Sources */,
 				9F69DC6224CADEC900C67A6B /* ForgetPasswordViewController.swift in Sources */,
+				9F79CB2A24D425D00070F883 /* QRCodeViewController.swift in Sources */,
 				9F67E8BC24D02124004A8003 /* ConsumerCell.swift in Sources */,
 				9F69DC6624CADFBA00C67A6B /* RequestViewController.swift in Sources */,
 				9F67E89F24CFDFAD004A8003 /* MessageCell.swift in Sources */,
 				9F67E8BA24D00E44004A8003 /* PDFViewController.swift in Sources */,
 				9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */,
 				9F731AA724D136C700FCB267 /* ThreadCell.swift in Sources */,
+				9F1C8D2624D813F60043F791 /* TableCell.swift in Sources */,
+				9F1C8D1C24D7F6410043F791 /* LineImageCell.swift in Sources */,
 				9F67E8B224CFFFA3004A8003 /* ProductDetailViewController.swift in Sources */,
+				9F1C8D2224D7FCB40043F791 /* PointCell.swift in Sources */,
 				9F69DC5D24CADE9800C67A6B /* LoginViewController.swift in Sources */,
 				9F67E8B824D00B67004A8003 /* ElectronicDocViewController.swift in Sources */,
 				9F67E8B624D00A81004A8003 /* ElectronicDocCell.swift in Sources */,
 				9F67E8B024CFFEFD004A8003 /* ProductCell.swift in Sources */,
+				9F1C8D2024D7FCA50043F791 /* RewardCardCell.swift in Sources */,
 				9F67E8AE24CFFD47004A8003 /* ProductSearchResultViewController.swift in Sources */,
 				9F69DC6424CADF0600C67A6B /* ProductSearchViewController.swift in Sources */,
 			);
@@ -595,16 +619,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = K78UD4724Z;
 				INFOPLIST_FILE = "GPS Member Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ah.GPS-Member-Store";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gps.member.store;
+				PRODUCT_NAME = "GPS會員店";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -613,16 +638,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = K78UD4724Z;
 				INFOPLIST_FILE = "GPS Member Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "ah.GPS-Member-Store";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gps.member.store;
+				PRODUCT_NAME = "GPS會員店";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

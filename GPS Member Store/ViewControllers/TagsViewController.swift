@@ -23,7 +23,7 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         textView.font = UIFont(name: "NotoSansTC-Regular", size: 15)
         textView.textColor = .black
         textView.delegate = self
-        textView.clipsToBounds = false
+        textView.clipsToBounds = true
 //        textView.textContainerInset = .zero; // fix the silly UITextView bug
 //        textView.textContainer.lineFragmentPadding = 0; // fix the silly UITextView bug
 //        textView.isScrollEnabled = false
@@ -38,8 +38,8 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "tags")
         tableView.isHidden = true
-        tableView.layer.borderColor = UIColor .red.cgColor
-        tableView.layer.borderWidth = 1
+//        tableView.layer.borderColor = UIColor .red.cgColor
+//        tableView.layer.borderWidth = 1
         return tableView
     }()
 
@@ -67,6 +67,7 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         view.addSubview(descView)
         view.addSubview(save)
         view.addSubview(tagTableView)
+        tagTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
     }
     
@@ -77,17 +78,14 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         descView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
         descView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         descView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        descView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        descView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         save.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
         save.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 30).isActive = true
         save.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         save.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
-//        tagTableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-//        tagTableView.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 30).isActive = true
-//        tagTableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-//        tagTableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        hideKeyboardWhenTappedOnView()
     }
     
     @objc private func saveButtonTapped(sender: UIButton!) {

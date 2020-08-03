@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
         textLabel.backgroundColor = .clear
         textLabel.font = UIFont(name: "NotoSansTC-Medium", size: 28)
         textLabel.textAlignment = .center
-        textLabel.text = "會員登入"
+        textLabel.text = "會員店 - 工作人員登入"
         return textLabel
     }()
     var subHeaderLabel : UILabel = {
@@ -34,6 +34,7 @@ class LoginViewController: UIViewController {
         textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 15)
         textLabel.textAlignment = .center
         textLabel.text = "登入好藥坊，成為好鄰居"
+        textLabel.isHidden = true
         return textLabel
     }()
     
@@ -115,10 +116,7 @@ class LoginViewController: UIViewController {
 
         self.setupLayout()
         
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-
+        hideKeyboardWhenTappedOnView()
     }
     
     @objc private func menuButtonTapped(sender: UIButton!) {
@@ -147,13 +145,13 @@ class LoginViewController: UIViewController {
             print(result)
             DispatchQueue.main.async {
 
-//                if (result["status"] as! Int == 1) {
+                if (result["status"] as! Int == 1) {
                     self.dismiss(animated: true) {
                     }
-//                }
-//                else {
-//                    GlobalVariables.showAlert(title: "登入", message: result["message"] as? String, vc: self)
-//                }
+                }
+                else {
+                    GlobalVariables.showAlert(title: "登入", message: result["message"] as? String, vc: self)
+                }
             }
         }
 

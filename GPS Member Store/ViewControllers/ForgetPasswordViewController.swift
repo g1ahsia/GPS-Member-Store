@@ -35,6 +35,7 @@ class ForgetPasswordViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(FormCell.self, forCellReuseIdentifier: "form")
+        tableView.backgroundColor = .clear
         return tableView
     }()
 

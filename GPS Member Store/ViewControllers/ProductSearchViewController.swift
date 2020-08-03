@@ -31,6 +31,18 @@ class ProductSearchViewController: UIViewController {
         return button
     }()
     
+    var nameLabel : UILabel = {
+        var textLabel = UILabel()
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.backgroundColor = .clear
+        textLabel.font = UIFont(name: "NotoSansTC-Bold", size: 20)
+        textLabel.textColor = .black
+        textLabel.clipsToBounds = true;
+        textLabel.textAlignment = .center
+        textLabel.text = "掃描Barcode"
+        return textLabel
+    }()
+    
     var redLine : UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +61,7 @@ class ProductSearchViewController: UIViewController {
         button.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SNOW
@@ -57,9 +69,12 @@ class ProductSearchViewController: UIViewController {
         view.addSubview(productSearchBar)
         view.addSubview(captureBracket)
         view.addSubview(redLine)
+        view.addSubview(nameLabel)
         view.addSubview(search)
         productSearchBar.delegate = self
         setupLayout()
+        
+        hideKeyboardWhenTappedOnView()
     }
     
     private func setupLayout() {
@@ -68,11 +83,16 @@ class ProductSearchViewController: UIViewController {
         productSearchBar.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
         productSearchBar.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
+        nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        nameLabel.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 40)).isActive = true
+        nameLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        nameLabel.bottomAnchor.constraint(equalTo: captureBracket.topAnchor, constant: -40).isActive = true
+        
         captureBracket.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         captureBracket.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         captureBracket.widthAnchor.constraint(equalToConstant: 271).isActive = true
         captureBracket.heightAnchor.constraint(equalToConstant: 183).isActive = true
-        
+                
         redLine.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         redLine.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         redLine.heightAnchor.constraint(equalToConstant: 2).isActive = true

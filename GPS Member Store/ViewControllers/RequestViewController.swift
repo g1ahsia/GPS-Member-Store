@@ -21,6 +21,7 @@ class RequestViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RequestCell.self, forCellReuseIdentifier: "request")
+        tableView.backgroundColor = .clear
         return tableView
     }()
 
@@ -43,9 +44,9 @@ class RequestViewController: UIViewController {
         self.navigationItem.rightBarButtonItem  = add
 
         requests = [
-            Request.init(id: 1, type: 0, sender: "松仁藥局", message: "歐樂B兒童防蛀牙膏Mickey 40g", updatedDate: "2020/04/25 15:35"),
-            Request.init(id: 2, type: 0, sender: "松仁藥局", message: "晶亮葉黃膠囊含葉黃素加玻尿酸", updatedDate: "2020/04/23 15:35"),
-            Request.init(id: 3, type: 1, sender: "松仁藥局", message: "空氣抑菌筆", updatedDate: "2020/04/20 15:35")
+            Request.init(id: 1, type: 0, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "歐樂B兒童防蛀牙膏Mickey 40g", updatedDate: "2020/04/25 15:35"),
+            Request.init(id: 2, type: 0, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "晶亮葉黃膠囊含葉黃素加玻尿酸", updatedDate: "2020/04/23 15:35"),
+            Request.init(id: 3, type: 1, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "空氣抑菌筆", updatedDate: "2020/04/20 15:35")
         ]
         setupLayout()
 
@@ -103,7 +104,30 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource, UIS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let messageDetailVC = MessageDetailViewController()
-        messageDetailVC.title = "預約領取處方"
+        messageDetailVC.title = REQUEST_SUBJECTS[requests[indexPath.row].type]
+        if (indexPath.row == 0) {
+            messageDetailVC.messages = [
+                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：60元\n商品數量：300\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
+                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購30隻", date: "2020/04/21", attachments: [])
+            ]
+            messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img")
+        }
+        else if (indexPath.row == 1) {
+            messageDetailVC.messages = [
+                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：120元\n商品數量：3000\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
+                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購100個，謝謝。", date: "2020/04/21", attachments: [])
+            ]
+            messageDetailVC.tempImage = #imageLiteral(resourceName: "001246")
+
+        }
+        else {
+            messageDetailVC.messages = [
+                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品數量：200\n我需要這批貨。", date: "2020/04/20", attachments: ["file"]),
+                Message.init(id: 1, sender: "翰林藥局", message: "我這邊有貨，請跟我聯絡。", date: "2020/04/21", attachments: [])
+            ]
+            messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img-122")
+        }
+
         self.navigationController?.pushViewController(messageDetailVC, animated: true)
     }
     

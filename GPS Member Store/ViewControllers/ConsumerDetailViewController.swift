@@ -23,6 +23,7 @@ class ConsumerDetailViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(FormCell.self, forCellReuseIdentifier: "form")
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
@@ -71,7 +72,7 @@ class ConsumerDetailViewController: UIViewController {
 extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
+        return 8
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,9 +117,9 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
                 cell.field = "標籤："
                 cell.answer = "#心臟病 #高血壓 #中風"
                 cell.fieldType = FieldType.Navigate
-            case 8:
-                cell.field = "血壓血糖紀錄"
-                cell.fieldType = FieldType.Navigate
+//            case 8:
+//                cell.field = "血壓血糖紀錄"
+//                cell.fieldType = FieldType.Navigate
             default:
                 cell.field = ""
         }

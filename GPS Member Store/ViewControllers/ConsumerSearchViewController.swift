@@ -11,7 +11,9 @@ import UIKit
 
 class ConsumerSearchViewController: UIViewController {
     var consumers = [Consumer]()
-    
+    var purpose : ConsumerSearchPurpose?
+    var points : Int?
+
     var consumerSearchBar : UISearchBar = {
         var searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +33,7 @@ class ConsumerSearchViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ConsumerCell.self, forCellReuseIdentifier: "consumer")
-//        tableView.backgroundColor = .blue
+        tableView.backgroundColor = .clear
         return tableView
     }()
 
@@ -59,9 +61,7 @@ class ConsumerSearchViewController: UIViewController {
 //                }
 //            }
         
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
+        hideKeyboardWhenTappedOnView()
     }
     
     private func setupLayout() {
@@ -94,10 +94,19 @@ extension ConsumerSearchViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let consumerDetailVC = ConsumerDetailViewController()
-        consumerDetailVC.id = consumers[indexPath.row].id
-        self.navigationController?.pushViewController(consumerDetailVC, animated: true)
-
+        
+        if (purpose == ConsumerSearchPurpose.LookUp) {
+            let consumerDetailVC = ConsumerDetailViewController()
+            consumerDetailVC.id = consumers[indexPath.row].id
+            self.navigationController?.pushViewController(consumerDetailVC, animated: true)
+        }
+        else {
+            let rewardCardsVC = RewardCardsViewController()
+            rewardCardsVC.id = consumers[indexPath.row].id
+            rewardCardsVC.purpose = purpose
+            rewardCardsVC.points = points
+            self.navigationController?.pushViewController(rewardCardsVC, animated: true)
+        }
     }
 }
 

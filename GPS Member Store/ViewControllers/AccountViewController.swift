@@ -17,13 +17,26 @@ class AccountViewController: UIViewController {
         tableView.rowHeight = 50
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "account")
+        tableView.register(TableCell.self, forCellReuseIdentifier: "account")
+        tableView.backgroundColor = .clear
         return tableView
-
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        if (self.accountTableView.indexPathForSelectedRow != nil) {
+            self.accountTableView.deselectRow(at: self.accountTableView.indexPathForSelectedRow!, animated: true)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        var image = UIImage(#imageLiteral(resourceName: " ic_qrcode"))
+        image = image.withRenderingMode(.alwaysOriginal)
+        let customer = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(self.QRCodeButtonTapped)) //
+        self.navigationItem.rightBarButtonItem  = customer
+
         view.backgroundColor = SNOW
         title = "我的帳號"
         view.addSubview(accountTableView)
@@ -36,7 +49,6 @@ class AccountViewController: UIViewController {
         accountTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         accountTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         accountTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-
     }
 }
 
@@ -47,37 +59,29 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource, UIS
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "account", for: indexPath)
-        cell.selectionStyle = .none
-        cell.textLabel?.font = UIFont(name: "NotoSansTC-Regular", size: 17)
-        
-        let imageView = UIImageView.init(frame: CGRect(x: UIScreen.main.bounds.width - 32 - 8, y: (60 - 32)/2, width: 32, height: 32))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.clipsToBounds = true;
-        imageView.image = #imageLiteral(resourceName: " arw_right_sm_grey")
-        cell.addSubview(imageView)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "account", for: indexPath) as! TableCell
         
         switch indexPath.row {
         case 0:
-            cell.textLabel?.text = "電子帳單"
+            cell.field = "電子帳單"
             break
         case 1:
-            cell.textLabel?.text = "電子公文"
+            cell.field = "電子公文"
             break
         case 2:
-            cell.textLabel?.text = "庫存調查"
+            cell.field = "庫存調查"
             break
         case 3:
-            cell.textLabel?.text = "銷貨單"
+            cell.field = "銷貨單"
             break
         case 4:
-            cell.textLabel?.text = "訂貨系統"
+            cell.field = "訂貨系統"
         case 5:
-            cell.textLabel?.text = "商品批價"
+            cell.field = "商品批價"
         case 6:
-            cell.textLabel?.text = "更改密碼"
+            cell.field = "更改密碼"
         case 7:
-            cell.textLabel?.text = "登出"
+            cell.field = "登出"
             break
         default:
             break
@@ -114,5 +118,10 @@ extension AccountViewController: UITableViewDelegate, UITableViewDataSource, UIS
             default:
                 break
             }
+    }
+    
+    @objc private func QRCodeButtonTapped() {
+        let qrCodeVC = QRCodeViewController()
+        self.navigationController?.pushViewController(qrCodeVC, animated: true)
     }
 }

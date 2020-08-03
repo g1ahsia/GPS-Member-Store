@@ -22,6 +22,7 @@ class MessageViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ThreadCell.self, forCellReuseIdentifier: "thread")
+        tableView.backgroundColor = .clear
         return tableView
 
     }()
@@ -100,10 +101,28 @@ extension MessageViewController: UITableViewDelegate, UITableViewDataSource, UIS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let messageDetailVC = MessageDetailViewController()
         messageDetailVC.role = Role.MemberStore
-        messageDetailVC.title = "預約領取處方"
+        messageDetailVC.title = MESSAGE_SUBJECTS[threads[indexPath.row].type]
+        if (indexPath.row == 0) {
+            messageDetailVC.messages = [
+                Message.init(id: 1, sender: "王大寶", message: threads[indexPath.row].message, date: "2020/04/20", attachments: ["file"]),
+                Message.init(id: 1, sender: "松仁藥局", message: "請攜帶健保卡來領取", date: "2020/04/21", attachments: [])
+            ]
+            messageDetailVC.tempImage = #imageLiteral(resourceName: "prescription")
+        }
+        else if (indexPath.row == 1) {
+            messageDetailVC.messages = [
+                Message.init(id: 1, sender: "王大寶", message: threads[indexPath.row].message, date: "2020/04/20", attachments: ["file"]),
+                Message.init(id: 1, sender: "松仁藥局", message: "沒有副作用，請安心使用。", date: "2020/04/21", attachments: [])
+            ]
+        }
+        else {
+            messageDetailVC.messages = [
+                Message.init(id: 1, sender: "王大寶", message: threads[indexPath.row].message, date: "2020/04/20", attachments: ["file"]),
+                Message.init(id: 1, sender: "松仁藥局", message: "歡迎您來藥局找我們詢問，感謝您！", date: "2020/04/21", attachments: [])
+            ]
+        }
         self.navigationController?.pushViewController(messageDetailVC, animated: true)
     }
-    
 }
 
 

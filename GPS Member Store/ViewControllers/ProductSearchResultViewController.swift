@@ -19,12 +19,16 @@ class ProductSearchResultViewController: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = 110
         tableView.register(ProductCell.self, forCellReuseIdentifier: "product")
+        tableView.backgroundColor = .clear
         return tableView
     }()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        if (self.productTableView.indexPathForSelectedRow != nil) {
+            self.productTableView.deselectRow(at: self.productTableView.indexPathForSelectedRow!, animated: true)
+        }
     }
     
     override func viewDidLoad() {

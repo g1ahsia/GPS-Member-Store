@@ -60,20 +60,40 @@ class ProductDetailViewController: UIViewController {
         var button =  UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "ic_pdf"), for: .normal)
-        button.setTitle("PDF檔案", for: .normal)
         button.addTarget(self, action: #selector(pdfButtonTapped), for: .touchUpInside)
         button.isHidden = true
         return button
+    }()
+    
+    var pdfLabel : UILabel = {
+        var textLabel = UILabel()
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.backgroundColor = .clear
+        textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 15)
+        textLabel.sizeToFit()
+        textLabel.textColor = .black
+        textLabel.text = "PDF檔案"
+        return textLabel
     }()
 
     var video : UIButton = {
         var button =  UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "ic_fill_play"), for: .normal)
-        button.setTitle("影片檔案", for: .normal)
         button.addTarget(self, action: #selector(videoButtonTapped), for: .touchUpInside)
         button.isHidden = true
         return button
+    }()
+    
+    var videoLabel : UILabel = {
+        var textLabel = UILabel()
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.backgroundColor = .clear
+        textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 15)
+        textLabel.sizeToFit()
+        textLabel.textColor = .black
+        textLabel.text = "影片檔案"
+        return textLabel
     }()
     
     var images : UIButton = {
@@ -83,10 +103,20 @@ class ProductDetailViewController: UIViewController {
         button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "ic_camera"), for: .normal)
-        button.setTitle("圖片檔案", for: .normal)
         button.addTarget(self, action: #selector(imagesButtonTapped), for: .touchUpInside)
 //        button.isHidden = true
         return button
+    }()
+    
+    var imagesLabel : UILabel = {
+        var textLabel = UILabel()
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.backgroundColor = .clear
+        textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 15)
+        textLabel.sizeToFit()
+        textLabel.textColor = .black
+        textLabel.text = "圖片檔案"
+        return textLabel
     }()
         
     let contentView = UIView();
@@ -109,6 +139,9 @@ class ProductDetailViewController: UIViewController {
         mainScrollView.addSubview(pdf)
         mainScrollView.addSubview(video)
         mainScrollView.addSubview(images)
+        mainScrollView.addSubview(pdfLabel)
+        mainScrollView.addSubview(videoLabel)
+        mainScrollView.addSubview(imagesLabel)
         setupLayout()
         
     }
@@ -155,16 +188,28 @@ class ProductDetailViewController: UIViewController {
         pdf.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 20).isActive = true
         pdf.widthAnchor.constraint(equalToConstant: 60).isActive = true
         pdf.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        pdfLabel.leftAnchor.constraint(equalTo: pdf.rightAnchor, constant: 10).isActive = true
+        pdfLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        pdfLabel.centerYAnchor.constraint(equalTo: pdf.centerYAnchor).isActive = true
 
         video.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
         video.topAnchor.constraint(equalTo: pdf.bottomAnchor, constant: 20).isActive = true
         video.widthAnchor.constraint(equalToConstant: 60).isActive = true
         video.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
+        videoLabel.leftAnchor.constraint(equalTo: video.rightAnchor, constant: 10).isActive = true
+        videoLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        videoLabel.centerYAnchor.constraint(equalTo: video.centerYAnchor).isActive = true
+
         images.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
         images.topAnchor.constraint(equalTo: video.bottomAnchor, constant: 20).isActive = true
         images.widthAnchor.constraint(equalToConstant: 60).isActive = true
         images.heightAnchor.constraint(equalToConstant: 60).isActive = true
+
+        imagesLabel.leftAnchor.constraint(equalTo: images.rightAnchor, constant: 10).isActive = true
+        imagesLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        imagesLabel.centerYAnchor.constraint(equalTo: images.centerYAnchor).isActive = true
 
     }
     @objc private func pdfButtonTapped() {

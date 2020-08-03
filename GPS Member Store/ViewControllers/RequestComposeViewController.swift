@@ -49,7 +49,8 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.backgroundColor = .clear
         textLabel.font = UIFont(name: "NotoSansTC-Medium", size: 34)
-        textLabel.text = "新增訊息"
+        textLabel.text = "新增調撥需求"
+        textLabel.textColor = MYTLE
         return textLabel
     }()
 
@@ -68,28 +69,6 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         return button
     }()
     
-//    var typeLabel : UILabel = {
-//        var textLabel = UILabel()
-//        textLabel.translatesAutoresizingMaskIntoConstraints = false
-//        textLabel.backgroundColor = .clear
-//        textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 15)
-//        textLabel.text = "調撥類型："
-//        textLabel.textColor = BLACKAlpha40
-//        return textLabel
-//    }()
-//
-//    var typeSelection : UIButton = {
-//        var button =  UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("請選擇", for: .normal)
-//        button.titleLabel?.sizeToFit()
-//        button.setTitleColor(MYTLE, for: .normal)
-//        button.titleLabel?.font = UIFont(name: "NotoSansTC-Regular", size: 15)
-//        button.backgroundColor = .clear
-//        button.addTarget(self, action: #selector(typeSelectionButtonTapped), for: .touchUpInside)
-//        return button
-//    }()
-
     lazy var headerTableView : UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +77,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(FormCell.self, forCellReuseIdentifier: "form")
+        tableView.backgroundColor = .clear
         return tableView
     }()
 
@@ -136,14 +116,6 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         return textLabel
     }()
     
-//    var arwDown : UIImageView = {
-//       var imageView = UIImageView()
-//        imageView.translatesAutoresizingMaskIntoConstraints = false
-//        imageView.clipsToBounds = true;
-//        imageView.image = #imageLiteral(resourceName: " arw_down_sm_grey")
-//        return imageView
-//    }()
-
     var attach : UIButton = {
         var button =  UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -151,14 +123,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         button.addTarget(self, action: #selector(attachButtonTapped), for: .touchUpInside)
         return button
     }()
-    
-//    var separator : UIView = {
-//        var view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = BLACKAlpha20
-//        return view
-//    }()
-    
+        
     var blackCover : UIView = {
         var view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -167,12 +132,23 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         return view
     }()
 
-    lazy var pickerView : UIPickerView = {
+    lazy var typePickerView : UIPickerView = {
         var picker = UIPickerView()
         picker.translatesAutoresizingMaskIntoConstraints = false
         picker.backgroundColor = .white
         picker.alpha = 0
         picker.delegate = self
+        picker.setValue(MYTLE, forKeyPath: "textColor")
+        return picker
+    }()
+
+    lazy var areaPickerView : UIPickerView = {
+        var picker = UIPickerView()
+        picker.translatesAutoresizingMaskIntoConstraints = false
+        picker.backgroundColor = .white
+        picker.alpha = 0
+        picker.delegate = self
+        picker.setValue(MYTLE, forKeyPath: "textColor")
         return picker
     }()
 
@@ -187,23 +163,21 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         view.addSubview(cancel)
         view.addSubview(header)
         view.addSubview(send)
-//        self.view .addSubview(typeLabel)
-//        self.view .addSubview(typeSelection)
-//        typeSelection .addSubview(arwDown)
-//        view.addSubview(headerTableView)
         headerTableView.tableFooterView = UIView(frame: .zero)
         view.addSubview(attach)
-//        self.view .addSubview(separator)
         view.addSubview(contentScrollView)
         contentScrollView.addSubview(headerTableView)
         contentScrollView .addSubview(descView)
         contentScrollView .addSubview(descPlaceholder)
         view.addSubview(blackCover)
-        view.addSubview(pickerView)
+        view.addSubview(typePickerView)
+        view.addSubview(areaPickerView)
         descView.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         blackCover.addGestureRecognizer(tap)
         self.setupLayout()
+        
+        hideKeyboardWhenTappedOnView()
     }
     
     @objc private func cancelButtonTapped(sender: UIButton!) {
@@ -244,14 +218,13 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         UIView .animate(withDuration: 0.3) {
             self.blackCover.alpha = 0
-            self.pickerView.alpha = 0
+            self.typePickerView.alpha = 0
+            self.areaPickerView.alpha = 0
         }
     }
 
     
     private func setupLayout() {
-        header.text = "新增調撥需求"
-        
         attach.topAnchor.constraint(equalTo: view.topAnchor, constant: 129).isActive = true
         attach.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
 
@@ -298,10 +271,13 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         blackCover.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         blackCover.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
 
-        pickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        pickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        pickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        typePickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        typePickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        typePickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
                 
+        areaPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        areaPickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        areaPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     func textViewDidChange(_ textView: UITextView) {
         descPlaceholder.isHidden = !textView.text.isEmpty
@@ -331,16 +307,16 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         
         // Cursor
         let textViewCursor = descView.caretRect(for: descView.selectedTextRange!.start).origin
-        let cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 200 + 40) // 200 is headerTableView 40 is for extra hint space
-        
+        let cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 200 + 25)
+
         let keyboardTop = self.view.frame.size.height - kbSize.height
         print("keyboardTop ", keyboardTop)
         
         print("cursor position y ", cursorPoint.y)
         
-        if (cursorPoint.y > keyboardTop &&
+        if (view.safeAreaLayoutGuide.layoutFrame.origin.y + cursorPoint.y > keyboardTop &&
             cursorPoint.y != .infinity) {
-            contentScrollView.contentOffset = CGPoint(x: 0, y: (cursorPoint.y - (self.view.frame.size.height - kbSize.height)) + contentScrollView.contentOffset.y + 25)
+            contentScrollView.contentOffset = CGPoint(x: 0, y: (cursorPoint.y - (self.view.frame.size.height - kbSize.height)) + contentScrollView.contentOffset.y)
         }
 
     }
@@ -449,24 +425,47 @@ extension RequestComposeViewController: UIPickerViewDataSource, UIPickerViewDele
     }
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if component == 0 {
-            return REQUEST_SUBJECTS.count
+        if (pickerView == typePickerView) {
+            if component == 0 {
+                return REQUEST_SUBJECTS.count
+            }
+            return 0
         }
-        return 0
+        else {
+            if component == 0 {
+                return AREA_SUBJECTS.count
+            }
+            return 0
+        }
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if component == 0 {
-            return REQUEST_SUBJECTS[row]
+        if (pickerView == typePickerView) {
+            if component == 0 {
+                return REQUEST_SUBJECTS[row]
+            }
+            return ""
         }
-        return ""
+        else {
+            if component == 0 {
+                return AREA_SUBJECTS[row]
+            }
+            return ""
+        }
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let cell0 = headerTableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) as! FormCell
-
-        cell0.answer = REQUEST_SUBJECTS[row]
-        selectedRow = row
-        cell0.layoutSubviews()
+        if (pickerView == typePickerView) {
+            let cell0 = headerTableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) as! FormCell
+            cell0.answer = REQUEST_SUBJECTS[row]
+            selectedRow = row
+            cell0.layoutSubviews()
+        }
+        else {
+            let cell1 = headerTableView.cellForRow(at: NSIndexPath(row: 1, section: 0) as IndexPath) as! FormCell
+            cell1.answer = AREA_SUBJECTS[row]
+            selectedRow = row
+            cell1.layoutSubviews()
+        }
     }
 
 }
@@ -490,7 +489,7 @@ extension RequestComposeViewController: UIImagePickerControllerDelegate, UINavig
 extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 5
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -502,12 +501,16 @@ extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSour
                 cell.placeholder = "請選擇"
                 cell.fieldType = FieldType.Selection
             case 1:
+                cell.field = "適用區域："
+                cell.placeholder = "請選擇"
+                cell.fieldType = FieldType.Selection
+            case 2:
                 cell.field = "商品名稱："
                 cell.fieldType = FieldType.Text
-            case 2:
+            case 3:
                 cell.field = "商品價格："
                 cell.fieldType = FieldType.Number
-            case 3:
+            case 4:
                 cell.field = "商品數量："
                 cell.fieldType = FieldType.Number
             default:
@@ -527,14 +530,23 @@ extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSour
                 self.view.endEditing(true)
                 UIView .animate(withDuration: 0.3) {
                     self.blackCover.alpha = 0.5
-                    self.pickerView.alpha = 1
-                    
+                    self.typePickerView.alpha = 1
+                    self.areaPickerView.alpha = 0
                 }
                 let cell0 = headerTableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) as! FormCell
                 cell0.answer = REQUEST_SUBJECTS[selectedRow]
                 cell0.layoutSubviews()
                 break
             case 1:
+                self.view.endEditing(true)
+                UIView .animate(withDuration: 0.3) {
+                    self.blackCover.alpha = 0.5
+                    self.typePickerView.alpha = 0
+                    self.areaPickerView.alpha = 1
+                }
+                let cell1 = headerTableView.cellForRow(at: NSIndexPath(row: 1, section: 0) as IndexPath) as! FormCell
+                cell1.answer = AREA_SUBJECTS[selectedRow]
+                cell1.layoutSubviews()
                 break
             case 2:
                 break
