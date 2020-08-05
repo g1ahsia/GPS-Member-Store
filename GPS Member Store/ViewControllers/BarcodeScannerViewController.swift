@@ -78,10 +78,10 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
         cancel.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 
         previewLayer.addSublayer(redLine.layer)
-        previewLayer.addSublayer(redLine.layer)
 
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+        view.addSubview(cancel)
 
         captureSession.startRunning()
         

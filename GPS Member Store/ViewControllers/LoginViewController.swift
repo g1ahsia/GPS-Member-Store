@@ -141,19 +141,19 @@ class LoginViewController: UIViewController {
 //            return
 //        }
         
-        NetworkManager.login(account: cell0.answerField.text!, password: cell1.answerField.text!) { (result) in
-            print(result)
-            DispatchQueue.main.async {
-
-                if (result["status"] as! Int == 1) {
+//        NetworkManager.login(account: cell0.answerField.text!, password: cell1.answerField.text!) { (result) in
+//            print(result)
+//            DispatchQueue.main.async {
+//
+//                if (result["status"] as! Int == 1) {
                     self.dismiss(animated: true) {
                     }
-                }
-                else {
-                    GlobalVariables.showAlert(title: "登入", message: result["message"] as? String, vc: self)
-                }
-            }
-        }
+//                }
+//                else {
+//                    GlobalVariables.showAlert(title: "登入", message: result["message"] as? String, vc: self)
+//                }
+//            }
+//        }
 
 
     }
