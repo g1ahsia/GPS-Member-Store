@@ -54,7 +54,11 @@ class RequestViewController: UIViewController {
         
     @objc private func addButtonTapped() {
         let requestComposeVC = RequestComposeViewController()
-        requestComposeVC.isModalInPresentation = true
+        if #available(iOS 13.0, *) {
+            requestComposeVC.isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
         self.present(requestComposeVC, animated: true) {
         }
     }

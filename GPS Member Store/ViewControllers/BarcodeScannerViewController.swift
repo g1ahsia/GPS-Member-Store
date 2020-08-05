@@ -71,7 +71,13 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
         redLine.frame = CGRect(x: 0, y: (previewLayer.frame.height - 2)/2, width: previewLayer.frame.width, height: 2)
         redLine.layer.borderColor = RED.cgColor
         redLine.layer.borderWidth = 2
+        
+        let cancel = UIButton()
+        cancel.setImage(#imageLiteral(resourceName: " ic_fill_cross_grey"), for: .normal)
+        cancel.frame = CGRect(x: 16, y: 16, width: 30, height: 30)
+        cancel.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 
+        previewLayer.addSublayer(redLine.layer)
         previewLayer.addSublayer(redLine.layer)
 
         previewLayer.videoGravity = .resizeAspectFill
@@ -134,5 +140,10 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+    
+    @objc private func cancelButtonTapped(sender: UIButton!) {
+        self.dismiss(animated: true) {
+        }
     }
 }

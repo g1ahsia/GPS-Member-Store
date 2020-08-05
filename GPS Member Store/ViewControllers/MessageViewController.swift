@@ -59,7 +59,11 @@ class MessageViewController: UIViewController {
     @objc private func addButtonTapped() {
         let messageComposeVC = MessageComposeViewController()
         messageComposeVC.messageType = MessageType.New
-        messageComposeVC.isModalInPresentation = true
+        if #available(iOS 13.0, *) {
+            messageComposeVC.isModalInPresentation = true
+        } else {
+            // Fallback on earlier versions
+        }
         self.present(messageComposeVC, animated: true) {
         }
     }
