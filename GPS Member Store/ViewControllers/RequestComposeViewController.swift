@@ -35,7 +35,9 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     
     var quantity = 0
 
-    var kbSize = CGSize(width: 0.0, height: 0.0)
+//    var kbSize = CGSize(width: 0.0, height: 0.0)
+    
+    var keyboardHeight = CGFloat(0)
     
     fileprivate var lineCollectionViewBottomConstraint1: NSLayoutConstraint?
     fileprivate var lineCollectionViewBottomConstraint2: NSLayoutConstraint?
@@ -86,6 +88,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         tableView.dataSource = self
         tableView.register(FormCell.self, forCellReuseIdentifier: "form")
         tableView.backgroundColor = .clear
+        tableView.isScrollEnabled = false
         return tableView
     }()
 
@@ -126,7 +129,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     var attach : UIButton = {
         var button =  UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: " ic_circle_add"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "ic_camera"), for: .normal)
         button.addTarget(self, action: #selector(attachButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -201,10 +204,34 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     }
 
     @objc private func attachButtonTapped(sender: UIButton!) {
-        self.imagePicker.sourceType = .savedPhotosAlbum
-        self.imagePicker.delegate = self
-        self.present(self.imagePicker, animated: true, completion: nil)
-        self.view.endEditing(true)
+//        self.imagePicker.sourceType = .savedPhotosAlbum
+//        self.imagePicker.delegate = self
+//        self.present(self.imagePicker, animated: true, completion: nil)
+//        self.view.endEditing(true)
+        let alert = UIAlertController(title: "選擇圖檔", message: "", preferredStyle: .actionSheet)
+
+        alert.addAction(UIAlertAction(title: "拍照", style: .default , handler:{ (UIAlertAction)in
+            self.imagePicker.sourceType = .camera
+            self.imagePicker.delegate = self
+            self.present(self.imagePicker, animated: true, completion: nil)
+            self.view.endEditing(true)
+        }))
+
+        alert.addAction(UIAlertAction(title: "圖庫", style: .default , handler:{ (UIAlertAction)in
+            print("User click Edit button")
+            self.imagePicker.sourceType = .savedPhotosAlbum
+            self.imagePicker.delegate = self
+            self.present(self.imagePicker, animated: true, completion: nil)
+            self.view.endEditing(true)
+        }))
+        
+        alert.addAction(UIAlertAction(title: MSG_TITLE_CANCEL, style: .cancel , handler:{ (UIAlertAction)in
+        }))
+
+        self.present(alert, animated: true, completion: {
+            print("completion block")
+        })
+
     }
     
     @objc private func lineButtonTapped(sender: UIButton!) {
@@ -287,14 +314,6 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     }
     func textViewDidChange(_ textView: UITextView) {
         descPlaceholder.isHidden = !textView.text.isEmpty
-//        if (textView.text.isEmpty) {
-//            send.alpha = 0.5
-//            send.isEnabled = false
-//        }
-//        else {
-//            send.alpha = 1.0
-//            send.isEnabled = true
-//        }
         let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         textView.constraints.forEach { (constraint) in
@@ -302,6 +321,12 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
                 constraint.constant = estimatedSize.height
             }
         }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { // Change `0.05` to the desired number of seconds.
+            self.scrollToCursor()
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) { // Change `0.05` to the desired number of seconds.
             self.scrollToCursor()
         }
@@ -315,14 +340,14 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         let textViewCursor = descView.caretRect(for: descView.selectedTextRange!.start).origin
         let cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 250 + 30)
 
-        let keyboardTop = self.view.frame.size.height - kbSize.height
+        let keyboardTop = self.view.frame.size.height - keyboardHeight
         print("keyboardTop ", keyboardTop)
         
         print("cursor position y ", cursorPoint.y)
         
-        if (view.safeAreaLayoutGuide.layoutFrame.origin.y + cursorPoint.y > keyboardTop &&
+        if (self.view.frame.origin.y + cursorPoint.y > keyboardTop &&
             cursorPoint.y != .infinity) {
-            contentScrollView.contentOffset = CGPoint(x: 0, y: (cursorPoint.y - (self.view.frame.size.height - kbSize.height)) + contentScrollView.contentOffset.y)
+            contentScrollView.contentOffset = CGPoint(x: 0, y: (cursorPoint.y - (self.view.frame.size.height - keyboardHeight)) + contentScrollView.contentOffset.y)
         }
 
     }
@@ -330,16 +355,21 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     @objc func keyboardWillShow(notification:NSNotification){
 
         print("keyboardWillShow")
-
-        let userInfo = notification.userInfo!
-        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
-        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
-
-        kbSize = keyboardFrame.size
+//
+//        let userInfo = notification.userInfo!
+//        var keyboardFrame:CGRect = (userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+//        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+//
+//        kbSize = keyboardFrame.size
         
-        self.scrollViewBottomConstraint?.isActive = false
-        self.scrollViewBottomConstraint = contentScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -keyboardFrame.size.height)
-        self.scrollViewBottomConstraint?.isActive = true
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            keyboardHeight = keyboardRectangle.height
+
+            self.scrollViewBottomConstraint?.isActive = false
+            self.scrollViewBottomConstraint = contentScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -keyboardHeight)
+            self.scrollViewBottomConstraint?.isActive = true
+        }
     }
 
     @objc func keyboardWillHide(notification:NSNotification){

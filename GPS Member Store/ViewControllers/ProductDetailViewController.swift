@@ -102,7 +102,7 @@ class ProductDetailViewController: UIViewController {
         button.titleLabel?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "ic_camera"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "ic_camera_fill"), for: .normal)
         button.addTarget(self, action: #selector(imagesButtonTapped), for: .touchUpInside)
 //        button.isHidden = true
         return button
