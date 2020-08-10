@@ -23,11 +23,19 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
         var view = UIView()
         return view
     }()
+    
+    var cancel : UIButton = {
+        var button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(#imageLiteral(resourceName: " ic_fill_cross_grey"), for: .normal)
+        button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = MYTLE
         captureSession = AVCaptureSession()
 
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
@@ -72,16 +80,19 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
         redLine.layer.borderColor = RED.cgColor
         redLine.layer.borderWidth = 2
         
-        let cancel = UIButton()
-        cancel.setImage(#imageLiteral(resourceName: " ic_fill_cross_grey"), for: .normal)
-        cancel.frame = CGRect(x: 16, y: 16, width: 30, height: 30)
-        cancel.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+//        let cancel = UIButton()
+//        cancel.setImage(#imageLiteral(resourceName: " ic_fill_cross_grey"), for: .normal)
+//        cancel.frame = CGRect(x: 16, y: 16, width: 30, height: 30)
+//        cancel.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
 
         previewLayer.addSublayer(redLine.layer)
 
         previewLayer.videoGravity = .resizeAspectFill
         view.layer.addSublayer(previewLayer)
+
         view.addSubview(cancel)
+        cancel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
+        cancel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
 
         captureSession.startRunning()
         

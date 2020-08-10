@@ -18,21 +18,25 @@ class LoginViewController: UIViewController {
         imageView.image = #imageLiteral(resourceName: "logo_gps")
         return imageView
     }()
+    
     var headerLabel : UILabel = {
         var textLabel = UILabel()
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.backgroundColor = .clear
         textLabel.font = UIFont(name: "NotoSansTC-Medium", size: 28)
         textLabel.textAlignment = .center
+        textLabel.textColor = MYTLE
         textLabel.text = "會員店 - 工作人員登入"
         return textLabel
     }()
+    
     var subHeaderLabel : UILabel = {
         var textLabel = UILabel()
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.backgroundColor = .clear
         textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 15)
         textLabel.textAlignment = .center
+        textLabel.textColor = MYTLE
         textLabel.text = "登入好藥坊，成為好鄰居"
         textLabel.isHidden = true
         return textLabel
@@ -53,12 +57,13 @@ class LoginViewController: UIViewController {
 
     }()
 
-//    var separator3 : UIView = {
-//        var view = UIView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = BLACKAlpha20
-//        return view
-//    }()
+    var invisibleView : UIView = {
+        var view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.alpha = 0.0
+        return view
+    }()
+    
     var forgetPassword : UIButton = {
         var button =  UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +73,7 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(forgetPasswordButtonTapped), for: .touchUpInside)
         return button
     }()
+    
     var login : UIButton = {
         var button =  UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -79,17 +85,6 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return button
     }()
-//    var registration : UIButton = {
-//        var button =  UIButton()
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.setTitle("註冊會員", for: .normal)
-//        button.setTitleColor(ATLANTIS_GREEN, for: .normal)
-//        button.titleLabel?.font = UIFont(name: "NotoSansTC-Bold", size: 17)
-//        button.backgroundColor = PATTENS_BLUE
-//        button.layer.cornerRadius = 10;
-//        button.addTarget(self, action: #selector(registrationButtonTapped), for: .touchUpInside)
-//        return button
-//    }()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -98,23 +93,15 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = SNOW
-        self.view.addSubview(logoImageView)
-        self.view.addSubview(headerLabel)
-        self.view.addSubview(subHeaderLabel)
-        self.view.addSubview(accountTableView)
-//        self.view.addSubview(accountTitle)
-//        self.view.addSubview(passwordTitle)
-//        self.view.addSubview(account)
-//        self.view.addSubview(password)
-//        self.view.addSubview(separator1)
-//        self.view.addSubview(separator2)
-        self.view.addSubview(forgetPassword)
-        self.view.addSubview(login)
-//        self.view.addSubview(separator3)
-//        self.view.addSubview(registration)
-
-        self.setupLayout()
+        view.backgroundColor = SNOW
+        view.addSubview(logoImageView)
+        view.addSubview(headerLabel)
+        view.addSubview(subHeaderLabel)
+        view.addSubview(accountTableView)
+        view.addSubview(forgetPassword)
+        view.addSubview(login)
+        view.addSubview(invisibleView)
+        setupLayout()
         
         hideKeyboardWhenTappedOnView()
     }
@@ -140,21 +127,19 @@ class LoginViewController: UIViewController {
 //            GlobalVariables.showAlert(title: title, message: ERR_INCORRECT_PHONE_NUMBER_FORMAT, vc: self)
 //            return
 //        }
-        
-//        NetworkManager.login(account: cell0.answerField.text!, password: cell1.answerField.text!) { (result) in
-//            print(result)
-//            DispatchQueue.main.async {
-//
-//                if (result["status"] as! Int == 1) {
+        NetworkManager.login(account: cell0.answerField.text!, password: cell1.answerField.text!) { (result) in
+            print(result)
+            DispatchQueue.main.async {
+
+                if (result["status"] as! Int == 1) {
                     self.dismiss(animated: true) {
                     }
-//                }
-//                else {
-//                    GlobalVariables.showAlert(title: "登入", message: result["message"] as? String, vc: self)
-//                }
-//            }
-//        }
-
+                }
+                else {
+                    GlobalVariables.showAlert(title: "登入", message: result["message"] as? String, vc: self)
+                }
+            }
+        }
 
     }
 //    @objc private func registrationButtonTapped(sender: UIButton!) {
@@ -168,11 +153,7 @@ class LoginViewController: UIViewController {
     }
 
     private func setupLayout() {
-        
-
-        
         accountTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-//        accountTableView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         accountTableView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         accountTableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         accountTableView.heightAnchor.constraint(equalToConstant: 100).isActive = true
@@ -185,62 +166,24 @@ class LoginViewController: UIViewController {
         headerLabel.bottomAnchor.constraint(equalTo: subHeaderLabel.topAnchor, constant: -11).isActive = true
         headerLabel.heightAnchor.constraint(equalToConstant: 34).isActive = true
 
+        invisibleView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        invisibleView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        invisibleView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        invisibleView.bottomAnchor.constraint(equalTo: headerLabel.topAnchor).isActive = true
+
         logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        logoImageView.bottomAnchor.constraint(equalTo: headerLabel.topAnchor, constant: -60).isActive = true
+        logoImageView.centerYAnchor.constraint(equalTo: invisibleView.centerYAnchor).isActive = true
         logoImageView.widthAnchor.constraint(equalToConstant: 61).isActive = true
         logoImageView.heightAnchor.constraint(equalToConstant: 81).isActive = true
 
-//        accountTitle.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-//        accountTitle.topAnchor.constraint(equalTo: subHeaderLabel.bottomAnchor, constant: 44).isActive = true
-//        accountTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//
-//        separator1.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-//        separator1.topAnchor.constraint(equalTo: accountTitle.bottomAnchor, constant: 16).isActive = true
-//        separator1.heightAnchor.constraint(equalToConstant: 1).isActive = true
-//        separator1.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-//
-//        passwordTitle.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-//        passwordTitle.topAnchor.constraint(equalTo: separator1.bottomAnchor, constant: 14).isActive = true
-//        passwordTitle.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//
-//        account.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 68).isActive = true
-//        account.topAnchor.constraint(equalTo: accountTitle.topAnchor).isActive = true
-//        account.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 16).isActive = true
-//        account.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//
-//        password.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 68).isActive = true
-//        password.topAnchor.constraint(equalTo: passwordTitle.topAnchor).isActive = true
-//        password.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 16).isActive = true
-//        password.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//
-//        separator2.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-//        separator2.topAnchor.constraint(equalTo: passwordTitle.bottomAnchor, constant: 16).isActive = true
-//        separator2.heightAnchor.constraint(equalToConstant: 1).isActive = true
-//        separator2.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-
-        forgetPassword.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        forgetPassword.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         forgetPassword.topAnchor.constraint(equalTo: accountTableView.bottomAnchor, constant: 20).isActive = true
         forgetPassword.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
-//        send.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        login.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        login.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         login.topAnchor.constraint(equalTo: forgetPassword.bottomAnchor, constant: 20).isActive = true
-//        send.widthAnchor.constraint(equalToConstant: 335).isActive = true
-        login.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        login.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         login.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
-//        separator3.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-//        separator3.topAnchor.constraint(equalTo: login.bottomAnchor, constant: 30).isActive = true
-//        separator3.heightAnchor.constraint(equalToConstant: 1).isActive = true
-//        separator3.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-
-//        registration.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-//        registration.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
-//        registration.topAnchor.constraint(equalTo: separator3.bottomAnchor, constant: 30).isActive = true
-////        registration.widthAnchor.constraint(equalToConstant: 335).isActive = true
-//        registration.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
-//        registration.heightAnchor.constraint(equalToConstant: 44).isActive = true
-
     }
 
 }

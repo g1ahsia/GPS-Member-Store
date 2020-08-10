@@ -9,18 +9,31 @@
 import Foundation
 import UIKit
 
-class ImagesViewController: UIViewController {
+class ImagesViewController: UIViewController, UIScrollViewDelegate {
     var images = [UIImage]()
+    var scrollImageViews = [UIImageView]()
     
-    let imageScrollView: UIScrollView = {
+//    let imageScrollView: UIScrollView = {
+//        let scrollView = UIScrollView()
+//        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        scrollView.isPagingEnabled = true
+//        scrollView.showsVerticalScrollIndicator = false
+//        scrollView.showsHorizontalScrollIndicator = false
+//        scrollView.layer.borderWidth = 5
+//        return scrollView
+//    }()
+    
+    let theScrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.isPagingEnabled = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.layer.borderWidth = 5
+//        scrollView.layer.borderWidth = 5
+//        scrollView.layer.borderColor = UIColor .red.cgColor
         return scrollView
     }()
+
     
     var close : UIButton = {
         var button =  UIButton()
@@ -40,7 +53,7 @@ class ImagesViewController: UIViewController {
         view.backgroundColor = .black
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: UIDevice.orientationDidChangeNotification, object: nil)
 
-        view.addSubview(imageScrollView)
+        view.addSubview(theScrollView)
         view.addSubview(close)
         images = [#imageLiteral(resourceName: "product-img"), #imageLiteral(resourceName: "001246"), #imageLiteral(resourceName: "item-1")]
         
@@ -48,13 +61,33 @@ class ImagesViewController: UIViewController {
     }
     
     private func setupLayout() {
-        imageScrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        imageScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        imageScrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        imageScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-        var previousImageView = UIImageView()
+        theScrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        theScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        theScrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        theScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        var previousImageScrollView = UIScrollView()
         for i in 0..<images.count {
+
+            let imageScrollView = UIScrollView()
+            imageScrollView.translatesAutoresizingMaskIntoConstraints = false
+            
+            theScrollView.addSubview(imageScrollView)
+
+//            imageScrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+            imageScrollView.topAnchor.constraint(equalTo: theScrollView.topAnchor).isActive = true
+            imageScrollView.widthAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.size.width).isActive = true
+            imageScrollView.heightAnchor.constraint(equalToConstant: view.safeAreaLayoutGuide.layoutFrame.size.height).isActive = true
+
+//            imageScrollView.rightAnchor.constraint(equalTo: theScrollView.rightAnchor).isActive = true
+//            imageScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            imageScrollView.minimumZoomScale = 1.0
+            imageScrollView.zoomScale = 6.0
+            imageScrollView.delegate = self
+            imageScrollView.layer.borderWidth = 5
+            imageScrollView.layer.borderColor = UIColor .blue.cgColor
+            imageScrollView.backgroundColor = .purple
+//            imageScrollView.isScrollEnabled = false
 
             let imageView = UIImageView()
             imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -65,18 +98,20 @@ class ImagesViewController: UIViewController {
 //            let xPosition = UIScreen.main.bounds.width * CGFloat(i)
 //            imageView.frame = CGRect(x: xPosition, y: 0, width: imageScrollView.frame.width, height: imageScrollView.frame.height)
             if (i == 0) {
-                imageView.leftAnchor.constraint(equalTo: imageScrollView.leftAnchor).isActive = true
+                imageScrollView.leftAnchor.constraint(equalTo: theScrollView.leftAnchor).isActive = true
             }
             else {
-                imageView.leftAnchor.constraint(equalTo: previousImageView.rightAnchor).isActive = true
+                imageScrollView.leftAnchor.constraint(equalTo: previousImageScrollView.rightAnchor).isActive = true
             }
             imageView.topAnchor.constraint(equalTo: imageScrollView.topAnchor).isActive = true
             imageView.widthAnchor.constraint(equalTo: imageScrollView.widthAnchor).isActive = true
             imageView.heightAnchor.constraint(equalTo: imageScrollView.heightAnchor).isActive = true
             imageView.contentMode = .scaleAspectFit
-            previousImageView = imageView
+            previousImageScrollView = imageScrollView
+            
+            scrollImageViews.append(imageView)
         }
-        imageScrollView.contentSize.width = UIScreen.main.bounds.width * CGFloat(images.count)
+        theScrollView.contentSize.width = UIScreen.main.bounds.width * CGFloat(images.count)
 //        imageScrollView.delegate = self
         
         close.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
@@ -84,12 +119,16 @@ class ImagesViewController: UIViewController {
 
 
     }
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+       
+        return scrollImageViews[0]
+    }
 
 
     @objc func rotated() {
         if UIDevice.current.orientation == .faceDown {
             // it's face down
-            imageScrollView.contentSize.width = view.safeAreaLayoutGuide.layoutFrame.size.height * CGFloat(images.count)
+            theScrollView.contentSize.width = view.safeAreaLayoutGuide.layoutFrame.size.height * CGFloat(images.count)
         }
 
         else if UIDevice.current.orientation.isLandscape {
@@ -97,11 +136,11 @@ class ImagesViewController: UIViewController {
             
 
             print("Landscape actual height \(view.safeAreaLayoutGuide.layoutFrame.size.height)")
-            imageScrollView.contentSize.width = view.safeAreaLayoutGuide.layoutFrame.size.width * CGFloat(images.count)
+            theScrollView.contentSize.width = view.safeAreaLayoutGuide.layoutFrame.size.width * CGFloat(images.count)
 
         } else {
             print("Portrait actual height \(view.safeAreaLayoutGuide.layoutFrame.size.height)")
-            imageScrollView.contentSize.width = UIScreen.main.bounds.width * CGFloat(images.count)
+            theScrollView.contentSize.width = UIScreen.main.bounds.width * CGFloat(images.count)
         }
     }
     

@@ -111,6 +111,11 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
         toolBar.isUserInteractionEnabled = true
         return toolBar
     }()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -189,6 +194,7 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
     
     @objc private func sendButtonTapped(sender: UIButton!) {
         let consumerSearchVC = ConsumerSearchViewController()
+        consumerSearchVC.purpose = ConsumerSearchPurpose.SendPoints
         consumerSearchVC.points = selectedPoint
         self.navigationController?.pushViewController(consumerSearchVC, animated: true)
     }

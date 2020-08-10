@@ -59,6 +59,7 @@ class ViewController: UIViewController {
         requestNav.tabBarItem = customTabBarItem2
         
         let messageVC = MessageViewController()
+        messageVC.role = Role.MemberStore
         messageVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
         let messageNav = UINavigationController()
@@ -81,18 +82,18 @@ class ViewController: UIViewController {
         let customTabBarItem4:UITabBarItem = UITabBarItem(title: "客戶搜尋", image: #imageLiteral(resourceName: " tab_ic_users_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_users_green"))
         consumerSearchNav.tabBarItem = customTabBarItem4
         
-        let accountVC = AccountViewController()
-        accountVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        let homeVC = HomeViewController()
+        homeVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        let accountNav = UINavigationController()
-        accountNav.navigationBar.tintColor = ATLANTIS_GREEN
-        accountNav.setNavigationBarHidden(false, animated: false)
-        accountNav.pushViewController(accountVC, animated: true)
+        let homeNav = UINavigationController()
+        homeNav.navigationBar.tintColor = ATLANTIS_GREEN
+        homeNav.setNavigationBarHidden(false, animated: false)
+        homeNav.pushViewController(homeVC, animated: true)
         
-        let customTabBarItem5:UITabBarItem = UITabBarItem(title: "我的帳號", image: #imageLiteral(resourceName: " tab_ic_user_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_user_green"))
-        accountNav.tabBarItem = customTabBarItem5
+        let customTabBarItem5:UITabBarItem = UITabBarItem(title: "首頁", image: #imageLiteral(resourceName: " tab_ic_user_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_user_green"))
+        homeNav.tabBarItem = customTabBarItem5
 
-        tabBarCtrl.viewControllers = [productSearchNav, requestNav, messageNav, consumerSearchNav, accountNav]
+        tabBarCtrl.viewControllers = [homeNav, productSearchNav, messageNav, requestNav, consumerSearchNav]
         
         self.view.addSubview(tabBarCtrl.view)
 

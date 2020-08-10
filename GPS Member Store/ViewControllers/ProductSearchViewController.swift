@@ -109,6 +109,7 @@ class ProductSearchViewController: UIViewController {
     
     @objc private func barcodeButtonTapped(sender: UIButton!) {
         let barcodeScannerVC = BarcodeScannerViewController()
+        barcodeScannerVC.modalPresentationStyle = .fullScreen
         present(barcodeScannerVC, animated: true)
 
     }

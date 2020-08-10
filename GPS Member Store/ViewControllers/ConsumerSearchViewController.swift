@@ -94,18 +94,24 @@ extension ConsumerSearchViewController: UITableViewDelegate, UITableViewDataSour
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if (purpose == ConsumerSearchPurpose.LookUp) {
             let consumerDetailVC = ConsumerDetailViewController()
             consumerDetailVC.id = consumers[indexPath.row].id
             self.navigationController?.pushViewController(consumerDetailVC, animated: true)
         }
-        else {
+        else if (purpose == ConsumerSearchPurpose.SendPoints) {
             let rewardCardsVC = RewardCardsViewController()
             rewardCardsVC.id = consumers[indexPath.row].id
             rewardCardsVC.purpose = purpose
             rewardCardsVC.points = points
             self.navigationController?.pushViewController(rewardCardsVC, animated: true)
+        }
+        else {
+            let messageComposeVC = self.presentingViewController as! MessageComposeViewController
+            messageComposeVC.consumer = consumers[indexPath.row]
+            messageComposeVC.updateCosumer()
+            self.dismiss(animated: true) {
+            }
         }
     }
 }
@@ -126,10 +132,8 @@ extension ConsumerSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
         consumers = [Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
-                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
-                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
-                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344"),
-                     Consumer.init(id: 1, name: "王大寶", mobilePhone: "0923233344")]
+                     Consumer.init(id: 2, name: "李曉明", mobilePhone: "0923233322"),
+                     Consumer.init(id: 3, name: "吳大川", mobilePhone: "0923233323")]
         
         consumerTableView.reloadData()
     }

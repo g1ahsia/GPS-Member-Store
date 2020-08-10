@@ -235,6 +235,7 @@ class ProductDetailViewController: UIViewController {
     
     @objc private func imagesButtonTapped() {
         let imagesVC = ImagesViewController()
+        imagesVC.attachedImages = [#imageLiteral(resourceName: "product-img"), #imageLiteral(resourceName: "001246"), #imageLiteral(resourceName: "item-1")]
         imagesVC.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         self.present(imagesVC, animated: true)
     }

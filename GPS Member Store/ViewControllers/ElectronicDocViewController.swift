@@ -25,6 +25,7 @@ class ElectronicDocViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
         (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
         if (self.electronicDocTableView.indexPathForSelectedRow != nil) {
             self.electronicDocTableView.deselectRow(at: self.electronicDocTableView.indexPathForSelectedRow!, animated: true)

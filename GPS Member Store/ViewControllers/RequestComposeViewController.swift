@@ -25,8 +25,16 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     
     var deleteButtons = [UIButton]()
 
-    var selectedRow = 0
+    var selectedType = Int(-1)
         
+    var selectedArea = Int(-1)
+    
+    var name = ""
+    
+    var price = 0
+    
+    var quantity = 0
+
     var kbSize = CGSize(width: 0.0, height: 0.0)
     
     fileprivate var lineCollectionViewBottomConstraint1: NSLayoutConstraint?
@@ -48,7 +56,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         var textLabel = UILabel()
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.backgroundColor = .clear
-        textLabel.font = UIFont(name: "NotoSansTC-Medium", size: 34)
+        textLabel.font = UIFont(name: "NotoSansTC-Medium", size: 31)
         textLabel.text = "新增調撥需求"
         textLabel.textColor = MYTLE
         return textLabel
@@ -80,7 +88,6 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         tableView.backgroundColor = .clear
         return tableView
     }()
-
 
     var contentScrollView : UIScrollView = {
         var scrollView = UIScrollView()
@@ -181,10 +188,18 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc private func cancelButtonTapped(sender: UIButton!) {
-        self.dismiss(animated: true) {
+        if (send.alpha != 1) {
+            self.dismiss(animated: true) {
+            }
+        }
+        else {
+            GlobalVariables.showAlertWithOptions(title: "退出編輯", message: "編輯未完成，是否要退出？", confirmString: "退出", vc: self) {
+                self.dismiss(animated: true) {
+                }
+            }
         }
     }
-    
+
     @objc private func attachButtonTapped(sender: UIButton!) {
         self.imagePicker.sourceType = .savedPhotosAlbum
         self.imagePicker.delegate = self
@@ -205,16 +220,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     @objc private func sendButtonTapped(sender: UIButton!) {
         print("sending message")
     }
-    
-//    @objc private func typeSelectionButtonTapped(sender: UIButton!) {
-//        UIView .animate(withDuration: 0.3) {
-//            self.blackCover.alpha = 0.5
-//            self.pickerView.alpha = 1
-//
-//        }
-//        typeSelection.setTitle(MESSAGE_SUBJECTS[selectedRow], for: .normal)
-//    }
-    
+        
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         UIView .animate(withDuration: 0.3) {
             self.blackCover.alpha = 0
@@ -235,7 +241,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         headerTableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         headerTableView.topAnchor.constraint(equalTo: contentScrollView.topAnchor).isActive = true
         headerTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        headerTableView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        headerTableView.heightAnchor.constraint(equalToConstant: 250).isActive = true
 
         scrollViewBottomConstraint = contentScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         scrollViewBottomConstraint?.isActive = true
@@ -243,7 +249,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         descView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
         descView.topAnchor.constraint(equalTo: headerTableView.bottomAnchor, constant: 10).isActive = true
         descView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        descView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        descView.heightAnchor.constraint(equalToConstant: 25).isActive = true
         
         bottomConstraint = descView.bottomAnchor.constraint(equalTo: contentScrollView.bottomAnchor, constant: -34)
         bottomConstraint?.isActive = true
@@ -253,16 +259,16 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         descPlaceholder.widthAnchor.constraint(equalToConstant: 100).isActive = true
         descPlaceholder.heightAnchor.constraint(equalToConstant: 20).isActive = true
 
-        cancel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        cancel.topAnchor.constraint(equalTo: view.topAnchor, constant: 16).isActive = true
+        cancel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
+        cancel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         
-        header.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        header.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        header.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
+        header.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60).isActive = true
         header.widthAnchor.constraint(equalToConstant: 233).isActive = true
         header.heightAnchor.constraint(equalToConstant: 41).isActive = true
 
-        send.topAnchor.constraint(equalTo: view.topAnchor, constant: 56).isActive = true
-        send.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        send.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 56).isActive = true
+        send.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -16).isActive = true
         send.widthAnchor.constraint(equalToConstant: 88).isActive = true
         send.heightAnchor.constraint(equalToConstant: 56).isActive = true
         
@@ -281,14 +287,14 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     }
     func textViewDidChange(_ textView: UITextView) {
         descPlaceholder.isHidden = !textView.text.isEmpty
-        if (textView.text.isEmpty) {
-            send.alpha = 0.5
-            send.isEnabled = false
-        }
-        else {
-            send.alpha = 1.0
-            send.isEnabled = true
-        }
+//        if (textView.text.isEmpty) {
+//            send.alpha = 0.5
+//            send.isEnabled = false
+//        }
+//        else {
+//            send.alpha = 1.0
+//            send.isEnabled = true
+//        }
         let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
         textView.constraints.forEach { (constraint) in
@@ -307,7 +313,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         
         // Cursor
         let textViewCursor = descView.caretRect(for: descView.selectedTextRange!.start).origin
-        let cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 200 + 25)
+        let cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 250 + 30)
 
         let keyboardTop = self.view.frame.size.height - kbSize.height
         print("keyboardTop ", keyboardTop)
@@ -457,17 +463,44 @@ extension RequestComposeViewController: UIPickerViewDataSource, UIPickerViewDele
         if (pickerView == typePickerView) {
             let cell0 = headerTableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) as! FormCell
             cell0.answer = REQUEST_SUBJECTS[row]
-            selectedRow = row
+            selectedType = row
             cell0.layoutSubviews()
+            enableSendButton()
         }
         else {
             let cell1 = headerTableView.cellForRow(at: NSIndexPath(row: 1, section: 0) as IndexPath) as! FormCell
             cell1.answer = AREA_SUBJECTS[row]
-            selectedRow = row
+            selectedArea = row
             cell1.layoutSubviews()
+            enableSendButton()
         }
     }
-
+    
+    func enableSendButton() {
+        let cell2 = headerTableView.cellForRow(at: NSIndexPath(row: 2, section: 0) as IndexPath) as! FormCell
+        let cell3 = headerTableView.cellForRow(at: NSIndexPath(row: 3, section: 0) as IndexPath) as! FormCell
+        let cell4 = headerTableView.cellForRow(at: NSIndexPath(row: 4, section: 0) as IndexPath) as! FormCell
+        name = cell2.answerField.text!
+        price =  (cell3.answerField.text! as NSString).integerValue
+        quantity = (cell4.answerField.text! as NSString).integerValue
+        
+        if (selectedType == -1 ||
+            selectedArea == -1 ||
+            name == "" ||
+            price == 0 ||
+            quantity == 0) {
+            send.alpha = 0.5
+            send.isEnabled = false
+        }
+        else {
+            send.alpha = 1.0
+            send.isEnabled = true
+        }
+    }
+    
+    @objc func textFieldDidChange() {
+        enableSendButton()
+    }
 }
 
 extension RequestComposeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -500,23 +533,30 @@ extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSour
                 cell.field = "調撥類型："
                 cell.placeholder = "請選擇"
                 cell.fieldType = FieldType.Selection
+                break
             case 1:
                 cell.field = "適用區域："
                 cell.placeholder = "請選擇"
                 cell.fieldType = FieldType.Selection
+                break
             case 2:
                 cell.field = "商品名稱："
                 cell.fieldType = FieldType.Text
+                break
             case 3:
                 cell.field = "商品價格："
                 cell.fieldType = FieldType.Number
+                break
             case 4:
                 cell.field = "商品數量："
                 cell.fieldType = FieldType.Number
+                break
             default:
                 cell.field = ""
+                break
         }
         cell.layoutSubviews()
+        cell.answerField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         return cell
     }
 
@@ -534,7 +574,10 @@ extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSour
                     self.areaPickerView.alpha = 0
                 }
                 let cell0 = headerTableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) as! FormCell
-                cell0.answer = REQUEST_SUBJECTS[selectedRow]
+                if selectedType == -1 {
+                    selectedType = 0
+                }
+                cell0.answer = REQUEST_SUBJECTS[selectedType]
                 cell0.layoutSubviews()
                 break
             case 1:
@@ -545,7 +588,10 @@ extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSour
                     self.areaPickerView.alpha = 1
                 }
                 let cell1 = headerTableView.cellForRow(at: NSIndexPath(row: 1, section: 0) as IndexPath) as! FormCell
-                cell1.answer = AREA_SUBJECTS[selectedRow]
+                if selectedArea == -1 {
+                    selectedArea = 0
+                }
+                cell1.answer = AREA_SUBJECTS[selectedArea == -1 ? 0 : selectedArea]
                 cell1.layoutSubviews()
                 break
             case 2:
