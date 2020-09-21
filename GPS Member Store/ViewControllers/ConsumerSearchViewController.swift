@@ -96,12 +96,12 @@ extension ConsumerSearchViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (purpose == ConsumerSearchPurpose.LookUp) {
             let consumerDetailVC = ConsumerDetailViewController()
-            consumerDetailVC.id = consumers[indexPath.row].id
+//            consumerDetailVC.id = consumers[indexPath.row].id
             self.navigationController?.pushViewController(consumerDetailVC, animated: true)
         }
         else if (purpose == ConsumerSearchPurpose.SendPoints) {
             let rewardCardsVC = RewardCardsViewController()
-            rewardCardsVC.id = consumers[indexPath.row].id
+//            rewardCardsVC.id = consumers[indexPath.row].id
             rewardCardsVC.purpose = purpose
             rewardCardsVC.points = points
             self.navigationController?.pushViewController(rewardCardsVC, animated: true)

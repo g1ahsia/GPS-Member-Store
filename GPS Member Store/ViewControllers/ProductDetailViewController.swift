@@ -184,7 +184,7 @@ class ProductDetailViewController: UIViewController {
         descView.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 20).isActive = true
         descView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28).isActive = true
         
-        pdf.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
+        pdf.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         pdf.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 20).isActive = true
         pdf.widthAnchor.constraint(equalToConstant: 60).isActive = true
         pdf.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -193,7 +193,7 @@ class ProductDetailViewController: UIViewController {
         pdfLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         pdfLabel.centerYAnchor.constraint(equalTo: pdf.centerYAnchor).isActive = true
 
-        video.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
+        video.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         video.topAnchor.constraint(equalTo: pdf.bottomAnchor, constant: 20).isActive = true
         video.widthAnchor.constraint(equalToConstant: 60).isActive = true
         video.heightAnchor.constraint(equalToConstant: 60).isActive = true
@@ -202,7 +202,7 @@ class ProductDetailViewController: UIViewController {
         videoLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         videoLabel.centerYAnchor.constraint(equalTo: video.centerYAnchor).isActive = true
 
-        images.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
+        images.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         images.topAnchor.constraint(equalTo: video.bottomAnchor, constant: 20).isActive = true
         images.widthAnchor.constraint(equalToConstant: 60).isActive = true
         images.heightAnchor.constraint(equalToConstant: 60).isActive = true

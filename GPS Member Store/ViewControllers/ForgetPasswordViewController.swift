@@ -69,9 +69,9 @@ class ForgetPasswordViewController: UIViewController {
     }
     private func setupLayout() {
 
-        hintView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
+        hintView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         hintView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30).isActive = true
-        hintView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28).isActive = true
+        hintView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
 
         infoTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         infoTableView.topAnchor.constraint(equalTo: hintView.bottomAnchor, constant: 30).isActive = true

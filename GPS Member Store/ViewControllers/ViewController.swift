@@ -90,7 +90,7 @@ class ViewController: UIViewController {
         homeNav.setNavigationBarHidden(false, animated: false)
         homeNav.pushViewController(homeVC, animated: true)
         
-        let customTabBarItem5:UITabBarItem = UITabBarItem(title: "首頁", image: #imageLiteral(resourceName: " tab_ic_user_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_user_green"))
+        let customTabBarItem5:UITabBarItem = UITabBarItem(title: "首頁", image: #imageLiteral(resourceName: " tab_ic_home_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_home_green"))
         homeNav.tabBarItem = customTabBarItem5
 
         tabBarCtrl.viewControllers = [homeNav, productSearchNav, messageNav, requestNav, consumerSearchNav]

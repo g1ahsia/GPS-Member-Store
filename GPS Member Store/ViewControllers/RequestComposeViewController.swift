@@ -129,7 +129,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     var attach : UIButton = {
         var button =  UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(#imageLiteral(resourceName: "ic_camera"), for: .normal)
+        button.setImage(#imageLiteral(resourceName: "ic_camera_grey"), for: .normal)
         button.addTarget(self, action: #selector(attachButtonTapped), for: .touchUpInside)
         return button
     }()

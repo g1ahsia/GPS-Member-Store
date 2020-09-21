@@ -80,7 +80,7 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         descView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         descView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
-        save.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 28).isActive = true
+        save.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         save.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 30).isActive = true
         save.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         save.heightAnchor.constraint(equalToConstant: 44).isActive = true

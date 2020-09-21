@@ -65,7 +65,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = SNOW
-        title = "我的帳號"
         view.addSubview(logoImageView)
         view.addSubview(storeLabel)
         view.addSubview(separator)
