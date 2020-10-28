@@ -22,16 +22,29 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentLoginVC(notification:)), name: Notification.Name("Logout"), object: nil)
+        
+        let userDefaults = UserDefaults.standard
+
+        // Read/Get Value
+        let myToken = userDefaults.string(forKey: "myToken")
+        let myStoreId = userDefaults.string(forKey: "myStoreId")
+        let myPrivilege = userDefaults.string(forKey: "myPrivilege")
+
+
+        if ((myToken) != nil) {
+            // Do any additional setup after loading the view.
+            TOKEN = myToken!
+            STOREID = Int(myStoreId!) ?? 0
+            PRIVILEGE = myPrivilege as? [Int] ?? [Int]()
+        }
+        else {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { // Change `0.05` to the desired number of seconds.
+                NotificationCenter.default.post(name: Notification.Name("Logout"), object: nil)
+            }
+        }
 
         createTabBarController()
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { // Change `0.05` to the desired number of seconds.
-//            self.presentLoginVC()
-            
-            NotificationCenter.default.post(name: Notification.Name("Logout"), object: nil)
-
-        }
-        
+                
     }
 
     func createTabBarController() {

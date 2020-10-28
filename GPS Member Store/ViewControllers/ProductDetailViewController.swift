@@ -16,6 +16,7 @@ class ProductDetailViewController: UIViewController {
     var videoUrl : String?
     var pdfUrl : String?
     var imageUrls : [String]?
+    var imageDownloads: [UIImage] = []
 
     var mainScrollView : UIScrollView = {
         var scrollView = UIScrollView()
@@ -153,21 +154,46 @@ class ProductDetailViewController: UIViewController {
         if let desc = desc {
             descView.text = desc
         }
-        if pdfUrl != nil {
+        if pdfUrl != "" {
             pdf.isHidden = false
+            
+            pdf.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+            pdf.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 20).isActive = true
+            pdf.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            pdf.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            
+            pdfLabel.leftAnchor.constraint(equalTo: pdf.rightAnchor, constant: 10).isActive = true
+            pdfLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            pdfLabel.centerYAnchor.constraint(equalTo: pdf.centerYAnchor).isActive = true
+
+
         }
-        if videoUrl != nil {
+        if videoUrl != "" {
             video.isHidden = false
+            
+            video.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+            video.topAnchor.constraint(equalTo: pdf.bottomAnchor, constant: 20).isActive = true
+            video.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            video.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            
+            videoLabel.leftAnchor.constraint(equalTo: video.rightAnchor, constant: 10).isActive = true
+            videoLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            videoLabel.centerYAnchor.constraint(equalTo: video.centerYAnchor).isActive = true
+
         }
 
         if imageUrls != nil {
             images.isHidden = false
-//            if imageUrls!.count > 0 {
-//                for case let imageURL in imageUrls! {
-//                    mainImageView.downloaded(from: imageURL) {
-//                    }
-//                }
-//            }
+
+            images.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+            images.topAnchor.constraint(equalTo: video.bottomAnchor, constant: 20).isActive = true
+            images.widthAnchor.constraint(equalToConstant: 60).isActive = true
+            images.heightAnchor.constraint(equalToConstant: 60).isActive = true
+
+            imagesLabel.leftAnchor.constraint(equalTo: images.rightAnchor, constant: 10).isActive = true
+            imagesLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            imagesLabel.centerYAnchor.constraint(equalTo: images.centerYAnchor).isActive = true
+
         }
         
         mainScrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -184,33 +210,6 @@ class ProductDetailViewController: UIViewController {
         descView.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 20).isActive = true
         descView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28).isActive = true
         
-        pdf.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        pdf.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 20).isActive = true
-        pdf.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        pdf.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        pdfLabel.leftAnchor.constraint(equalTo: pdf.rightAnchor, constant: 10).isActive = true
-        pdfLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        pdfLabel.centerYAnchor.constraint(equalTo: pdf.centerYAnchor).isActive = true
-
-        video.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        video.topAnchor.constraint(equalTo: pdf.bottomAnchor, constant: 20).isActive = true
-        video.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        video.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        videoLabel.leftAnchor.constraint(equalTo: video.rightAnchor, constant: 10).isActive = true
-        videoLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        videoLabel.centerYAnchor.constraint(equalTo: video.centerYAnchor).isActive = true
-
-        images.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        images.topAnchor.constraint(equalTo: video.bottomAnchor, constant: 20).isActive = true
-        images.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        images.heightAnchor.constraint(equalToConstant: 60).isActive = true
-
-        imagesLabel.leftAnchor.constraint(equalTo: images.rightAnchor, constant: 10).isActive = true
-        imagesLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        imagesLabel.centerYAnchor.constraint(equalTo: images.centerYAnchor).isActive = true
-
     }
     @objc private func pdfButtonTapped() {
         let pdfVC = PDFViewController()
@@ -235,7 +234,15 @@ class ProductDetailViewController: UIViewController {
     
     @objc private func imagesButtonTapped() {
         let imagesVC = ImagesViewController()
-        imagesVC.attachedImages = [#imageLiteral(resourceName: "product-img"), #imageLiteral(resourceName: "001246"), #imageLiteral(resourceName: "item-1")]
+        imageDownloads = []
+        if imageUrls!.count > 0 {
+            for case let imageURL in imageUrls! {
+                let url = URL(string: imageURL)
+                let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+                imageDownloads.append(UIImage(data: data!)!)
+            }
+        }
+        imagesVC.attachedImages = imageDownloads
         imagesVC.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         self.present(imagesVC, animated: true)
     }

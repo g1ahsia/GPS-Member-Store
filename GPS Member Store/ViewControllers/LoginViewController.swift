@@ -127,7 +127,7 @@ class LoginViewController: UIViewController {
 //            GlobalVariables.showAlert(title: title, message: ERR_INCORRECT_PHONE_NUMBER_FORMAT, vc: self)
 //            return
 //        }
-        NetworkManager.login(account: cell0.answerField.text!, password: cell1.answerField.text!) { (result) in
+        NetworkManager.userLogin(account: cell0.answerField.text!, password: cell1.answerField.text!) { (result) in
             print(result)
             DispatchQueue.main.async {
 

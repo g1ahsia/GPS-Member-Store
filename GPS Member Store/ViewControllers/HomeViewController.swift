@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
         label.isUserInteractionEnabled = false
         label.font = UIFont(name: "PingFangTC-Medium", size: 28)
         label.textColor = ATLANTIS_GREEN
-        label.text = "松仁藥局"
+//        label.text = "松仁藥局"
         return label
     }()
     
@@ -60,6 +60,11 @@ class HomeViewController: UIViewController {
 //        if (self.accountTableView.indexPathForSelectedRow != nil) {
 //            self.accountTableView.deselectRow(at: self.accountTableView.indexPathForSelectedRow!, animated: true)
 //        }
+        NetworkManager.fetchStore(id: STOREID) { (fetchedStore) in
+            DispatchQueue.main.async {
+                self.storeLabel.text = fetchedStore.name
+            }
+        }
     }
 
     override func viewDidLoad() {
@@ -155,6 +160,11 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIScro
             case 7:
                 GlobalVariables.showAlertWithOptions(title: "登出", message: "確定要登出", confirmString: "登出", vc: self) {
                     print("已登出")
+                    
+                    UserDefaults.standard.removeObject(forKey: "myToken")
+
+                    UserDefaults.standard.removeObject(forKey: "myPrivilege")
+
                     NotificationCenter.default.post(name: Notification.Name("Logout"), object: nil)
                 }
                 break
