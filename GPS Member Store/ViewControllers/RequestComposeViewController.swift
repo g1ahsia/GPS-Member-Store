@@ -34,8 +34,12 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     var price = 0
     
     var quantity = 0
+    
+    var expiryDate = ""
+    
+    var request = Request.init(id: 0, typeId: 0, areaId: 0, name: "", price: 0, quantity: 0, description: "", expiryDate: "", attachments: [], updatedDate: "", storeId: "", storeName: "")
 
-//    var kbSize = CGSize(width: 0.0, height: 0.0)
+//    var kbSize = CGSize(width: 0.0, height: 0.0)typeSelectionButtonTapped
     
     var keyboardHeight = CGFloat(0)
     
@@ -245,7 +249,25 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     
 
     @objc private func sendButtonTapped(sender: UIButton!) {
-        print("sending message")
+        sender.isEnabled = false
+        print("sending request")
+        request.name =  name
+        request.price =  price
+        request.quantity = quantity
+        request.expiryDate = expiryDate
+        request.description = descView.text
+        
+        NetworkManager.createRequest(typeId: request.typeId, areaId: request.areaId, name: request.name, price: request.price, quantity: request.quantity, expiryDate: request.expiryDate, description: request.description, attachments: request.attachments) { (result) in
+            print(result)
+            if (result["status"] as! Int == 1) {
+                NotificationCenter.default.post(name: Notification.Name("CreatedRequest"), object: nil)
+                DispatchQueue.main.async {
+                    self.send.isEnabled = true
+                    self.dismiss(animated: true) {
+                    }
+                }
+            }
+        }
     }
         
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -268,7 +290,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         headerTableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         headerTableView.topAnchor.constraint(equalTo: contentScrollView.topAnchor).isActive = true
         headerTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        headerTableView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        headerTableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
 
         scrollViewBottomConstraint = contentScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         scrollViewBottomConstraint?.isActive = true
@@ -495,6 +517,7 @@ extension RequestComposeViewController: UIPickerViewDataSource, UIPickerViewDele
             cell0.answer = REQUEST_SUBJECTS[row]
             selectedType = row
             cell0.layoutSubviews()
+            request.typeId = row+1
             enableSendButton()
         }
         else {
@@ -502,6 +525,7 @@ extension RequestComposeViewController: UIPickerViewDataSource, UIPickerViewDele
             cell1.answer = AREA_SUBJECTS[row]
             selectedArea = row
             cell1.layoutSubviews()
+            request.areaId = row+1
             enableSendButton()
         }
     }
@@ -510,15 +534,18 @@ extension RequestComposeViewController: UIPickerViewDataSource, UIPickerViewDele
         let cell2 = headerTableView.cellForRow(at: NSIndexPath(row: 2, section: 0) as IndexPath) as! FormCell
         let cell3 = headerTableView.cellForRow(at: NSIndexPath(row: 3, section: 0) as IndexPath) as! FormCell
         let cell4 = headerTableView.cellForRow(at: NSIndexPath(row: 4, section: 0) as IndexPath) as! FormCell
+        let cell5 = headerTableView.cellForRow(at: NSIndexPath(row: 5, section: 0) as IndexPath) as! FormCell
         name = cell2.answerField.text!
         price =  (cell3.answerField.text! as NSString).integerValue
         quantity = (cell4.answerField.text! as NSString).integerValue
+        expiryDate = cell5.answerField.text!
         
         if (selectedType == -1 ||
             selectedArea == -1 ||
             name == "" ||
             price == 0 ||
-            quantity == 0) {
+            quantity == 0 ||
+            expiryDate == "") {
             send.alpha = 0.5
             send.isEnabled = false
         }
@@ -552,7 +579,7 @@ extension RequestComposeViewController: UIImagePickerControllerDelegate, UINavig
 extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
 
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -580,6 +607,10 @@ extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSour
             case 4:
                 cell.field = "商品數量："
                 cell.fieldType = FieldType.Number
+                break
+            case 5:
+                cell.field = "需求效期："
+                cell.fieldType = FieldType.Date
                 break
             default:
                 cell.field = ""

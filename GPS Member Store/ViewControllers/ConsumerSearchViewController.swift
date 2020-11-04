@@ -135,6 +135,12 @@ extension ConsumerSearchViewController: UISearchBarDelegate {
                      Consumer.init(id: 2, name: "李曉明", mobilePhone: "0923233322"),
                      Consumer.init(id: 3, name: "吳大川", mobilePhone: "0923233323")]
         
-        consumerTableView.reloadData()
+        NetworkManager.searchConsumer(keyword: searchBar.text!) { (consumers) in
+            DispatchQueue.main.async {
+                self.consumers = consumers
+                self.consumerTableView.reloadData()
+            }
+        }
+        
     }
 }

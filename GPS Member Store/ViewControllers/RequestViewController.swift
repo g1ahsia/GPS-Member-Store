@@ -43,11 +43,19 @@ class RequestViewController: UIViewController {
         let add = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(self.addButtonTapped)) //
         self.navigationItem.rightBarButtonItem  = add
 
-        requests = [
-            Request.init(id: 1, type: 0, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "歐樂B兒童防蛀牙膏Mickey 40g", updatedDate: "2020/04/25 15:35"),
-            Request.init(id: 2, type: 0, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "晶亮葉黃膠囊含葉黃素加玻尿酸", updatedDate: "2020/04/23 15:35"),
-            Request.init(id: 3, type: 1, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "空氣抑菌筆", updatedDate: "2020/04/20 15:35")
-        ]
+//        requests = [
+//            Request.init(id: 1, type: 0, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "歐樂B兒童防蛀牙膏Mickey 40g", updatedDate: "2020/04/25 15:35"),
+//            Request.init(id: 2, type: 0, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "晶亮葉黃膠囊含葉黃素加玻尿酸", updatedDate: "2020/04/23 15:35"),
+//            Request.init(id: 3, type: 1, sender: "松仁藥局", name: "產品名稱", price: 120, quantity: 300, message: "空氣抑菌筆", updatedDate: "2020/04/20 15:35")
+//        ]
+        
+        NetworkManager.fetchRequests() { (requests) in
+            self.requests = requests
+            DispatchQueue.main.async {
+                self.requestTableView.reloadData()
+            }
+        }
+
         setupLayout()
 
     }
@@ -84,9 +92,9 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource, UIS
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "request", for: indexPath) as! RequestCell
-        cell.sender = requests[indexPath.row].sender
-        cell.type = requests[indexPath.row].type
-        cell.message = requests[indexPath.row].message
+        cell.storeName = requests[indexPath.row].storeName
+        cell.typeId = requests[indexPath.row].typeId
+        cell.desc = requests[indexPath.row].description
         cell.updatedDate = requests[indexPath.row].updatedDate
         cell.layoutSubviews()
         cell.mainImage = #imageLiteral(resourceName: "img_holder")
@@ -108,26 +116,25 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource, UIS
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let messageDetailVC = MessageDetailViewController()
-        messageDetailVC.title = REQUEST_SUBJECTS[requests[indexPath.row].type]
+        messageDetailVC.title = REQUEST_SUBJECTS[requests[indexPath.row].typeId - 1]
         if (indexPath.row == 0) {
             messageDetailVC.messages = [
-                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：60元\n商品數量：300\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
-                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購30隻", date: "2020/04/21", attachments: [])
+//                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：60元\n商品數量：300\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
+//                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購30隻", date: "2020/04/21", attachments: [])
             ]
             messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img")
         }
         else if (indexPath.row == 1) {
             messageDetailVC.messages = [
-                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：120元\n商品數量：3000\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
-                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購100個，謝謝。", date: "2020/04/21", attachments: [])
+//                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：120元\n商品數量：3000\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
+//                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購100個，謝謝。", date: "2020/04/21", attachments: [])
             ]
             messageDetailVC.tempImage = #imageLiteral(resourceName: "001246")
 
         }
         else {
             messageDetailVC.messages = [
-                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品數量：200\n我需要這批貨。", date: "2020/04/20", attachments: ["file"]),
-                Message.init(id: 1, sender: "翰林藥局", message: "我這邊有貨，請跟我聯絡。", date: "2020/04/21", attachments: [])
+//                Message.init·(id: 1, sender: "翰林藥局", message: "我這邊有貨，請跟我聯絡。", date: "2020/04/21", attachments: [])
             ]
             messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img-122")
         }

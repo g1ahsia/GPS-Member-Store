@@ -11,9 +11,9 @@ import UIKit
 
 class RequestCell: UITableViewCell {
     var mainImage : UIImage?
-    var sender : String?
-    var type : Int?
-    var message : String?
+    var storeName : String?
+    var typeId : Int?
+    var desc : String?
     var updatedDate : String?
         
     var mainImageView : UIImageView = {
@@ -44,7 +44,7 @@ class RequestCell: UITableViewCell {
         return textLabel
     }()
 
-    var messageLabel: UILabel = {
+    var descLabel: UILabel = {
         var textLabel = UILabel()
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         textLabel.backgroundColor = .clear
@@ -79,7 +79,7 @@ class RequestCell: UITableViewCell {
         self.contentView.addSubview(mainImageView)
         self.contentView.addSubview(senderLabel)
         self.contentView.addSubview(subjectLabel)
-        self.contentView.addSubview(messageLabel)
+        self.contentView.addSubview(descLabel)
         self.contentView.addSubview(dateLabel)
         self.contentView.addSubview(icon)
 
@@ -90,20 +90,20 @@ class RequestCell: UITableViewCell {
         if let image = mainImage {
             mainImageView.image = image
         }
-        if let sender = sender {
-            senderLabel.text = sender
+        if let storeName = storeName {
+            senderLabel.text = storeName
         }
-        if let type = type {
-            subjectLabel.text = REQUEST_SUBJECTS[type]
-            if (type == 0) {
+        if let typeId = typeId {
+            subjectLabel.text = REQUEST_SUBJECTS[typeId-1]
+            if (typeId == 0) {
                 icon.image = #imageLiteral(resourceName: " ic_package_out_grey")
             }
             else {
                 icon.image = #imageLiteral(resourceName: " ic_package_in")
             }
         }
-        if let message = message {
-            messageLabel.text = message
+        if let desc = desc {
+            descLabel.text = desc
         }
 
         if let date = updatedDate {
@@ -125,10 +125,10 @@ class RequestCell: UITableViewCell {
         subjectLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -44).isActive = true
         subjectLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
 
-        messageLabel.leftAnchor.constraint(equalTo: self.mainImageView.rightAnchor, constant: 8).isActive = true
-        messageLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 69).isActive = true
-        messageLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -44).isActive = true
-        messageLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        descLabel.leftAnchor.constraint(equalTo: self.mainImageView.rightAnchor, constant: 8).isActive = true
+        descLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 69).isActive = true
+        descLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -44).isActive = true
+        descLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         dateLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16).isActive = true
         dateLabel.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -20).isActive = true

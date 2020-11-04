@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9F1C8D1C24D7F6410043F791 /* LineImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D1B24D7F6410043F791 /* LineImageCell.swift */; };
-		9F1C8D1E24D7FC630043F791 /* RewardCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D1D24D7FC630043F791 /* RewardCardsViewController.swift */; };
-		9F1C8D2024D7FCA50043F791 /* RewardCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D1F24D7FCA50043F791 /* RewardCardCell.swift */; };
-		9F1C8D2224D7FCB40043F791 /* PointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D2124D7FCB40043F791 /* PointCell.swift */; };
-		9F1C8D2624D813F60043F791 /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1C8D2524D813F60043F791 /* TableCell.swift */; };
+		9F113CF12552DDEE0055DEAF /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113CF02552DDEE0055DEAF /* FormCell.swift */; };
+		9F113CF62552DDF50055DEAF /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113CF52552DDF50055DEAF /* TableCell.swift */; };
+		9F113CFB2552DDFF0055DEAF /* LineImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113CFA2552DDFF0055DEAF /* LineImageCell.swift */; };
+		9F113D002552DE0B0055DEAF /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113CFF2552DE0B0055DEAF /* MessageCell.swift */; };
+		9F113D052552DE110055DEAF /* RewardCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D042552DE110055DEAF /* RewardCardCell.swift */; };
+		9F113D0A2552DE1B0055DEAF /* PointCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D092552DE1B0055DEAF /* PointCell.swift */; };
+		9F113D0F2552DE240055DEAF /* ThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D0E2552DE240055DEAF /* ThreadCell.swift */; };
+		9F113D142552DE300055DEAF /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D132552DE300055DEAF /* ChangePasswordViewController.swift */; };
+		9F113D192552DE370055DEAF /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D182552DE370055DEAF /* ImagesViewController.swift */; };
+		9F113D1E2552DE3C0055DEAF /* ImageViewZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D1D2552DE3C0055DEAF /* ImageViewZoom.swift */; };
+		9F113D232552DE460055DEAF /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D222552DE460055DEAF /* MessageViewController.swift */; };
+		9F113D282552DE4F0055DEAF /* MessageComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D272552DE4F0055DEAF /* MessageComposeViewController.swift */; };
+		9F113D2D2552DE540055DEAF /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D2C2552DE540055DEAF /* MessageDetailViewController.swift */; };
+		9F113D322552DE5E0055DEAF /* RewardCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */; };
 		9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */; };
-		9F67E89B24CFDF65004A8003 /* MessageComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */; };
-		9F67E89D24CFDF9A004A8003 /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */; };
-		9F67E89F24CFDFAD004A8003 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89E24CFDFAD004A8003 /* MessageCell.swift */; };
 		9F67E8A724CFE368004A8003 /* NotoSansTC-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */; };
 		9F67E8A824CFE368004A8003 /* NotoSansTC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */; };
 		9F67E8A924CFE368004A8003 /* NotoSansTC-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A424CFE32D004A8003 /* NotoSansTC-Light.otf */; };
@@ -45,18 +51,12 @@
 		9F69DC6A24CAE07300C67A6B /* ConsumerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */; };
 		9F69DC6C24CAE0B000C67A6B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6B24CAE0B000C67A6B /* HomeViewController.swift */; };
 		9F731A9D24D116DF00FCB267 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731A9C24D116DF00FCB267 /* NetworkManager.swift */; };
-		9F731A9F24D11BC900FCB267 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731A9E24D11BC900FCB267 /* FormCell.swift */; };
-		9F731AA724D136C700FCB267 /* ThreadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AA624D136C700FCB267 /* ThreadCell.swift */; };
 		9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AA824D14C6600FCB267 /* RequestCell.swift */; };
 		9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */; };
 		9F79CB1824D3C17E0070F883 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB1724D3C17E0070F883 /* TagsViewController.swift */; };
-		9F79CB1C24D3DAA60070F883 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB1B24D3DAA60070F883 /* ChangePasswordViewController.swift */; };
 		9F79CB2624D3E5660070F883 /* ConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */; };
 		9F79CB2A24D425D00070F883 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2924D425D00070F883 /* QRCodeViewController.swift */; };
-		9FE50CDE24E115480040BD9B /* ImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE50CDD24E115480040BD9B /* ImagesViewController.swift */; };
-		9FE50CE024E1155F0040BD9B /* ImageViewZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE50CDF24E1155F0040BD9B /* ImageViewZoom.swift */; };
 		9FE50CE224E1180B0040BD9B /* FunctionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE50CE124E1180B0040BD9B /* FunctionCell.swift */; };
-		9FE50CE424E1279C0040BD9B /* MessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE50CE324E1279C0040BD9B /* MessageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,15 +77,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9F1C8D1B24D7F6410043F791 /* LineImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineImageCell.swift; path = ../../../GPS/GPS/Cells/LineImageCell.swift; sourceTree = "<group>"; };
-		9F1C8D1D24D7FC630043F791 /* RewardCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardsViewController.swift; path = ../../../GPS/GPS/ViewControllers/RewardCardsViewController.swift; sourceTree = "<group>"; };
-		9F1C8D1F24D7FCA50043F791 /* RewardCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardCell.swift; path = ../../../GPS/GPS/Cells/RewardCardCell.swift; sourceTree = "<group>"; };
-		9F1C8D2124D7FCB40043F791 /* PointCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PointCell.swift; path = ../../../GPS/GPS/Cells/PointCell.swift; sourceTree = "<group>"; };
-		9F1C8D2524D813F60043F791 /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableCell.swift; path = ../../../GPS/GPS/Cells/TableCell.swift; sourceTree = "<group>"; };
+		9F113CF02552DDEE0055DEAF /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/FormCell.swift"; sourceTree = "<group>"; };
+		9F113CF52552DDF50055DEAF /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/TableCell.swift"; sourceTree = "<group>"; };
+		9F113CFA2552DDFF0055DEAF /* LineImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineImageCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/LineImageCell.swift"; sourceTree = "<group>"; };
+		9F113CFF2552DE0B0055DEAF /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/MessageCell.swift"; sourceTree = "<group>"; };
+		9F113D042552DE110055DEAF /* RewardCardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/RewardCardCell.swift"; sourceTree = "<group>"; };
+		9F113D092552DE1B0055DEAF /* PointCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PointCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/PointCell.swift"; sourceTree = "<group>"; };
+		9F113D0E2552DE240055DEAF /* ThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/ThreadCell.swift"; sourceTree = "<group>"; };
+		9F113D132552DE300055DEAF /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/ChangePasswordViewController.swift"; sourceTree = "<group>"; };
+		9F113D182552DE370055DEAF /* ImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/ImagesViewController.swift"; sourceTree = "<group>"; };
+		9F113D1D2552DE3C0055DEAF /* ImageViewZoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewZoom.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/ImageViewZoom.swift"; sourceTree = "<group>"; };
+		9F113D222552DE460055DEAF /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/MessageViewController.swift"; sourceTree = "<group>"; };
+		9F113D272552DE4F0055DEAF /* MessageComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageComposeViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/MessageComposeViewController.swift"; sourceTree = "<group>"; };
+		9F113D2C2552DE540055DEAF /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageDetailViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/MessageDetailViewController.swift"; sourceTree = "<group>"; };
+		9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardsViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/RewardCardsViewController.swift"; sourceTree = "<group>"; };
 		9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = ../../GPS/GPS/GlobalVariables.swift; sourceTree = "<group>"; };
-		9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageComposeViewController.swift; path = ../../../GPS/GPS/ViewControllers/MessageComposeViewController.swift; sourceTree = "<group>"; };
-		9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageDetailViewController.swift; path = ../../../GPS/GPS/ViewControllers/MessageDetailViewController.swift; sourceTree = "<group>"; };
-		9F67E89E24CFDFAD004A8003 /* MessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCell.swift; path = ../../../GPS/GPS/Cells/MessageCell.swift; sourceTree = "<group>"; };
 		9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Black.otf"; sourceTree = "<group>"; };
 		9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Bold.otf"; sourceTree = "<group>"; };
 		9F67E8A324CFE32D004A8003 /* NotoSansTC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Regular.otf"; sourceTree = "<group>"; };
@@ -121,18 +127,12 @@
 		9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerSearchViewController.swift; sourceTree = "<group>"; };
 		9F69DC6B24CAE0B000C67A6B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9F731A9C24D116DF00FCB267 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = ../../GPS/GPS/NetworkManager.swift; sourceTree = "<group>"; };
-		9F731A9E24D11BC900FCB267 /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCell.swift; path = ../../../GPS/GPS/Cells/FormCell.swift; sourceTree = "<group>"; };
-		9F731AA624D136C700FCB267 /* ThreadCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ThreadCell.swift; path = ../../../GPS/GPS/Cells/ThreadCell.swift; sourceTree = "<group>"; };
 		9F731AA824D14C6600FCB267 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestComposeViewController.swift; sourceTree = "<group>"; };
 		9F79CB1724D3C17E0070F883 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
-		9F79CB1B24D3DAA60070F883 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChangePasswordViewController.swift; path = ../../../GPS/GPS/ViewControllers/ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumerDetailViewController.swift; sourceTree = "<group>"; };
 		9F79CB2924D425D00070F883 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
-		9FE50CDD24E115480040BD9B /* ImagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesViewController.swift; path = ../../../GPS/GPS/ViewControllers/ImagesViewController.swift; sourceTree = "<group>"; };
-		9FE50CDF24E1155F0040BD9B /* ImageViewZoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageViewZoom.swift; path = ../../../GPS/GPS/ViewControllers/ImageViewZoom.swift; sourceTree = "<group>"; };
 		9FE50CE124E1180B0040BD9B /* FunctionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionCell.swift; sourceTree = "<group>"; };
-		9FE50CE324E1279C0040BD9B /* MessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageViewController.swift; path = ../../../GPS/GPS/ViewControllers/MessageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,24 +233,24 @@
 			isa = PBXGroup;
 			children = (
 				9F67E8B324D00240004A8003 /* BarcodeScannerViewController.swift */,
-				9F79CB1B24D3DAA60070F883 /* ChangePasswordViewController.swift */,
+				9F113D132552DE300055DEAF /* ChangePasswordViewController.swift */,
 				9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */,
 				9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */,
 				9F67E8B724D00B67004A8003 /* ElectronicDocViewController.swift */,
 				9F69DC6124CADEC900C67A6B /* ForgetPasswordViewController.swift */,
 				9F69DC6B24CAE0B000C67A6B /* HomeViewController.swift */,
-				9FE50CDD24E115480040BD9B /* ImagesViewController.swift */,
-				9FE50CDF24E1155F0040BD9B /* ImageViewZoom.swift */,
-				9FE50CE324E1279C0040BD9B /* MessageViewController.swift */,
-				9F67E89A24CFDF65004A8003 /* MessageComposeViewController.swift */,
-				9F67E89C24CFDF9A004A8003 /* MessageDetailViewController.swift */,
+				9F113D182552DE370055DEAF /* ImagesViewController.swift */,
+				9F113D1D2552DE3C0055DEAF /* ImageViewZoom.swift */,
+				9F113D222552DE460055DEAF /* MessageViewController.swift */,
+				9F113D272552DE4F0055DEAF /* MessageComposeViewController.swift */,
+				9F113D2C2552DE540055DEAF /* MessageDetailViewController.swift */,
 				9F67E8B924D00E44004A8003 /* PDFViewController.swift */,
 				9F69DC6324CADF0600C67A6B /* ProductSearchViewController.swift */,
 				9F67E8AD24CFFD47004A8003 /* ProductSearchResultViewController.swift */,
 				9F67E8B124CFFFA3004A8003 /* ProductDetailViewController.swift */,
 				9F69DC5C24CADE9800C67A6B /* LoginViewController.swift */,
 				9F79CB1724D3C17E0070F883 /* TagsViewController.swift */,
-				9F1C8D1D24D7FC630043F791 /* RewardCardsViewController.swift */,
+				9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */,
 				9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */,
 				9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */,
 				9F79CB2924D425D00070F883 /* QRCodeViewController.swift */,
@@ -264,16 +264,16 @@
 			children = (
 				9F67E8BB24D02124004A8003 /* ConsumerCell.swift */,
 				9F67E8B524D00A81004A8003 /* ElectronicDocCell.swift */,
-				9F731A9E24D11BC900FCB267 /* FormCell.swift */,
 				9FE50CE124E1180B0040BD9B /* FunctionCell.swift */,
-				9F1C8D2524D813F60043F791 /* TableCell.swift */,
-				9F1C8D1B24D7F6410043F791 /* LineImageCell.swift */,
+				9F113CF02552DDEE0055DEAF /* FormCell.swift */,
+				9F113CF52552DDF50055DEAF /* TableCell.swift */,
+				9F113CFA2552DDFF0055DEAF /* LineImageCell.swift */,
 				9F67E8AF24CFFEFD004A8003 /* ProductCell.swift */,
-				9F67E89E24CFDFAD004A8003 /* MessageCell.swift */,
-				9F1C8D1F24D7FCA50043F791 /* RewardCardCell.swift */,
+				9F113CFF2552DE0B0055DEAF /* MessageCell.swift */,
+				9F113D042552DE110055DEAF /* RewardCardCell.swift */,
 				9F731AA824D14C6600FCB267 /* RequestCell.swift */,
-				9F1C8D2124D7FCB40043F791 /* PointCell.swift */,
-				9F731AA624D136C700FCB267 /* ThreadCell.swift */,
+				9F113D0E2552DE240055DEAF /* ThreadCell.swift */,
+				9F113D092552DE1B0055DEAF /* PointCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -416,43 +416,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F731A9D24D116DF00FCB267 /* NetworkManager.swift in Sources */,
-				9FE50CE424E1279C0040BD9B /* MessageViewController.swift in Sources */,
-				9F1C8D1E24D7FC630043F791 /* RewardCardsViewController.swift in Sources */,
+				9F113D002552DE0B0055DEAF /* MessageCell.swift in Sources */,
 				9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */,
+				9F113CF12552DDEE0055DEAF /* FormCell.swift in Sources */,
 				9F69DC2C24CADD2800C67A6B /* ViewController.swift in Sources */,
-				9F67E89D24CFDF9A004A8003 /* MessageDetailViewController.swift in Sources */,
-				9F731A9F24D11BC900FCB267 /* FormCell.swift in Sources */,
-				9F67E89B24CFDF65004A8003 /* MessageComposeViewController.swift in Sources */,
 				9F69DC6C24CAE0B000C67A6B /* HomeViewController.swift in Sources */,
+				9F113D192552DE370055DEAF /* ImagesViewController.swift in Sources */,
+				9F113D2D2552DE540055DEAF /* MessageDetailViewController.swift in Sources */,
 				9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */,
+				9F113CF62552DDF50055DEAF /* TableCell.swift in Sources */,
 				9F79CB2624D3E5660070F883 /* ConsumerDetailViewController.swift in Sources */,
-				9F79CB1C24D3DAA60070F883 /* ChangePasswordViewController.swift in Sources */,
-				9FE50CE024E1155F0040BD9B /* ImageViewZoom.swift in Sources */,
 				9F69DC2824CADD2800C67A6B /* AppDelegate.swift in Sources */,
 				9F67E8B424D00240004A8003 /* BarcodeScannerViewController.swift in Sources */,
+				9F113D0F2552DE240055DEAF /* ThreadCell.swift in Sources */,
+				9F113D052552DE110055DEAF /* RewardCardCell.swift in Sources */,
 				9F79CB1824D3C17E0070F883 /* TagsViewController.swift in Sources */,
 				9F69DC2A24CADD2800C67A6B /* SceneDelegate.swift in Sources */,
 				9F69DC6A24CAE07300C67A6B /* ConsumerSearchViewController.swift in Sources */,
+				9F113D322552DE5E0055DEAF /* RewardCardsViewController.swift in Sources */,
 				9F69DC6224CADEC900C67A6B /* ForgetPasswordViewController.swift in Sources */,
 				9F79CB2A24D425D00070F883 /* QRCodeViewController.swift in Sources */,
 				9F67E8BC24D02124004A8003 /* ConsumerCell.swift in Sources */,
 				9F69DC6624CADFBA00C67A6B /* RequestViewController.swift in Sources */,
-				9F67E89F24CFDFAD004A8003 /* MessageCell.swift in Sources */,
 				9F67E8BA24D00E44004A8003 /* PDFViewController.swift in Sources */,
 				9FE50CE224E1180B0040BD9B /* FunctionCell.swift in Sources */,
 				9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */,
-				9F731AA724D136C700FCB267 /* ThreadCell.swift in Sources */,
-				9F1C8D2624D813F60043F791 /* TableCell.swift in Sources */,
-				9F1C8D1C24D7F6410043F791 /* LineImageCell.swift in Sources */,
+				9F113D282552DE4F0055DEAF /* MessageComposeViewController.swift in Sources */,
+				9F113CFB2552DDFF0055DEAF /* LineImageCell.swift in Sources */,
 				9F67E8B224CFFFA3004A8003 /* ProductDetailViewController.swift in Sources */,
-				9F1C8D2224D7FCB40043F791 /* PointCell.swift in Sources */,
 				9F69DC5D24CADE9800C67A6B /* LoginViewController.swift in Sources */,
 				9F67E8B824D00B67004A8003 /* ElectronicDocViewController.swift in Sources */,
+				9F113D142552DE300055DEAF /* ChangePasswordViewController.swift in Sources */,
 				9F67E8B624D00A81004A8003 /* ElectronicDocCell.swift in Sources */,
-				9FE50CDE24E115480040BD9B /* ImagesViewController.swift in Sources */,
+				9F113D232552DE460055DEAF /* MessageViewController.swift in Sources */,
+				9F113D1E2552DE3C0055DEAF /* ImageViewZoom.swift in Sources */,
 				9F67E8B024CFFEFD004A8003 /* ProductCell.swift in Sources */,
-				9F1C8D2024D7FCA50043F791 /* RewardCardCell.swift in Sources */,
 				9F67E8AE24CFFD47004A8003 /* ProductSearchResultViewController.swift in Sources */,
+				9F113D0A2552DE1B0055DEAF /* PointCell.swift in Sources */,
 				9F69DC6424CADF0600C67A6B /* ProductSearchViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
