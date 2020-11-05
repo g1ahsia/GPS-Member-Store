@@ -21,6 +21,7 @@
 		9F113D282552DE4F0055DEAF /* MessageComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D272552DE4F0055DEAF /* MessageComposeViewController.swift */; };
 		9F113D2D2552DE540055DEAF /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D2C2552DE540055DEAF /* MessageDetailViewController.swift */; };
 		9F113D322552DE5E0055DEAF /* RewardCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */; };
+		9F113D502553AF5C0055DEAF /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D4F2553AF5C0055DEAF /* TableCell.swift */; };
 		9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */; };
 		9F67E8A724CFE368004A8003 /* NotoSansTC-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */; };
 		9F67E8A824CFE368004A8003 /* NotoSansTC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */; };
@@ -91,6 +92,7 @@
 		9F113D272552DE4F0055DEAF /* MessageComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageComposeViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/MessageComposeViewController.swift"; sourceTree = "<group>"; };
 		9F113D2C2552DE540055DEAF /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageDetailViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/MessageDetailViewController.swift"; sourceTree = "<group>"; };
 		9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardsViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/RewardCardsViewController.swift"; sourceTree = "<group>"; };
+		9F113D4F2553AF5C0055DEAF /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
 		9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = ../../GPS/GPS/GlobalVariables.swift; sourceTree = "<group>"; };
 		9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Black.otf"; sourceTree = "<group>"; };
 		9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Bold.otf"; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				9F67E8A524CFE32D004A8003 /* NotoSansTC-Medium.otf */,
 				9F67E8A324CFE32D004A8003 /* NotoSansTC-Regular.otf */,
 				9F67E8A624CFE32E004A8003 /* NotoSansTC-Thin.otf */,
+				9F113D4F2553AF5C0055DEAF /* TableCell.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				9F113D2D2552DE540055DEAF /* MessageDetailViewController.swift in Sources */,
 				9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */,
 				9F113CF62552DDF50055DEAF /* TableCell.swift in Sources */,
+				9F113D502553AF5C0055DEAF /* TableCell.swift in Sources */,
 				9F79CB2624D3E5660070F883 /* ConsumerDetailViewController.swift in Sources */,
 				9F69DC2824CADD2800C67A6B /* AppDelegate.swift in Sources */,
 				9F67E8B424D00240004A8003 /* BarcodeScannerViewController.swift in Sources */,
