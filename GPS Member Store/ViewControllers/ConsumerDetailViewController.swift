@@ -171,7 +171,7 @@ extension ConsumerDetailViewController: UIPickerViewDataSource, UIPickerViewDele
         return 0
     }
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ f: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if component == 0 {
             if row == 0 {
                 return "男性"

@@ -95,7 +95,7 @@ class RequestCell: UITableViewCell {
         }
         if let typeId = typeId {
             subjectLabel.text = REQUEST_SUBJECTS[typeId-1]
-            if (typeId == 0) {
+            if (typeId == 1) {
                 icon.image = #imageLiteral(resourceName: " ic_package_out_grey")
             }
             else {

@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67B13C5670740F1C9B81F4D0 /* Pods_GPS_Member_StoreUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE2998FD2FA06F38D3B544B8 /* Pods_GPS_Member_StoreUITests.framework */; };
 		9F113CF12552DDEE0055DEAF /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113CF02552DDEE0055DEAF /* FormCell.swift */; };
 		9F113CF62552DDF50055DEAF /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113CF52552DDF50055DEAF /* TableCell.swift */; };
 		9F113CFB2552DDFF0055DEAF /* LineImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113CFA2552DDFF0055DEAF /* LineImageCell.swift */; };
@@ -21,8 +22,10 @@
 		9F113D282552DE4F0055DEAF /* MessageComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D272552DE4F0055DEAF /* MessageComposeViewController.swift */; };
 		9F113D2D2552DE540055DEAF /* MessageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D2C2552DE540055DEAF /* MessageDetailViewController.swift */; };
 		9F113D322552DE5E0055DEAF /* RewardCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */; };
-		9F113D502553AF5C0055DEAF /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D4F2553AF5C0055DEAF /* TableCell.swift */; };
-		9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */; };
+		9F113D89255524690055DEAF /* AWSS3TransferManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F113D88255524690055DEAF /* AWSS3TransferManager.swift */; };
+		9F15C09625553D1100D180A2 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15C09525553D1000D180A2 /* GlobalVariables.swift */; };
+		9F15C09B25553FEB00D180A2 /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15C09A25553FEB00D180A2 /* RequestDetailViewController.swift */; };
+		9F15C0A62555541300D180A2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15C0A52555541300D180A2 /* NetworkManager.swift */; };
 		9F67E8A724CFE368004A8003 /* NotoSansTC-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */; };
 		9F67E8A824CFE368004A8003 /* NotoSansTC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */; };
 		9F67E8A924CFE368004A8003 /* NotoSansTC-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A424CFE32D004A8003 /* NotoSansTC-Light.otf */; };
@@ -51,13 +54,14 @@
 		9F69DC6624CADFBA00C67A6B /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */; };
 		9F69DC6A24CAE07300C67A6B /* ConsumerSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */; };
 		9F69DC6C24CAE0B000C67A6B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F69DC6B24CAE0B000C67A6B /* HomeViewController.swift */; };
-		9F731A9D24D116DF00FCB267 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731A9C24D116DF00FCB267 /* NetworkManager.swift */; };
 		9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AA824D14C6600FCB267 /* RequestCell.swift */; };
 		9F731AAB24D163FF00FCB267 /* RequestComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */; };
 		9F79CB1824D3C17E0070F883 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB1724D3C17E0070F883 /* TagsViewController.swift */; };
 		9F79CB2624D3E5660070F883 /* ConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */; };
 		9F79CB2A24D425D00070F883 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2924D425D00070F883 /* QRCodeViewController.swift */; };
 		9FE50CE224E1180B0040BD9B /* FunctionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE50CE124E1180B0040BD9B /* FunctionCell.swift */; };
+		B55BA19B2A3F6A40A0525F8D /* Pods_GPS_Member_StoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 300801A25B59A7FA41EBA2EB /* Pods_GPS_Member_StoreTests.framework */; };
+		C85C9A3EE00D56FAC831257E /* Pods_GPS_Member_Store.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B56E00923F51EEF4450707 /* Pods_GPS_Member_Store.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		20BAA9CED53B6AB0CD4B072F /* Pods-GPS Member Store.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPS Member Store.release.xcconfig"; path = "Target Support Files/Pods-GPS Member Store/Pods-GPS Member Store.release.xcconfig"; sourceTree = "<group>"; };
+		300801A25B59A7FA41EBA2EB /* Pods_GPS_Member_StoreTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPS_Member_StoreTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		387156608D42A77B47505CF5 /* Pods-GPS Member Store.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPS Member Store.debug.xcconfig"; path = "Target Support Files/Pods-GPS Member Store/Pods-GPS Member Store.debug.xcconfig"; sourceTree = "<group>"; };
+		726DD1B9CF4D9CA19794E3C3 /* Pods-GPS Member StoreTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPS Member StoreTests.release.xcconfig"; path = "Target Support Files/Pods-GPS Member StoreTests/Pods-GPS Member StoreTests.release.xcconfig"; sourceTree = "<group>"; };
+		79727023AB88486EA92522F1 /* Pods-GPS Member StoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPS Member StoreTests.debug.xcconfig"; path = "Target Support Files/Pods-GPS Member StoreTests/Pods-GPS Member StoreTests.debug.xcconfig"; sourceTree = "<group>"; };
 		9F113CF02552DDEE0055DEAF /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/FormCell.swift"; sourceTree = "<group>"; };
 		9F113CF52552DDF50055DEAF /* TableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/TableCell.swift"; sourceTree = "<group>"; };
 		9F113CFA2552DDFF0055DEAF /* LineImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineImageCell.swift; path = "../../../GPS Consumer/GPS Consumer/Cells/LineImageCell.swift"; sourceTree = "<group>"; };
@@ -92,8 +101,10 @@
 		9F113D272552DE4F0055DEAF /* MessageComposeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageComposeViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/MessageComposeViewController.swift"; sourceTree = "<group>"; };
 		9F113D2C2552DE540055DEAF /* MessageDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageDetailViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/MessageDetailViewController.swift"; sourceTree = "<group>"; };
 		9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RewardCardsViewController.swift; path = "../../../GPS Consumer/GPS Consumer/ViewControllers/RewardCardsViewController.swift"; sourceTree = "<group>"; };
-		9F113D4F2553AF5C0055DEAF /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
-		9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = ../../GPS/GPS/GlobalVariables.swift; sourceTree = "<group>"; };
+		9F113D88255524690055DEAF /* AWSS3TransferManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AWSS3TransferManager.swift; path = "../../GPS Consumer/AWSS3TransferManager.swift"; sourceTree = "<group>"; };
+		9F15C09525553D1000D180A2 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = "../../GPS Consumer/GlobalVariables.swift"; sourceTree = "<group>"; };
+		9F15C09A25553FEB00D180A2 /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
+		9F15C0A52555541300D180A2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = "../../GPS Consumer/NetworkManager.swift"; sourceTree = "<group>"; };
 		9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Black.otf"; sourceTree = "<group>"; };
 		9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Bold.otf"; sourceTree = "<group>"; };
 		9F67E8A324CFE32D004A8003 /* NotoSansTC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Regular.otf"; sourceTree = "<group>"; };
@@ -128,13 +139,16 @@
 		9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		9F69DC6924CAE07300C67A6B /* ConsumerSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumerSearchViewController.swift; sourceTree = "<group>"; };
 		9F69DC6B24CAE0B000C67A6B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		9F731A9C24D116DF00FCB267 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = ../../GPS/GPS/NetworkManager.swift; sourceTree = "<group>"; };
 		9F731AA824D14C6600FCB267 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestComposeViewController.swift; sourceTree = "<group>"; };
 		9F79CB1724D3C17E0070F883 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumerDetailViewController.swift; sourceTree = "<group>"; };
 		9F79CB2924D425D00070F883 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		9FE50CE124E1180B0040BD9B /* FunctionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionCell.swift; sourceTree = "<group>"; };
+		BE2998FD2FA06F38D3B544B8 /* Pods_GPS_Member_StoreUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPS_Member_StoreUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E588BEBA68D93FC41D165644 /* Pods-GPS Member StoreUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPS Member StoreUITests.release.xcconfig"; path = "Target Support Files/Pods-GPS Member StoreUITests/Pods-GPS Member StoreUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E8B56E00923F51EEF4450707 /* Pods_GPS_Member_Store.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPS_Member_Store.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F22B2BB9A19BB411ECA9C1D3 /* Pods-GPS Member StoreUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPS Member StoreUITests.debug.xcconfig"; path = "Target Support Files/Pods-GPS Member StoreUITests/Pods-GPS Member StoreUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +156,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C85C9A3EE00D56FAC831257E /* Pods_GPS_Member_Store.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +164,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B55BA19B2A3F6A40A0525F8D /* Pods_GPS_Member_StoreTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,12 +172,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67B13C5670740F1C9B81F4D0 /* Pods_GPS_Member_StoreUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		956EF778F9BED4804C51D1BF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				387156608D42A77B47505CF5 /* Pods-GPS Member Store.debug.xcconfig */,
+				20BAA9CED53B6AB0CD4B072F /* Pods-GPS Member Store.release.xcconfig */,
+				79727023AB88486EA92522F1 /* Pods-GPS Member StoreTests.debug.xcconfig */,
+				726DD1B9CF4D9CA19794E3C3 /* Pods-GPS Member StoreTests.release.xcconfig */,
+				F22B2BB9A19BB411ECA9C1D3 /* Pods-GPS Member StoreUITests.debug.xcconfig */,
+				E588BEBA68D93FC41D165644 /* Pods-GPS Member StoreUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9F67E8A024CFE307004A8003 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,7 +201,6 @@
 				9F67E8A524CFE32D004A8003 /* NotoSansTC-Medium.otf */,
 				9F67E8A324CFE32D004A8003 /* NotoSansTC-Regular.otf */,
 				9F67E8A624CFE32E004A8003 /* NotoSansTC-Thin.otf */,
-				9F113D4F2553AF5C0055DEAF /* TableCell.swift */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -183,6 +212,8 @@
 				9F69DC3D24CADD2B00C67A6B /* GPS Member StoreTests */,
 				9F69DC4824CADD2B00C67A6B /* GPS Member StoreUITests */,
 				9F69DC2524CADD2800C67A6B /* Products */,
+				956EF778F9BED4804C51D1BF /* Pods */,
+				F0FF30C076DDA657F22D06FA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,10 +230,11 @@
 		9F69DC2624CADD2800C67A6B /* GPS Member Store */ = {
 			isa = PBXGroup;
 			children = (
-				9F67E89624CFDEB7004A8003 /* GlobalVariables.swift */,
-				9F731A9C24D116DF00FCB267 /* NetworkManager.swift */,
+				9F15C09525553D1000D180A2 /* GlobalVariables.swift */,
+				9F113D88255524690055DEAF /* AWSS3TransferManager.swift */,
 				9F69DC2724CADD2800C67A6B /* AppDelegate.swift */,
 				9F69DC2924CADD2800C67A6B /* SceneDelegate.swift */,
+				9F15C0A52555541300D180A2 /* NetworkManager.swift */,
 				9F69DC3524CADD2B00C67A6B /* Info.plist */,
 				9F67E8A024CFE307004A8003 /* Fonts */,
 				9F69DC5E24CADEAC00C67A6B /* Cells */,
@@ -256,6 +288,7 @@
 				9F113D312552DE5E0055DEAF /* RewardCardsViewController.swift */,
 				9F69DC6524CADFBA00C67A6B /* RequestViewController.swift */,
 				9F731AAA24D163FF00FCB267 /* RequestComposeViewController.swift */,
+				9F15C09A25553FEB00D180A2 /* RequestDetailViewController.swift */,
 				9F79CB2924D425D00070F883 /* QRCodeViewController.swift */,
 				9F69DC2B24CADD2800C67A6B /* ViewController.swift */,
 			);
@@ -281,6 +314,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F0FF30C076DDA657F22D06FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E8B56E00923F51EEF4450707 /* Pods_GPS_Member_Store.framework */,
+				300801A25B59A7FA41EBA2EB /* Pods_GPS_Member_StoreTests.framework */,
+				BE2998FD2FA06F38D3B544B8 /* Pods_GPS_Member_StoreUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -288,9 +331,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F69DC4E24CADD2B00C67A6B /* Build configuration list for PBXNativeTarget "GPS Member Store" */;
 			buildPhases = (
+				C89940AFB3800CFA52433A83 /* [CP] Check Pods Manifest.lock */,
 				9F69DC2024CADD2800C67A6B /* Sources */,
 				9F69DC2124CADD2800C67A6B /* Frameworks */,
 				9F69DC2224CADD2800C67A6B /* Resources */,
+				163F6361C6983ECF05DB60A7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,6 +350,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F69DC5124CADD2B00C67A6B /* Build configuration list for PBXNativeTarget "GPS Member StoreTests" */;
 			buildPhases = (
+				86CC57ED1AFEEDA5F5E4B551 /* [CP] Check Pods Manifest.lock */,
 				9F69DC3624CADD2B00C67A6B /* Sources */,
 				9F69DC3724CADD2B00C67A6B /* Frameworks */,
 				9F69DC3824CADD2B00C67A6B /* Resources */,
@@ -323,6 +369,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F69DC5424CADD2B00C67A6B /* Build configuration list for PBXNativeTarget "GPS Member StoreUITests" */;
 			buildPhases = (
+				4D894606242AE1660D28B319 /* [CP] Check Pods Manifest.lock */,
 				9F69DC4124CADD2B00C67A6B /* Sources */,
 				9F69DC4224CADD2B00C67A6B /* Frameworks */,
 				9F69DC4324CADD2B00C67A6B /* Resources */,
@@ -413,30 +460,116 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		163F6361C6983ECF05DB60A7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GPS Member Store/Pods-GPS Member Store-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GPS Member Store/Pods-GPS Member Store-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GPS Member Store/Pods-GPS Member Store-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D894606242AE1660D28B319 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GPS Member StoreUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		86CC57ED1AFEEDA5F5E4B551 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GPS Member StoreTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C89940AFB3800CFA52433A83 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GPS Member Store-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9F69DC2024CADD2800C67A6B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F731A9D24D116DF00FCB267 /* NetworkManager.swift in Sources */,
 				9F113D002552DE0B0055DEAF /* MessageCell.swift in Sources */,
+				9F15C09B25553FEB00D180A2 /* RequestDetailViewController.swift in Sources */,
 				9F731AA924D14C6600FCB267 /* RequestCell.swift in Sources */,
 				9F113CF12552DDEE0055DEAF /* FormCell.swift in Sources */,
 				9F69DC2C24CADD2800C67A6B /* ViewController.swift in Sources */,
 				9F69DC6C24CAE0B000C67A6B /* HomeViewController.swift in Sources */,
 				9F113D192552DE370055DEAF /* ImagesViewController.swift in Sources */,
 				9F113D2D2552DE540055DEAF /* MessageDetailViewController.swift in Sources */,
-				9F67E89724CFDEB7004A8003 /* GlobalVariables.swift in Sources */,
 				9F113CF62552DDF50055DEAF /* TableCell.swift in Sources */,
-				9F113D502553AF5C0055DEAF /* TableCell.swift in Sources */,
 				9F79CB2624D3E5660070F883 /* ConsumerDetailViewController.swift in Sources */,
 				9F69DC2824CADD2800C67A6B /* AppDelegate.swift in Sources */,
 				9F67E8B424D00240004A8003 /* BarcodeScannerViewController.swift in Sources */,
 				9F113D0F2552DE240055DEAF /* ThreadCell.swift in Sources */,
+				9F113D89255524690055DEAF /* AWSS3TransferManager.swift in Sources */,
 				9F113D052552DE110055DEAF /* RewardCardCell.swift in Sources */,
 				9F79CB1824D3C17E0070F883 /* TagsViewController.swift in Sources */,
 				9F69DC2A24CADD2800C67A6B /* SceneDelegate.swift in Sources */,
 				9F69DC6A24CAE07300C67A6B /* ConsumerSearchViewController.swift in Sources */,
+				9F15C0A62555541300D180A2 /* NetworkManager.swift in Sources */,
 				9F113D322552DE5E0055DEAF /* RewardCardsViewController.swift in Sources */,
 				9F69DC6224CADEC900C67A6B /* ForgetPasswordViewController.swift in Sources */,
 				9F79CB2A24D425D00070F883 /* QRCodeViewController.swift in Sources */,
@@ -453,6 +586,7 @@
 				9F113D142552DE300055DEAF /* ChangePasswordViewController.swift in Sources */,
 				9F67E8B624D00A81004A8003 /* ElectronicDocCell.swift in Sources */,
 				9F113D232552DE460055DEAF /* MessageViewController.swift in Sources */,
+				9F15C09625553D1100D180A2 /* GlobalVariables.swift in Sources */,
 				9F113D1E2552DE3C0055DEAF /* ImageViewZoom.swift in Sources */,
 				9F67E8B024CFFEFD004A8003 /* ProductCell.swift in Sources */,
 				9F67E8AE24CFFD47004A8003 /* ProductSearchResultViewController.swift in Sources */,
@@ -628,6 +762,7 @@
 		};
 		9F69DC4F24CADD2B00C67A6B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 387156608D42A77B47505CF5 /* Pods-GPS Member Store.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -647,6 +782,7 @@
 		};
 		9F69DC5024CADD2B00C67A6B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20BAA9CED53B6AB0CD4B072F /* Pods-GPS Member Store.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -666,6 +802,7 @@
 		};
 		9F69DC5224CADD2B00C67A6B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79727023AB88486EA92522F1 /* Pods-GPS Member StoreTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -688,6 +825,7 @@
 		};
 		9F69DC5324CADD2B00C67A6B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 726DD1B9CF4D9CA19794E3C3 /* Pods-GPS Member StoreTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -710,6 +848,7 @@
 		};
 		9F69DC5524CADD2B00C67A6B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F22B2BB9A19BB411ECA9C1D3 /* Pods-GPS Member StoreUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -730,6 +869,7 @@
 		};
 		9F69DC5624CADD2B00C67A6B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E588BEBA68D93FC41D165644 /* Pods-GPS Member StoreUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

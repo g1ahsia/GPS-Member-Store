@@ -57,6 +57,8 @@ class RequestViewController: UIViewController {
         }
 
         setupLayout()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData), name:Notification.Name("CreatedRequest"), object: nil)
 
     }
         
@@ -76,6 +78,15 @@ class RequestViewController: UIViewController {
         requestTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
         requestTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
         requestTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+    }
+    
+    @objc private func reloadData () {
+        NetworkManager.fetchRequests() { (requests) in
+            self.requests = requests
+            DispatchQueue.main.async {
+                self.requestTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -115,31 +126,39 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource, UIS
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let messageDetailVC = MessageDetailViewController()
-        messageDetailVC.title = REQUEST_SUBJECTS[requests[indexPath.row].typeId - 1]
-        if (indexPath.row == 0) {
-            messageDetailVC.messages = [
-//                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：60元\n商品數量：300\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
-//                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購30隻", date: "2020/04/21", attachments: [])
-            ]
-            messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img")
+        let requestDetailVC = RequestDetailViewController()
+        requestDetailVC.title = REQUEST_SUBJECTS[requests[indexPath.row].typeId - 1]
+//        if (indexPath.row == 0) {
+//            messageDetailVC.messages = [
+////                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：60元\n商品數量：300\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
+////                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購30隻", date: "2020/04/21", attachments: [])
+//            ]
+//            messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img")
+//        }
+//        else if (indexPath.row == 1) {
+//            messageDetailVC.messages = [
+////                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：120元\n商品數量：3000\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
+////                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購100個，謝謝。", date: "2020/04/21", attachments: [])
+//            ]
+//            messageDetailVC.tempImage = #imageLiteral(resourceName: "001246")
+//
+//        }
+//        else {
+//            messageDetailVC.messages = [
+////                Message.init·(id: 1, sender: "翰林藥局", message: "我這邊有貨，請跟我聯絡。", date: "2020/04/21", attachments: [])
+//            ]
+//            messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img-122")
+//        }
+        
+        NetworkManager.fetchRequestMessages(id: requests[indexPath.row].id) { (messages) in
+            requestDetailVC.messages = messages
+            requestDetailVC.threadId = self.requests[indexPath.row].id
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(requestDetailVC, animated: true)
+            }
         }
-        else if (indexPath.row == 1) {
-            messageDetailVC.messages = [
-//                Message.init(id: 1, sender: "松仁藥局", message: requests[indexPath.row].message + "\n商品價錢：120元\n商品數量：3000\n商品有限，把握機會。", date: "2020/04/20", attachments: ["file"]),
-//                Message.init(id: 1, sender: "翰林藥局", message: "我想要訂購100個，謝謝。", date: "2020/04/21", attachments: [])
-            ]
-            messageDetailVC.tempImage = #imageLiteral(resourceName: "001246")
 
-        }
-        else {
-            messageDetailVC.messages = [
-//                Message.init·(id: 1, sender: "翰林藥局", message: "我這邊有貨，請跟我聯絡。", date: "2020/04/21", attachments: [])
-            ]
-            messageDetailVC.tempImage = #imageLiteral(resourceName: "product-img-122")
-        }
-
-        self.navigationController?.pushViewController(messageDetailVC, animated: true)
+//        self.navigationController?.pushViewController(requestDetailVC, animated: true)
     }
     
 }

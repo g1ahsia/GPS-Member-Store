@@ -500,12 +500,14 @@ extension RequestComposeViewController: UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if (pickerView == typePickerView) {
             if component == 0 {
+                request.typeId = row+1
                 return REQUEST_SUBJECTS[row]
             }
             return ""
         }
         else {
             if component == 0 {
+                request.areaId = row+1
                 return AREA_SUBJECTS[row]
             }
             return ""
