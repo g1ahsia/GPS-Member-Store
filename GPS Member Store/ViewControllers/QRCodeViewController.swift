@@ -130,15 +130,7 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
         view.addSubview(blackCover)
         view.addSubview(pointPickerView)
         view.addSubview(toolbar)
-
-//        let tapOnBlackCover = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
-//        blackCover.addGestureRecognizer(tapOnBlackCover)
         setupLayout()
-
-//        pointPickerView.addSubview(toolbar)
-        
-//        pointPickerView.inputAccessoryView = toolbar
-        
     }
     
     private func setupLayout() {
@@ -190,6 +182,7 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
     
     @objc private func refreshButtonTapped(sender: UIButton!) {
         point.setTitle("+1點", for: .normal)
+        createQRCode()
     }
     
     @objc private func sendButtonTapped(sender: UIButton!) {
@@ -214,6 +207,7 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
             self.pointPickerView.alpha = 0
         }
         point.setTitle("+\(selectedPoint)點", for: .normal)
+        createQRCode()
     }
 
     @objc private func cancelButtonTapped() {
@@ -230,6 +224,18 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
             self.toolbar.alpha = 0
             self.blackCover.alpha = 0
             self.pointPickerView.alpha = 0
+        }
+    }
+    
+    private func createQRCode() {
+        NetworkManager.createQRCode(points: selectedPoint) { (qrCode) in
+            DispatchQueue.main.async {
+                let imageData = qrCode.image
+                if let decodedData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters) {
+                    let image = UIImage(data: decodedData)
+                    self.mainImageView.image = image
+                }
+            }
         }
     }
 
