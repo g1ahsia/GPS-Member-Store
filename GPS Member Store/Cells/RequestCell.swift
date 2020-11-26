@@ -15,6 +15,7 @@ class RequestCell: UITableViewCell {
     var typeId : Int?
     var desc : String?
     var updatedDate : String?
+    var attachments : [String]?
         
     var mainImageView : UIImageView = {
         var imageView = UIImageView()
@@ -109,7 +110,12 @@ class RequestCell: UITableViewCell {
         if let date = updatedDate {
             dateLabel.text = date
         }
-
+        if let attachments = attachments {
+            if (attachments.count > 0) {
+                mainImageView.downloaded(from: attachments[0]) {
+                }
+            }
+        }
         mainImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         mainImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         mainImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true

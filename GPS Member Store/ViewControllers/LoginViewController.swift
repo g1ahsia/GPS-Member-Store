@@ -135,6 +135,9 @@ class LoginViewController: UIViewController {
                     self.dismiss(animated: true) {
                     }
                 }
+                else if (result["status"] as! Int == -1) {
+                    GlobalVariables.showAlert(title: "登入", message: ERR_CONNECTING, vc: self)
+                }
                 else {
                     GlobalVariables.showAlert(title: "登入", message: result["message"] as? String, vc: self)
                 }

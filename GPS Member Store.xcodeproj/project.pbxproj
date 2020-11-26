@@ -26,6 +26,7 @@
 		9F15C09625553D1100D180A2 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15C09525553D1000D180A2 /* GlobalVariables.swift */; };
 		9F15C09B25553FEB00D180A2 /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15C09A25553FEB00D180A2 /* RequestDetailViewController.swift */; };
 		9F15C0A62555541300D180A2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15C0A52555541300D180A2 /* NetworkManager.swift */; };
+		9F404127256FA1E40022B65A /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F404126256FA1E40022B65A /* TagCell.swift */; };
 		9F67E8A724CFE368004A8003 /* NotoSansTC-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */; };
 		9F67E8A824CFE368004A8003 /* NotoSansTC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */; };
 		9F67E8A924CFE368004A8003 /* NotoSansTC-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 9F67E8A424CFE32D004A8003 /* NotoSansTC-Light.otf */; };
@@ -105,6 +106,7 @@
 		9F15C09525553D1000D180A2 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GlobalVariables.swift; path = "../../GPS Consumer/GlobalVariables.swift"; sourceTree = "<group>"; };
 		9F15C09A25553FEB00D180A2 /* RequestDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
 		9F15C0A52555541300D180A2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkManager.swift; path = "../../GPS Consumer/NetworkManager.swift"; sourceTree = "<group>"; };
+		9F404126256FA1E40022B65A /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		9F67E8A124CFE32C004A8003 /* NotoSansTC-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Black.otf"; sourceTree = "<group>"; };
 		9F67E8A224CFE32C004A8003 /* NotoSansTC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Bold.otf"; sourceTree = "<group>"; };
 		9F67E8A324CFE32D004A8003 /* NotoSansTC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansTC-Regular.otf"; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				9F113CFF2552DE0B0055DEAF /* MessageCell.swift */,
 				9F113D042552DE110055DEAF /* RewardCardCell.swift */,
 				9F731AA824D14C6600FCB267 /* RequestCell.swift */,
+				9F404126256FA1E40022B65A /* TagCell.swift */,
 				9F113D0E2552DE240055DEAF /* ThreadCell.swift */,
 				9F113D092552DE1B0055DEAF /* PointCell.swift */,
 			);
@@ -565,6 +568,7 @@
 				9F67E8B424D00240004A8003 /* BarcodeScannerViewController.swift in Sources */,
 				9F113D0F2552DE240055DEAF /* ThreadCell.swift in Sources */,
 				9F113D89255524690055DEAF /* AWSS3TransferManager.swift in Sources */,
+				9F404127256FA1E40022B65A /* TagCell.swift in Sources */,
 				9F113D052552DE110055DEAF /* RewardCardCell.swift in Sources */,
 				9F79CB1824D3C17E0070F883 /* TagsViewController.swift in Sources */,
 				9F69DC2A24CADD2800C67A6B /* SceneDelegate.swift in Sources */,

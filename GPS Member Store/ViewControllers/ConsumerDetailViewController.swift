@@ -11,8 +11,8 @@ import UIKit
 
 
 class ConsumerDetailViewController: UIViewController {
-    var id : Int?
-    var consumer = Consumer.init(id: 0, name: "", mobilePhone: "", dateOfBirth: "", serialNumber: "", email: "", address: "", gender: 0, storeId: 0, tags: [])
+    var id : Int!
+    var consumer : Consumer!
     
     lazy var infoTableView : UITableView = {
         var tableView = UITableView()
@@ -150,6 +150,7 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
             case 7:
                 let tagsVC = TagsViewController()
                 tagsVC.tagsString = "#心臟病 #高血壓 #中風"
+                tagsVC.consumer = consumer
                 self.navigationController?.pushViewController(tagsVC, animated: true)
                 break
             default:

@@ -24,7 +24,6 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
         imageView.layer.cornerRadius = 5;
         imageView.clipsToBounds = true;
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = #imageLiteral(resourceName: "1_sHmqYIYMV_C3TUhucHrT4w")
         return imageView
     }()
     
@@ -115,6 +114,7 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        createQRCode()
     }
 
     override func viewDidLoad() {
@@ -181,7 +181,7 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc private func refreshButtonTapped(sender: UIButton!) {
-        point.setTitle("+1點", for: .normal)
+//        point.setTitle("+1點", for: .normal)
         createQRCode()
     }
     

@@ -11,6 +11,7 @@ import UIKit
 
 
 class RequestDetailViewController: UIViewController {
+    var request : Request?
     var messages = [RequestMessage]()
     var tempImage : UIImage?
     var threadId : Int = 0
@@ -53,11 +54,11 @@ class RequestDetailViewController: UIViewController {
         messageDetailTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
     
-    @objc private func customerButtonTapped() {
-        let consumerDetailVC = ConsumerDetailViewController()
-        consumerDetailVC.id = 1
-        self.navigationController?.pushViewController(consumerDetailVC, animated: true)
-    }
+//    @objc private func customerButtonTapped() {
+//        let consumerDetailVC = ConsumerDetailViewController()
+////        consumerDetailVC.id = 1
+//        self.navigationController?.pushViewController(consumerDetailVC, animated: true)
+//    }
     
     func loadImage(_ url: URL, indexPath: IndexPath) {
         let downloadTask:URLSessionDownloadTask =
@@ -87,7 +88,7 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView == messageDetailTableView) {
-            return messages.count
+            return messages.count + 1
         }
         else {
             return 0
@@ -97,27 +98,27 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath) as! MessageCell
         cell.viewController = self
-//        if (indexPath.row == 0) {
+        if (indexPath.row > messages.count - 1) {
+            cell.sender = request?.storeName
+            cell.message = "商品名稱：" + request!.name + "\n" +
+                            "商品價格：" + String(request!.price) + "\n" +
+                            "商品數量：" + String(request!.quantity) + "\n" +
+                            "需求效期：" + String(request!.expiryDate) + "\n" +
+                            "描述：" + request!.description
+
+            cell.date = request?.updatedDate
+        }
+        else {
             cell.sender = messages[indexPath.row].storeName + messages[indexPath.row].storeUserName
             cell.message = messages[indexPath.row].message
             cell.date = messages[indexPath.row].date
-//            cell.attachments = messages[indexPath.row].attachments
-//        cell.attachedImages = self.cachedImages
-            cell.layoutSubviews()
-//        }
-//        else {
-//            cell.sender = messages[indexPath.row].sender
-//            cell.message = messages[indexPath.row].message
-//            cell.date = messages[indexPath.row].date
-//            cell.layoutSubviews()
-//        }
+        }
+        cell.layoutSubviews()
         return cell
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //        print("hehe", scrollView.contentOffset.x)
     }
-    
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView()

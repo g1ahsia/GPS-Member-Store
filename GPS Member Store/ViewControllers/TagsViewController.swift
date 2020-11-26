@@ -10,8 +10,10 @@ import Foundation
 import UIKit
 
 class TagsViewController: UIViewController, UITextViewDelegate {
+    var consumer : Consumer!
     var tagsString : String?
-    var tags = [String]()
+    var tags = [Tag]()
+    var updatedTags = [Int]()
     var lastWord = ""
     var kbSize = CGSize(width: 0.0, height: 0.0)
 
@@ -32,14 +34,12 @@ class TagsViewController: UIViewController, UITextViewDelegate {
     
     lazy var tagTableView : UITableView = {
         var tableView = UITableView()
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "tags")
-        tableView.isHidden = true
-//        tableView.layer.borderColor = UIColor .red.cgColor
-//        tableView.layer.borderWidth = 1
+        tableView.register(TagCell.self, forCellReuseIdentifier: "tags")
+        tableView.allowsMultipleSelection = true;
         return tableView
     }()
 
@@ -62,7 +62,13 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 
         title = "編輯標籤"
-        tags = ["#心臟病", "#高血壓", "#中風"]
+//        tags = ["#心臟病", "#高血壓", "#中風"]
+        NetworkManager.fetchTags { (tags) in
+            DispatchQueue.main.async {
+                self.tags = tags
+                self.tagTableView.reloadData()
+            }
+        }
         view.backgroundColor = SNOW
         view.addSubview(descView)
         view.addSubview(save)
@@ -75,21 +81,39 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         if let tagsString = tagsString {
             descView.text = tagsString
         }
-        descView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        descView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        descView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
-        descView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+//        descView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+//        descView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+//        descView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+//        descView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
+        tagTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        tagTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tagTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tagTableView.bottomAnchor.constraint(equalTo: save.topAnchor, constant: -20).isActive = true
+
         save.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        save.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 30).isActive = true
         save.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        save.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        
+        save.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+
         hideKeyboardWhenTappedOnView()
     }
     
     @objc private func saveButtonTapped(sender: UIButton!) {
-        self.navigationController?.popViewController(animated: true)
+        
+        NetworkManager.updateTags(id: consumer.id, tags: updatedTags) { (result) in
+            DispatchQueue.main.async {
+                if (result["status"] as! Int == 1) {
+                        self.navigationController?.popToRootViewController(animated: true)
+                }
+                else if (result["status"] as! Int == -1) {
+                    GlobalVariables.showAlert(title: self.title, message: ERR_CONNECTING, vc: self)
+                }
+                else {
+                    GlobalVariables.showAlert(title: self.title, message: result["message"] as? String, vc: self)
+                }
+            }
+
+        }
     }
     
     func textViewDidChange(_ textView: UITextView) {
@@ -112,14 +136,14 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         
         let keyboardTop = self.view.frame.size.height - kbSize.height
 
-        tagTableView.frame = CGRect(x: 0, y: view.safeAreaLayoutGuide.layoutFrame.origin.y + cursorPoint.y + 25, width: UIScreen.main.bounds.width, height: keyboardTop - (view.safeAreaLayoutGuide.layoutFrame.origin.y + cursorPoint.y + 25) )
-        if (lastWord.count != 0 &&
-            lastWord.prefix(1) == "#") {
-            tagTableView.isHidden = false
-        }
-        else {
-            tagTableView.isHidden = true
-        }
+//        tagTableView.frame = CGRect(x: 0, y: view.safeAreaLayoutGuide.layoutFrame.origin.y + cursorPoint.y + 25, width: UIScreen.main.bounds.width, height: keyboardTop - (view.safeAreaLayoutGuide.layoutFrame.origin.y + cursorPoint.y + 25) )
+//        if (lastWord.count != 0 &&
+//            lastWord.prefix(1) == "#") {
+//            tagTableView.isHidden = false
+//        }
+//        else {
+//            tagTableView.isHidden = true
+//        }
     }
     @objc func keyboardWillShow(notification:NSNotification){
 
@@ -150,12 +174,15 @@ extension TagsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "tags", for: indexPath)
-        cell.textLabel?.text = tags[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tags", for: indexPath) as! TagCell
+        cell.selectionStyle = .none
+        cell.name = tags[indexPath.row].name
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        descView.text = descView.text + tags[indexPath.row].suffix(tags.count) + " "
-        tagTableView.isHidden = true
+//        descView.text = descView.text + tags[indexPath.row].suffix(tags.count) + " "
+//        tagTableView.isHidden = true
+        updatedTags.append(tags[indexPath.row].id)
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
     }
 }
