@@ -67,6 +67,14 @@ class TagsViewController: UIViewController, UITextViewDelegate {
             DispatchQueue.main.async {
                 self.tags = tags
                 self.tagTableView.reloadData()
+                
+                for index in 0...tags.count - 1 {
+                    if (self.consumer.tags.contains(tags[index])) {
+                        let indexPath = IndexPath(row: index, section: 0)
+                        self.tagTableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+                        self .tableView(self.tagTableView, didSelectRowAt: indexPath)
+                    }
+                }
             }
         }
         view.backgroundColor = SNOW
@@ -75,6 +83,7 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         view.addSubview(tagTableView)
         tagTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
+        
     }
     
     private func setupLayout() {
@@ -103,7 +112,7 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         NetworkManager.updateTags(id: consumer.id, tags: updatedTags) { (result) in
             DispatchQueue.main.async {
                 if (result["status"] as! Int == 1) {
-                        self.navigationController?.popToRootViewController(animated: true)
+                        self.navigationController?.popViewController(animated: true)
                 }
                 else if (result["status"] as! Int == -1) {
                     GlobalVariables.showAlert(title: self.title, message: ERR_CONNECTING, vc: self)

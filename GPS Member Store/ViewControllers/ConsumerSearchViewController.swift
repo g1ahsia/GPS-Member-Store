@@ -97,6 +97,7 @@ extension ConsumerSearchViewController: UITableViewDelegate, UITableViewDataSour
         if (purpose == ConsumerSearchPurpose.LookUp) {
             let consumerDetailVC = ConsumerDetailViewController()
             consumerDetailVC.id = consumers[indexPath.row].id
+            consumerDetailVC.mobilePhone = consumers[indexPath.row].mobilePhone
             self.navigationController?.pushViewController(consumerDetailVC, animated: true)
         }
         else if (purpose == ConsumerSearchPurpose.SendPoints) {

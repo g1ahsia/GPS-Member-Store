@@ -12,14 +12,16 @@ import UIKit
 
 class ConsumerDetailViewController: UIViewController {
     var id : Int!
-    var consumer : Consumer!
+    var mobilePhone : String!
+    var consumer = Consumer.init(id: 0, name: "", mobilePhone: "", dateOfBirth: "", serialNumber: "", email: "", address: "", gender: 1, storeId: 1, tags: [])
+
     
     lazy var infoTableView : UITableView = {
         var tableView = UITableView()
         tableView.isScrollEnabled = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.estimatedRowHeight = 50
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.rowHeight = 50
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(FormCell.self, forCellReuseIdentifier: "form")
@@ -36,16 +38,35 @@ class ConsumerDetailViewController: UIViewController {
         setupLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NetworkManager.searchConsumer(keyword: mobilePhone) { (consumers) in
+            if (consumers.count > 0) {
+                self.consumer = consumers[0]
+            }
+            DispatchQueue.main.async {
+                self.infoTableView.reloadData()
+            }
+        }
+    }
+    
     private func setupLayout() {
-        if let id = id {
+//        if let id = id {
 //            NetworkManager.fetchConsumer(id: id) { (fetchedConsumer) in
 //                self.consumer = fetchedConsumer
 //                DispatchQueue.main.async {
 //                    self.infoTableView.reloadData()
 //                }
 //            }
-            self.consumer = Consumer.init(id: id, name: "王大寶", mobilePhone: "0923233344", dateOfBirth: "1970/01/01", serialNumber: "A129233444", email: "abc@123.com", address: "台北市大同區", gender: 1, storeId: 1, tags: ["心臟病", "高血壓", "中風"])
-        }
+//        NetworkManager.searchConsumer(keyword: mobilePhone) { (consumers) in
+//            if (consumers.count > 0) {
+//                self.consumer = consumers[0]
+//            }
+//            DispatchQueue.main.async {
+//                self.infoTableView.reloadData()
+//            }
+//        }
 
         infoTableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         infoTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
@@ -74,6 +95,10 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 8
 
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "form", for: indexPath) as! FormCell
@@ -115,7 +140,12 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
                 cell.fieldType = FieldType.DisplayOnly
             case 7:
                 cell.field = "標籤："
-                cell.answer = "#心臟病 #高血壓 #中風"
+                var answerString = ""
+                for tag in consumer.tags {
+                    answerString += "#" + tag.name + " "
+                }
+                cell.answer = answerString
+
                 cell.fieldType = FieldType.Navigate
 //            case 8:
 //                cell.field = "血壓血糖紀錄"
