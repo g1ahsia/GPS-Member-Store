@@ -155,6 +155,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource, UIScro
                 break
             case 6:
                 let changePasswordVC = ChangePasswordViewController()
+                changePasswordVC.role = Role.MemberStore
                 self.navigationController?.pushViewController(changePasswordVC, animated: true)
                 break
             case 7:

@@ -42,7 +42,6 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         tableView.allowsMultipleSelection = true;
         return tableView
     }()
-
     
     var save : UIButton = {
         var button =  UIButton()
