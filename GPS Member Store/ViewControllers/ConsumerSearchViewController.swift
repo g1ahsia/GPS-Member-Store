@@ -104,6 +104,7 @@ extension ConsumerSearchViewController: UITableViewDelegate, UITableViewDataSour
             let rewardCardsVC = RewardCardsViewController()
             rewardCardsVC.purpose = purpose
             rewardCardsVC.points = points
+            rewardCardsVC.id = consumers[indexPath.row].id
             self.navigationController?.pushViewController(rewardCardsVC, animated: true)
         }
         else {

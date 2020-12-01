@@ -251,6 +251,9 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     @objc private func sendButtonTapped(sender: UIButton!) {
         sender.isEnabled = false
         print("sending request")
+    }
+        
+    private func sendMessage() {
         request.name =  name
         request.price =  price
         request.quantity = quantity
@@ -269,7 +272,6 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
             }
         }
     }
-        
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         UIView .animate(withDuration: 0.3) {
             self.blackCover.alpha = 0

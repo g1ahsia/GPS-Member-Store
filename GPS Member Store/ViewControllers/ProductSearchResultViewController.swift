@@ -9,7 +9,7 @@
 import UIKit
 
 class ProductSearchResultViewController: UIViewController {
-    
+    var keywoard = String()
     var products = [Product]()
 
     lazy var productTableView : UITableView = {
@@ -38,7 +38,7 @@ class ProductSearchResultViewController: UIViewController {
         title = "搜尋結果"
         productTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
-        NetworkManager.fetchProducts(keyword : "糖尿病") { (products) in
+        NetworkManager.fetchProducts(keyword : keywoard) { (products) in
             self.products = products
             DispatchQueue.main.async {
                 self.productTableView.reloadData()

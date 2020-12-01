@@ -69,9 +69,9 @@ class RequestCell: UITableViewCell {
         textLabel.backgroundColor = .clear
         textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 15)
         textLabel.textAlignment = .right
+        textLabel.textColor = .black
         return textLabel
     }()
-
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier : reuseIdentifier)

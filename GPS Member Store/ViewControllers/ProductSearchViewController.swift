@@ -104,6 +104,7 @@ class ProductSearchViewController: UIViewController {
     }
     @objc private func searchButtonTapped() {
         let productSearchResultVC = ProductSearchResultViewController()
+        productSearchResultVC.keywoard = productSearchBar.text ?? ""
         self.navigationController?.pushViewController(productSearchResultVC, animated: true)
     }
     
@@ -129,6 +130,7 @@ extension ProductSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
         let productSearchResultVC = ProductSearchResultViewController()
+        productSearchResultVC.keywoard = productSearchBar.text ?? ""
         self.navigationController?.pushViewController(productSearchResultVC, animated: true)
     }
 

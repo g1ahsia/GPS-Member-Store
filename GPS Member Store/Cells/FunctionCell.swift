@@ -70,7 +70,9 @@ class FunctionCell: UICollectionViewCell {
 
         mainImageView.centerXAnchor.constraint(equalTo: mainImageBackground.centerXAnchor).isActive = true
         mainImageView.centerYAnchor.constraint(equalTo: mainImageBackground.centerYAnchor).isActive = true
-        
+        mainImageView.widthAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 80) / 3 - 20).isActive = true
+        mainImageView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 80) / 3 - 20).isActive = true
+
         nameView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         nameView.topAnchor.constraint(equalTo: self.mainImageBackground.bottomAnchor, constant: 5).isActive = true
         nameView.heightAnchor.constraint(equalToConstant: 30).isActive = true
