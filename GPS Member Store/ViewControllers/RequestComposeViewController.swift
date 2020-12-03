@@ -37,6 +37,8 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     
     var expiryDate = ""
     
+    var attachedImages = [UIImage]()
+    
     var request = Request.init(id: 0, typeId: 0, areaId: 0, name: "", price: 0, quantity: 0, description: "", expiryDate: "", attachments: [], updatedDate: "", storeId: "", storeName: "")
 
 //    var kbSize = CGSize(width: 0.0, height: 0.0)typeSelectionButtonTapped
@@ -251,6 +253,26 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     @objc private func sendButtonTapped(sender: UIButton!) {
         sender.isEnabled = false
         print("sending request")
+        ATTACHMENTS = []
+        for imageView in attachedImageViews {
+            attachedImages.append(imageView.image!)
+        }
+        sender.isEnabled = false
+        let myGroup = DispatchGroup()
+        
+        if (attachedImages.count > 0) {
+            for image in attachedImages {
+                myGroup.enter()
+                uploadImage(withImage: image, group: myGroup)
+            }
+            myGroup.notify(queue: .main) {
+                print("Finished all requests.")
+                self.sendMessage()
+            }
+        }
+        else {
+            self.sendMessage()
+        }
     }
         
     private func sendMessage() {

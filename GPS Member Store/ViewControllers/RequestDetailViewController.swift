@@ -121,7 +121,18 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if (indexPath.row > messages.count - 1) {
-            return 300
+            let textView = UITextView()
+            textView.font = UIFont(name: "NotoSansTC-Regular", size: 15)
+            textView.textContainerInset = .zero; // fix the silly UITextView bug
+            textView.textContainer.lineFragmentPadding = 0; // fix the silly UITextView bug
+            textView.text = "商品名稱：" + request!.name + "\n" +
+                "商品價格：" + String(request!.price) + "\n" +
+                "商品數量：" + String(request!.quantity) + "\n" +
+                "需求效期：" + String(request!.expiryDate) + "\n" +
+                "描述：" + request!.description
+            let size = textView.sizeThatFits(CGSize(width: self.view.frame.size.width - 32, height: CGFloat.greatestFiniteMagnitude))
+            let images = self.cachedImages[threadId] ?? []
+            return 16 + 40 + size.height + (CGFloat(images.count) * (200 + 16)) + 16
         }
         else {
             let textView = UITextView()
@@ -250,12 +261,18 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
                 DispatchQueue.main.async {
                     self.messageDetailTableView.reloadData()
                 }
-                for index in 0...messages.count - 1 {
-                    let attachments = self.messages[index].attachments
-                    let messageId = self.messages[index].id
-                    DispatchQueue.main.async {
-                        self.loadImages(attachments, indexPath: NSIndexPath(row: index, section: 0) as IndexPath, messageId: messageId)
+                
+                if (messages.count > 0) {
+                    for index in 0...messages.count - 1 {
+                        let attachments = self.messages[index].attachments
+                        let messageId = self.messages[index].id
+                        DispatchQueue.main.async {
+                            self.loadImages(attachments, indexPath: NSIndexPath(row: index, section: 0) as IndexPath, messageId: messageId)
+                        }
                     }
+                }
+                DispatchQueue.main.async {
+                    self.loadImages(self.request!.attachments, indexPath: NSIndexPath(row: messages.count, section: 0) as IndexPath, messageId: self.threadId)
                 }
             }
 //        }
