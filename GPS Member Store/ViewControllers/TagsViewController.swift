@@ -26,9 +26,6 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         textView.textColor = .black
         textView.delegate = self
         textView.clipsToBounds = true
-//        textView.textContainerInset = .zero; // fix the silly UITextView bug
-//        textView.textContainer.lineFragmentPadding = 0; // fix the silly UITextView bug
-//        textView.isScrollEnabled = false
         return textView
     }()
     
@@ -57,6 +54,9 @@ class TagsViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.backgroundColor = SNOW
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:UIResponder.keyboardWillHideNotification, object: nil)
 

@@ -246,5 +246,4 @@ class ProductDetailViewController: UIViewController {
         imagesVC.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         self.present(imagesVC, animated: true)
     }
-
 }

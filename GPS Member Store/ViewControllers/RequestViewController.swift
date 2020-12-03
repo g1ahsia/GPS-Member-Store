@@ -115,14 +115,15 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource, UIS
         let requestDetailVC = RequestDetailViewController()
         requestDetailVC.title = REQUEST_SUBJECTS[requests[indexPath.row].typeId - 1]
         
-        NetworkManager.fetchRequestMessages(id: requests[indexPath.row].id) { (messages) in
+//        NetworkManager.fetchRequestMessages(id: requests[indexPath.row].id) { (messages) in
             requestDetailVC.request = self.requests[indexPath.row]
-            requestDetailVC.messages = messages
+//            requestDetailVC.messages = messages
             requestDetailVC.threadId = self.requests[indexPath.row].id
+            requestDetailVC.reloadData()
             DispatchQueue.main.async {
                 self.navigationController?.pushViewController(requestDetailVC, animated: true)
             }
-        }
+//        }
     }
     
 }

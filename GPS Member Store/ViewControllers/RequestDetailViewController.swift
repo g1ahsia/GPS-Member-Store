@@ -15,15 +15,16 @@ class RequestDetailViewController: UIViewController {
     var messages = [RequestMessage]()
     var tempImage : UIImage?
     var threadId : Int = 0
-    var cachedImages = [UIImage]()
-    
+    var numCachedImages = [Int: Int]()
+    var cachedImages = [Int: [UIImage]]()
+
 //    let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 22, width: UIScreen.main.bounds.width, height: 44))
     
     lazy var messageDetailTableView : UITableView = {
         var tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 102
+        tableView.estimatedRowHeight = 300
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(MessageCell.self, forCellReuseIdentifier: "message")
@@ -60,27 +61,27 @@ class RequestDetailViewController: UIViewController {
 //        self.navigationController?.pushViewController(consumerDetailVC, animated: true)
 //    }
     
-    func loadImage(_ url: URL, indexPath: IndexPath) {
-        let downloadTask:URLSessionDownloadTask =
-            URLSession.shared.downloadTask(with: url, completionHandler: {
-            (location: URL?, response: URLResponse?, error: Error?) -> Void in
-            if let location = location {
-                if let data:Data = try? Data(contentsOf: location) {
-                    if let image:UIImage = UIImage(data: data) {
-                        self.cachedImages[indexPath.row] = image // Save into the cache
-                        DispatchQueue.main.async(execute: { () -> Void in
-                            self.messageDetailTableView.beginUpdates()
-                            self.messageDetailTableView.reloadRows(
-                                at: [indexPath],
-                                with: .fade)
-                            self.messageDetailTableView.endUpdates()
-                        })
-                    }
-                }
-            }
-        })
-        downloadTask.resume()
-    }
+//    func loadImage(_ url: URL, indexPath: IndexPath) {
+//        let downloadTask:URLSessionDownloadTask =
+//            URLSession.shared.downloadTask(with: url, completionHandler: {
+//            (location: URL?, response: URLResponse?, error: Error?) -> Void in
+//            if let location = location {
+//                if let data:Data = try? Data(contentsOf: location) {
+//                    if let image:UIImage = UIImage(data: data) {
+//                        self.cachedImages[indexPath.row] = image // Save into the cache
+//                        DispatchQueue.main.async(execute: { () -> Void in
+//                            self.messageDetailTableView.beginUpdates()
+//                            self.messageDetailTableView.reloadRows(
+//                                at: [indexPath],
+//                                with: .fade)
+//                            self.messageDetailTableView.endUpdates()
+//                        })
+//                    }
+//                }
+//            }
+//        })
+//        downloadTask.resume()
+//    }
 
 }
 
@@ -112,9 +113,26 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.sender = messages[indexPath.row].storeName + messages[indexPath.row].storeUserName
             cell.message = messages[indexPath.row].message
             cell.date = messages[indexPath.row].date
+            cell.attachedImages = self.cachedImages[messages[indexPath.row].id] ?? []
         }
         cell.layoutSubviews()
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row > messages.count - 1) {
+            return 300
+        }
+        else {
+            let textView = UITextView()
+            textView.font = UIFont(name: "NotoSansTC-Regular", size: 15)
+            textView.textContainerInset = .zero; // fix the silly UITextView bug
+            textView.textContainer.lineFragmentPadding = 0; // fix the silly UITextView bug
+            textView.text = messages[indexPath.row].message
+            let size = textView.sizeThatFits(CGSize(width: self.view.frame.size.width - 32, height: CGFloat.greatestFiniteMagnitude))
+            let images = self.cachedImages[messages[indexPath.row].id] ?? []
+            return 16 + 40 + size.height + (CGFloat(images.count) * (200 + 16)) + 16
+        }
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -171,12 +189,73 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    @objc private func reloadData () {
+    func loadImages(_ urlStrings: [String], indexPath: IndexPath, messageId : Int) {
+        print("loading images for cell " + String(indexPath.row))
+
+        numCachedImages[messageId] = urlStrings.count
+        cachedImages[messageId] = []
+        for urlString in urlStrings {
+            
+            let url = URL(string: urlString)!
+            print("Sending a request " + urlString )
+
+            let downloadTask:URLSessionDownloadTask =
+                URLSession.shared.downloadTask(with: url, completionHandler: { [self]
+                (location: URL?, response: URLResponse?, error: Error?) -> Void in
+                    
+                print("got image for cell " + String(indexPath.row))
+
+                if let location = location {
+                    if let data:Data = try? Data(contentsOf: location) {
+                        var images = cachedImages[messageId] ?? []
+                        if let image:UIImage = UIImage(data: data) {
+                            images.append(image)
+                            cachedImages[messageId] = images
+                            
+                        }
+                        else {
+                            print("CANNOT DOWNLOAD IMAGE \(location)")
+                            images.append(#imageLiteral(resourceName: "img_holder"))
+                            cachedImages[messageId] = images
+
+                        }
+                        if (images.count == numCachedImages[messageId]) {
+                            DispatchQueue.main.async(execute: { () -> Void in
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                                print("reload cell ", String(indexPath.row))
+                                
+                                UIView.performWithoutAnimation({
+                                    let loc = self.messageDetailTableView.contentOffset
+                                    self.messageDetailTableView.beginUpdates()
+                                    self.messageDetailTableView.reloadRows(at: [indexPath], with: .none)
+                                    self.messageDetailTableView.contentOffset = loc
+                                    self.messageDetailTableView.endUpdates()
+                                })
+                            })
+                        }
+
+                    }
+                }
+            })
+            downloadTask.resume()
+        }
+
+    }
+
+    
+    @objc func reloadData () {
 //        if (role == Role.Consumer) {
             NetworkManager.fetchRequestMessages(id: threadId) { (messages) in
                 self.messages = messages
                 DispatchQueue.main.async {
                     self.messageDetailTableView.reloadData()
+                }
+                for index in 0...messages.count - 1 {
+                    let attachments = self.messages[index].attachments
+                    let messageId = self.messages[index].id
+                    DispatchQueue.main.async {
+                        self.loadImages(attachments, indexPath: NSIndexPath(row: index, section: 0) as IndexPath, messageId: messageId)
+                    }
                 }
             }
 //        }

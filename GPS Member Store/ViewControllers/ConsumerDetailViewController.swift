@@ -41,10 +41,8 @@ class ConsumerDetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        NetworkManager.searchConsumer(keyword: mobilePhone) { (consumers) in
-            if (consumers.count > 0) {
-                self.consumer = consumers[0]
-            }
+        NetworkManager.storefetchConsumer(id: id) { (consumer) in
+            self.consumer = consumer
             DispatchQueue.main.async {
                 self.infoTableView.reloadData()
             }
