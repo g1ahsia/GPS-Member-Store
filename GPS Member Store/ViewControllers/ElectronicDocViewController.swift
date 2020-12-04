@@ -68,14 +68,14 @@ extension ElectronicDocViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "electronicDoc", for: indexPath) as! ElectronicDocCell
-        cell.fileUrl = electronicDocs[indexPath.row].fileUrl
-        cell.createdDate = electronicDocs[indexPath.row].createdDate
+        cell.fileUrl = electronicDocs[electronicDocs.count - indexPath.row - 1].fileUrl
+        cell.createdDate = electronicDocs[electronicDocs.count - indexPath.row - 1].createdDate
         cell.layoutSubviews()
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let pdfVC = PDFViewController()
-        pdfVC.fileUrl = electronicDocs[indexPath.row].fileUrl
+        pdfVC.fileUrl = electronicDocs[electronicDocs.count - indexPath.row - 1].fileUrl
         pdfVC.modalPresentationStyle = .fullScreen //or .overFullScreen for transparency
         self.present(pdfVC, animated: true)
     }

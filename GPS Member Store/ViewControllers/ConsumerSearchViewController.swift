@@ -18,7 +18,7 @@ class ConsumerSearchViewController: UIViewController {
         var searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchBar.placeholder = "關鍵字搜尋"
+        searchBar.placeholder = "關鍵字搜尋客戶"
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()
@@ -36,6 +36,20 @@ class ConsumerSearchViewController: UIViewController {
         tableView.backgroundColor = .clear
         return tableView
     }()
+    
+    var noResult : UILabel = {
+        var textLabel = UILabel()
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.backgroundColor = .clear
+        textLabel.font = UIFont(name: "NotoSansTC-Regular", size: 17)
+        textLabel.textColor = .black
+        textLabel.clipsToBounds = true;
+        textLabel.textAlignment = .center
+        textLabel.text = "查無結果"
+        textLabel.isHidden = true
+        return textLabel
+    }()
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -50,6 +64,7 @@ class ConsumerSearchViewController: UIViewController {
         title = "客戶搜尋"
         view.addSubview(consumerSearchBar)
         view.addSubview(consumerTableView)
+        view.addSubview(noResult)
         consumerSearchBar.delegate = self
         consumerTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
@@ -74,6 +89,9 @@ class ConsumerSearchViewController: UIViewController {
         consumerTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         consumerTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         consumerTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        noResult.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noResult.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 
 }
@@ -137,6 +155,12 @@ extension ConsumerSearchViewController: UISearchBarDelegate {
             DispatchQueue.main.async {
                 self.consumers = consumers
                 self.consumerTableView.reloadData()
+                if (consumers.count > 0) {
+                    self.noResult.isHidden = true
+                }
+                else {
+                    self.noResult.isHidden = false
+                }
             }
         }
         

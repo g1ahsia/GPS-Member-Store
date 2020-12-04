@@ -15,7 +15,7 @@ class ProductSearchViewController: UIViewController {
         var searchBar = UISearchBar()
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchBarStyle = UISearchBar.Style.prominent
-        searchBar.placeholder = "關鍵字搜尋"
+        searchBar.placeholder = "關鍵字搜尋產品"
         searchBar.sizeToFit()
         searchBar.isTranslucent = false
         searchBar.backgroundImage = UIImage()
@@ -64,6 +64,9 @@ class ProductSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.searchBarcode(_:)), name: NSNotification.Name(rawValue: "scannedBarcode"), object: nil)
+
         view.backgroundColor = SNOW
         title = "產品播放系統"
         view.addSubview(productSearchBar)
@@ -114,7 +117,18 @@ class ProductSearchViewController: UIViewController {
         present(barcodeScannerVC, animated: true)
 
     }
+    
+    @objc private func searchBarcode(_ notification: NSNotification) {
+        if let dict = notification.userInfo as NSDictionary? {
+            if let barcode = dict["barcode"] as? String{
+                // do something with your image
+                let productSearchResultVC = ProductSearchResultViewController()
+                productSearchResultVC.keywoard = barcode
+                self.navigationController?.pushViewController(productSearchResultVC, animated: true)
+            }
+        }
 
+    }
 }
 
 extension ProductSearchViewController: UISearchBarDelegate {
@@ -133,5 +147,7 @@ extension ProductSearchViewController: UISearchBarDelegate {
         productSearchResultVC.keywoard = productSearchBar.text ?? ""
         self.navigationController?.pushViewController(productSearchResultVC, animated: true)
     }
+    
+    
 
 }

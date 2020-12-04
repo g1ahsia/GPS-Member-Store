@@ -134,7 +134,11 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
             found(code: stringValue)
             let vc = self.presentingViewController
             dismiss(animated: true) {
-                GlobalVariables.showAlert(title: "已掃描到barcode！", message: stringValue, vc: vc)
+//                GlobalVariables.showAlert(title: "已掃描到barcode！", message: stringValue, vc: vc)
+//                NotificationCenter.default.post(name: Notification.Name("ScannedBarcode"), object: stringValue)
+                let dataDict:[String: String] = ["barcode": stringValue]
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "scannedBarcode"), object: nil, userInfo: dataDict)
+
             }
         }
 

@@ -49,7 +49,15 @@ class ElectronicDocCell: UITableViewCell {
         if let fileUrl = fileUrl {
             
             let url = URL(string: fileUrl)
-            mainImageView.image = drawPDFfromURL(url: url!)
+            DispatchQueue.global(qos: .background).async {
+                print("This is run on the background queue")
+                let thumbnail = drawPDFfromURL(url: url!)
+                DispatchQueue.main.async {
+                    print("This is run on the main queue, after the previous code in outer block")
+                    self.mainImageView.image = thumbnail
+                }
+            }
+
         }
         if let createdDate = createdDate {
             createdDateLabel.text = createdDate
@@ -77,6 +85,7 @@ class ElectronicDocCell: UITableViewCell {
 
 
 func drawPDFfromURL(url: URL) -> UIImage? {
+    print("start drawing")
     guard let document = CGPDFDocument(url as CFURL) else { return nil }
     guard let page = document.page(at: 1) else { return nil }
 
@@ -91,6 +100,7 @@ func drawPDFfromURL(url: URL) -> UIImage? {
 
         ctx.cgContext.drawPDFPage(page)
     }
+    print("end drawing")
 
     return img
 }

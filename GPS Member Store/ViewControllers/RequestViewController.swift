@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 class RequestViewController: UIViewController {
-    
     var requests = [Request]()
+    var cachedImages = [Int: UIImage]()
     
     lazy var requestTableView : UITableView = {
         var tableView = UITableView()
@@ -30,6 +30,21 @@ class RequestViewController: UIViewController {
         if (self.requestTableView.indexPathForSelectedRow != nil) {
             self.requestTableView.deselectRow(at: self.requestTableView.indexPathForSelectedRow!, animated: true)
         }
+        NetworkManager.fetchRequests() { (requests) in
+            self.requests = requests
+            DispatchQueue.main.async {
+                self.requestTableView.reloadData()
+            }
+            if (requests.count > 0) {
+                for index in 0...requests.count - 1 {
+                    let attachments = self.requests[index].attachments
+                    let requestId = self.requests[index].id
+                    DispatchQueue.main.async {
+                        self.loadImages(attachments, indexPath: NSIndexPath(row: index, section: 0) as IndexPath, messageId: requestId)
+                    }
+                }
+            }
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,14 +57,6 @@ class RequestViewController: UIViewController {
         image = image.withRenderingMode(.alwaysOriginal)
         let add = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(self.addButtonTapped)) //
         self.navigationItem.rightBarButtonItem  = add
-
-        
-        NetworkManager.fetchRequests() { (requests) in
-            self.requests = requests
-            DispatchQueue.main.async {
-                self.requestTableView.reloadData()
-            }
-        }
 
         setupLayout()
         
@@ -102,8 +109,10 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource, UIS
         cell.typeId = requests[indexPath.row].typeId
         cell.desc = requests[indexPath.row].description
         cell.updatedDate = requests[indexPath.row].updatedDate
-        cell.attachments = requests[indexPath.row].attachments
         cell.layoutSubviews()
+        if (self.cachedImages[requests[indexPath.row].id] != nil) {
+            cell.mainImage = self.cachedImages[requests[indexPath.row].id]!
+        }
         return cell
     }
 
@@ -114,16 +123,54 @@ extension RequestViewController: UITableViewDelegate, UITableViewDataSource, UIS
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let requestDetailVC = RequestDetailViewController()
         requestDetailVC.title = REQUEST_SUBJECTS[requests[indexPath.row].typeId - 1]
-        
-//        NetworkManager.fetchRequestMessages(id: requests[indexPath.row].id) { (messages) in
-            requestDetailVC.request = self.requests[indexPath.row]
-//            requestDetailVC.messages = messages
-            requestDetailVC.threadId = self.requests[indexPath.row].id
-            requestDetailVC.reloadData()
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(requestDetailVC, animated: true)
-            }
-//        }
+        requestDetailVC.request = self.requests[indexPath.row]
+        requestDetailVC.threadId = self.requests[indexPath.row].id
+        requestDetailVC.reloadData()
+        DispatchQueue.main.async {
+            self.navigationController?.pushViewController(requestDetailVC, animated: true)
+        }
+    }
+    
+    func loadImages(_ urlStrings: [String], indexPath: IndexPath, messageId : Int) {
+        print("loading images for cell " + String(indexPath.row))
+
+        if urlStrings.count > 0 {
+            let url = URL(string: urlStrings[0])!
+
+            let downloadTask:URLSessionDownloadTask =
+                URLSession.shared.downloadTask(with: url, completionHandler: { [self]
+                (location: URL?, response: URLResponse?, error: Error?) -> Void in
+                    
+                print("got image for cell " + String(indexPath.row))
+
+                if let location = location {
+                    if let data:Data = try? Data(contentsOf: location) {
+                        if let image:UIImage = UIImage(data: data) {
+                            cachedImages[messageId] = image
+                        }
+                        else {
+                            print("CANNOT DOWNLOAD IMAGE \(location)")
+                            cachedImages[messageId] = #imageLiteral(resourceName: "img_holder")
+
+                        }
+                        DispatchQueue.main.async(execute: { () -> Void in
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                            print("reload cell ", String(indexPath.row))
+                            
+                            UIView.performWithoutAnimation({
+                                let loc = self.requestTableView.contentOffset
+                                self.requestTableView.beginUpdates()
+                                self.requestTableView.reloadRows(at: [indexPath], with: .none)
+                                self.requestTableView.contentOffset = loc
+                                self.requestTableView.endUpdates()
+                            })
+                        })
+
+                    }
+                }
+            })
+            downloadTask.resume()
+        }
     }
     
 }

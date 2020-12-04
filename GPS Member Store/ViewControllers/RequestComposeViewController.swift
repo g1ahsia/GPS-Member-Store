@@ -282,7 +282,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         request.expiryDate = expiryDate
         request.description = descView.text
         
-        NetworkManager.createRequest(typeId: request.typeId, areaId: request.areaId, name: request.name, price: request.price, quantity: request.quantity, expiryDate: request.expiryDate, description: request.description, attachments: request.attachments) { (result) in
+        NetworkManager.createRequest(typeId: request.typeId, areaId: request.areaId, name: request.name, price: request.price, quantity: request.quantity, expiryDate: request.expiryDate, description: request.description, attachments: ATTACHMENTS) { (result) in
             print(result)
             if (result["status"] as! Int == 1) {
                 NotificationCenter.default.post(name: Notification.Name("CreatedRequest"), object: nil)
@@ -443,9 +443,11 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         contentScrollView .addSubview(imageView)
         imageView .addSubview(delete)
         
-        imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
-        imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
-        imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: image.size.height/image.size.width).isActive = true
+//        imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+//        imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16).isActive = true
+        imageView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+//        imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: image.size.height/image.size.width).isActive = true
         
         var topConstraint: NSLayoutConstraint?
         

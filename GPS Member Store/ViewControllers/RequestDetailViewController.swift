@@ -108,6 +108,7 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
                             "描述：" + request!.description
 
             cell.date = request?.updatedDate
+            cell.attachedImages = self.cachedImages[threadId] ?? []
         }
         else {
             cell.sender = messages[indexPath.row].storeName + messages[indexPath.row].storeUserName
