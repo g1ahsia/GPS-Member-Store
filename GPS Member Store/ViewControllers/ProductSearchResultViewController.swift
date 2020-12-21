@@ -62,7 +62,11 @@ class ProductSearchResultViewController: UIViewController {
                         let productId = self.products[index].id
                         let thumbnailUrl = self.products[index].thumbnailUrl
                         DispatchQueue.main.async {
-                            self.loadImages(thumbnailUrl, indexPath: NSIndexPath(row: index, section: 0) as IndexPath, messageId: productId)
+                            if let url = thumbnailUrl {
+                                if (url != "") {
+                                    self.loadImages(url, indexPath: NSIndexPath(row: index, section: 0) as IndexPath, messageId: productId)
+                                }
+                            }
                         }
                     }
                     self.noResult.isHidden = true

@@ -220,7 +220,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             break
         case 7:
             cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_8")
-            cell.name = "QR Code"
+            cell.name = "點數發送"
             break
         case 8:
             cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_9")

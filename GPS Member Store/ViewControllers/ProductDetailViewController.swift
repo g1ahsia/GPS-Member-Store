@@ -28,6 +28,7 @@ class ProductDetailViewController: UIViewController {
     var imageUrls : [String]?
     var imageDownloads: [UIImage] = []
     var spinner = UIActivityIndicatorView(style: .gray)
+    var bottomAnchor : NSLayoutYAxisAnchor!
 
     var mainScrollView : UIScrollView = {
         var scrollView = UIScrollView()
@@ -97,6 +98,7 @@ class ProductDetailViewController: UIViewController {
 //        button.imageView?.transform = CGAffineTransform(scaleX: -1.0, y: 1.0)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(#imageLiteral(resourceName: "ic_camera_fill"), for: .normal)
+        button.isHidden = true
         button.addTarget(self, action: #selector(imagesButtonTapped), for: .touchUpInside)
         button.setTitle("圖片檔案", for: .normal)
         button.setTitleColor(.black, for: .normal)
@@ -141,29 +143,38 @@ class ProductDetailViewController: UIViewController {
         if let desc = desc {
             descView.text = desc
         }
+        
+        descView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        descView.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 20).isActive = true
+        descView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28).isActive = true
+        bottomAnchor = descView.bottomAnchor
+        
         if pdfUrl != "" {
             pdf.isHidden = false
             
             pdf.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-            pdf.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 20).isActive = true
+            pdf.topAnchor.constraint(equalTo: bottomAnchor, constant: 20).isActive = true
             pdf.widthAnchor.constraint(equalToConstant: 210).isActive = true
             pdf.heightAnchor.constraint(equalToConstant: 60).isActive = true
-
+            bottomAnchor = pdf.bottomAnchor
         }
+        
         if videoUrl != "" {
             video.isHidden = false
             
             video.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-            video.topAnchor.constraint(equalTo: pdf.bottomAnchor, constant: 20).isActive = true
+            video.topAnchor.constraint(equalTo: bottomAnchor, constant: 20).isActive = true
             video.widthAnchor.constraint(equalToConstant: 210).isActive = true
             video.heightAnchor.constraint(equalToConstant: 60).isActive = true
+            bottomAnchor = video.bottomAnchor
         }
 
-        if imageUrls != nil {
+        if imageUrls != nil &&
+            imageUrls!.count > 0 {
             images.isHidden = false
 
             images.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-            images.topAnchor.constraint(equalTo: video.bottomAnchor, constant: 20).isActive = true
+            images.topAnchor.constraint(equalTo: bottomAnchor, constant: 20).isActive = true
             images.widthAnchor.constraint(equalToConstant: 210).isActive = true
             images.heightAnchor.constraint(equalToConstant: 60).isActive = true
 
@@ -178,11 +189,7 @@ class ProductDetailViewController: UIViewController {
         nameView.topAnchor.constraint(equalTo: mainScrollView.topAnchor, constant: 8).isActive = true
         nameView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         nameView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-                
-        descView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        descView.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 20).isActive = true
-        descView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -28).isActive = true
-        
+                        
         spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 

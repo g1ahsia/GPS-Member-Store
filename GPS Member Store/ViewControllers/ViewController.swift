@@ -23,31 +23,31 @@ class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentLoginVC(notification:)), name: Notification.Name("Logout"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.createTabBarController), name:Notification.Name("Initialize"), object: nil)
+        
         let userDefaults = UserDefaults.standard
 
         // Read/Get Value
         let myToken = userDefaults.string(forKey: "myToken")
         let myStoreId = userDefaults.string(forKey: "myStoreId")
-        let myPrivilege = userDefaults.string(forKey: "myPrivilege")
-
+        let myPrivilege = userDefaults.array(forKey: "myPrivilege") as? [Int] ?? [Int]()
 
         if ((myToken) != nil) {
             // Do any additional setup after loading the view.
             TOKEN = myToken!
             STOREID = Int(myStoreId!) ?? 0
-            PRIVILEGE = myPrivilege as? [Int] ?? [Int]()
+            PRIVILEGE = myPrivilege
+
         }
         else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { // Change `0.05` to the desired number of seconds.
                 NotificationCenter.default.post(name: Notification.Name("Logout"), object: nil)
             }
         }
-
         createTabBarController()
-                
     }
 
-    func createTabBarController() {
+    @objc func createTabBarController() {
         tabBarCtrl = UITabBarController()
         tabBarCtrl?.tabBar.tintColor = PIGMENT_GREEN
 
@@ -105,9 +105,26 @@ class ViewController: UIViewController {
         
         let customTabBarItem5:UITabBarItem = UITabBarItem(title: "首頁", image: #imageLiteral(resourceName: " tab_ic_home_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_home_green"))
         homeNav.tabBarItem = customTabBarItem5
-
-        tabBarCtrl.viewControllers = [homeNav, productSearchNav, messageNav, requestNav, consumerSearchNav]
         
+        var tabBarFunctions = [homeNav, productSearchNav, messageNav, requestNav, consumerSearchNav]
+        
+        if (!PRIVILEGE.contains(5)) {
+            if let index = tabBarFunctions.firstIndex(of: consumerSearchNav) {
+                tabBarFunctions.remove(at: index)
+            }
+        }
+        if (!PRIVILEGE.contains(14)) {
+            if let index = tabBarFunctions.firstIndex(of: messageNav) {
+                tabBarFunctions.remove(at: index)
+            }
+        }
+        if (!PRIVILEGE.contains(15)) {
+            if let index = tabBarFunctions.firstIndex(of: requestNav) {
+                tabBarFunctions.remove(at: index)
+            }
+        }
+        tabBarCtrl.viewControllers = tabBarFunctions
+
         self.view.addSubview(tabBarCtrl.view)
 
     }

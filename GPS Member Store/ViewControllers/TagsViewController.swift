@@ -13,7 +13,6 @@ class TagsViewController: UIViewController, UITextViewDelegate {
     var consumer : Consumer!
     var tagsString : String?
     var tags = [Tag]()
-    var updatedTags = [Int]()
     var lastWord = ""
     var kbSize = CGSize(width: 0.0, height: 0.0)
 
@@ -37,6 +36,7 @@ class TagsViewController: UIViewController, UITextViewDelegate {
         tableView.dataSource = self
         tableView.register(TagCell.self, forCellReuseIdentifier: "tags")
         tableView.allowsMultipleSelection = true;
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
@@ -107,6 +107,13 @@ class TagsViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc private func saveButtonTapped(sender: UIButton!) {
+        var updatedTags = [Int]()
+        for index in 0..<tags.count {
+            let cell = tagTableView.cellForRow(at: NSIndexPath(row: index, section: 0) as IndexPath) as! TagCell
+            if (cell.isSelected) {
+                updatedTags.append(tags[index].id)
+            }
+        }
         
         NetworkManager.updateTags(id: consumer.id, tags: updatedTags) { (result) in
             DispatchQueue.main.async {
@@ -188,9 +195,14 @@ extension TagsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        descView.text = descView.text + tags[indexPath.row].suffix(tags.count) + " "
-//        tagTableView.isHidden = true
-        updatedTags.append(tags[indexPath.row].id)
-        tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+//        updatedTags.append(tags[indexPath.row].id)
+//        tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
     }
+    func tableView(_ tableView: UITableView, didDeSelectRowAt indexPath: IndexPath) {
+//        if let index = updatedTags.firstIndex(of: tags[indexPath.row].id) {
+//            updatedTags.remove(at: index)
+//        }
+//        tableView.selectRow(at: indexPath, animated: false, scrollPosition: UITableView.ScrollPosition.none)
+    }
+
 }

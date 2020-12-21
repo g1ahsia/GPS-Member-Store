@@ -91,7 +91,7 @@ class ConsumerDetailViewController: UIViewController {
 extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return 9
 
     }
     
@@ -119,14 +119,18 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
                 cell.answer = consumer.mobilePhone
                 cell.fieldType = FieldType.DisplayOnly
             case 4:
+                cell.field = "市話："
+                cell.answer = consumer.homePhone
+                cell.fieldType = FieldType.DisplayOnly
+            case 5:
                 cell.field = "電子郵件："
                 cell.answer = consumer.email
                 cell.fieldType = FieldType.DisplayOnly
-            case 5:
+            case 6:
                 cell.field = "住址："
                 cell.answer = consumer.address
                 cell.fieldType = FieldType.DisplayOnly
-            case 6:
+            case 7:
                 cell.field = "性別："
                 cell.fieldType = FieldType.DisplayOnly
                 switch consumer.gender {
@@ -136,7 +140,7 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
                     cell.answer = "女性"
                 }
                 cell.fieldType = FieldType.DisplayOnly
-            case 7:
+            case 8:
                 cell.field = "標籤："
                 var answerString = ""
                 for tag in consumer.tags {
@@ -176,8 +180,10 @@ extension ConsumerDetailViewController: UITableViewDelegate, UITableViewDataSour
             case 6:
                 break
             case 7:
+                break
+            case 8:
                 let tagsVC = TagsViewController()
-                tagsVC.tagsString = "#心臟病 #高血壓 #中風"
+//                tagsVC.tagsString = "#心臟病 #高血壓 #中風"
                 tagsVC.consumer = consumer
                 self.navigationController?.pushViewController(tagsVC, animated: true)
                 break

@@ -69,12 +69,18 @@ class ConsumerSearchViewController: UIViewController {
         consumerTableView.tableFooterView = UIView(frame: .zero)
         setupLayout()
 
-//            NetworkManager.fetchElectronicDocs() { (electronicDocs) in
-//                self.electronicDocs = electronicDocs
-//                DispatchQueue.main.async {
-//                    self.electronicDocTableView.reloadData()
-//                }
-//            }
+        NetworkManager.searchConsumer(keyword: "09") { (consumers) in
+            DispatchQueue.main.async {
+                self.consumers = consumers
+                self.consumerTableView.reloadData()
+                if (consumers.count > 0) {
+                    self.noResult.isHidden = true
+                }
+                else {
+                    self.noResult.isHidden = false
+                }
+            }
+        }
         
         hideKeyboardWhenTappedOnView()
     }

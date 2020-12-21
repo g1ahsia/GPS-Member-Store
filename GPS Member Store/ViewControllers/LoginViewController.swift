@@ -133,6 +133,7 @@ class LoginViewController: UIViewController {
 
                 if (result["status"] as! Int == 1) {
                     self.dismiss(animated: true) {
+                        NotificationCenter.default.post(name: Notification.Name("Initialize"), object: nil)
                     }
                 }
                 else if (result["status"] as! Int == -1) {
