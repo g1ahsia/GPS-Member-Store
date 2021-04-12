@@ -65,7 +65,7 @@ class ProductSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.searchBarcode(_:)), name: NSNotification.Name(rawValue: "scannedBarcode"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.searchBarcode(_:)), name: NSNotification.Name(rawValue: "scannedBarcodeForProduct"), object: nil)
 
         view.backgroundColor = SNOW
         title = "產品播放系統"
@@ -114,6 +114,7 @@ class ProductSearchViewController: UIViewController {
     @objc private func barcodeButtonTapped(sender: UIButton!) {
         let barcodeScannerVC = BarcodeScannerViewController()
         barcodeScannerVC.modalPresentationStyle = .fullScreen
+        barcodeScannerVC.query = BarcodeQuery.Product
         present(barcodeScannerVC, animated: true)
 
     }

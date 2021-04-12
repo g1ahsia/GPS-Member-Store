@@ -12,6 +12,7 @@ import UIKit
 class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     var captureSession: AVCaptureSession!
     var previewLayer: AVCaptureVideoPreviewLayer!
+    var query : BarcodeQuery?
     
     lazy var captureBracket : UIImageView = {
         var imageView = UIImageView()
@@ -137,8 +138,13 @@ class BarcodeScannerViewController: UIViewController, AVCaptureMetadataOutputObj
 //                GlobalVariables.showAlert(title: "已掃描到barcode！", message: stringValue, vc: vc)
 //                NotificationCenter.default.post(name: Notification.Name("ScannedBarcode"), object: stringValue)
                 let dataDict:[String: String] = ["barcode": stringValue]
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "scannedBarcode"), object: nil, userInfo: dataDict)
-
+                
+                if (self.query == BarcodeQuery.Product) {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "scannedBarcodeForProduct"), object: nil, userInfo: dataDict)
+                }
+                else {
+                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "scannedBarcodeForPrice"), object: nil, userInfo: dataDict)
+                }
             }
         }
 

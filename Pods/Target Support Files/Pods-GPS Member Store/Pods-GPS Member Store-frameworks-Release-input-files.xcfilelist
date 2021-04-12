@@ -2,3 +2,8 @@ ${PODS_ROOT}/Target Support Files/Pods-GPS Member Store/Pods-GPS Member Store-fr
 ${BUILT_PRODUCTS_DIR}/AWSCognito/AWSCognito.framework
 ${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework
 ${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework
+${BUILT_PRODUCTS_DIR}/BadgeSwift/BadgeSwift.framework
+${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework
+${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework
+${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework
+${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework

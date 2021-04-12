@@ -45,6 +45,10 @@ class RequestViewController: UIViewController {
                 }
             }
         }
+        let param = ["requests" : 0]
+        NetworkManager.updateStoreBadges(parameters: param) { (result) in
+        }
+        NotificationCenter.default.post(name: Notification.Name("clearRequestBadge"), object: nil, userInfo: nil)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +65,10 @@ class RequestViewController: UIViewController {
 
         setupLayout()
         
+//        BADGE_REQUEST = 0
+//        UserDefaults.standard.set(BADGE_REQUEST, forKey: "BADGE_REQUEST")
+//        NotificationCenter.default.post(name: Notification.Name("getBadges"), object: nil, userInfo: nil)
+
         NotificationCenter.default.addObserver(self, selector: #selector(self.reloadData), name:Notification.Name("CreatedRequest"), object: nil)
 
     }

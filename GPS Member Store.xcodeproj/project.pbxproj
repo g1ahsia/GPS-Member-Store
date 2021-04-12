@@ -60,6 +60,7 @@
 		9F79CB1824D3C17E0070F883 /* TagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB1724D3C17E0070F883 /* TagsViewController.swift */; };
 		9F79CB2624D3E5660070F883 /* ConsumerDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */; };
 		9F79CB2A24D425D00070F883 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F79CB2924D425D00070F883 /* QRCodeViewController.swift */; };
+		9FAE27A025B04D3B00417BE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAE279F25B04D3B00417BE7 /* GoogleService-Info.plist */; };
 		9FE50CE224E1180B0040BD9B /* FunctionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE50CE124E1180B0040BD9B /* FunctionCell.swift */; };
 		B55BA19B2A3F6A40A0525F8D /* Pods_GPS_Member_StoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 300801A25B59A7FA41EBA2EB /* Pods_GPS_Member_StoreTests.framework */; };
 		C85C9A3EE00D56FAC831257E /* Pods_GPS_Member_Store.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8B56E00923F51EEF4450707 /* Pods_GPS_Member_Store.framework */; };
@@ -146,6 +147,8 @@
 		9F79CB1724D3C17E0070F883 /* TagsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsViewController.swift; sourceTree = "<group>"; };
 		9F79CB2524D3E5660070F883 /* ConsumerDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConsumerDetailViewController.swift; sourceTree = "<group>"; };
 		9F79CB2924D425D00070F883 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
+		9FAE279F25B04D3B00417BE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9FBA4A0E259AF2D800FEEEE4 /* GPS會員店.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "GPS會員店.entitlements"; sourceTree = "<group>"; };
 		9FE50CE124E1180B0040BD9B /* FunctionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionCell.swift; sourceTree = "<group>"; };
 		BE2998FD2FA06F38D3B544B8 /* Pods_GPS_Member_StoreUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GPS_Member_StoreUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E588BEBA68D93FC41D165644 /* Pods-GPS Member StoreUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GPS Member StoreUITests.release.xcconfig"; path = "Target Support Files/Pods-GPS Member StoreUITests/Pods-GPS Member StoreUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -232,12 +235,14 @@
 		9F69DC2624CADD2800C67A6B /* GPS Member Store */ = {
 			isa = PBXGroup;
 			children = (
+				9FBA4A0E259AF2D800FEEEE4 /* GPS會員店.entitlements */,
+				9F69DC2724CADD2800C67A6B /* AppDelegate.swift */,
 				9F15C09525553D1000D180A2 /* GlobalVariables.swift */,
 				9F113D88255524690055DEAF /* AWSS3TransferManager.swift */,
-				9F69DC2724CADD2800C67A6B /* AppDelegate.swift */,
 				9F69DC2924CADD2800C67A6B /* SceneDelegate.swift */,
 				9F15C0A52555541300D180A2 /* NetworkManager.swift */,
 				9F69DC3524CADD2B00C67A6B /* Info.plist */,
+				9FAE279F25B04D3B00417BE7 /* GoogleService-Info.plist */,
 				9F67E8A024CFE307004A8003 /* Fonts */,
 				9F69DC5E24CADEAC00C67A6B /* Cells */,
 				9F69DC5B24CADDFC00C67A6B /* ViewControllers */,
@@ -442,6 +447,7 @@
 				9F67E8AB24CFE368004A8003 /* NotoSansTC-Regular.otf in Resources */,
 				9F67E8AC24CFE368004A8003 /* NotoSansTC-Thin.otf in Resources */,
 				9F69DC3424CADD2B00C67A6B /* LaunchScreen.storyboard in Resources */,
+				9FAE27A025B04D3B00417BE7 /* GoogleService-Info.plist in Resources */,
 				9F69DC3124CADD2B00C67A6B /* Assets.xcassets in Resources */,
 				9F69DC2F24CADD2800C67A6B /* Main.storyboard in Resources */,
 			);
@@ -769,8 +775,9 @@
 			baseConfigurationReference = 387156608D42A77B47505CF5 /* Pods-GPS Member Store.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "GPS Member Store/GPS會員店.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = K78UD4724Z;
 				INFOPLIST_FILE = "GPS Member Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -790,8 +797,9 @@
 			baseConfigurationReference = 20BAA9CED53B6AB0CD4B072F /* Pods-GPS Member Store.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "GPS Member Store/GPS會員店.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_TEAM = K78UD4724Z;
 				INFOPLIST_FILE = "GPS Member Store/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

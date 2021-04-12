@@ -50,10 +50,10 @@ class ElectronicDocCell: UITableViewCell {
             
             let url = URL(string: fileUrl)
             DispatchQueue.global(qos: .background).async {
-                print("This is run on the background queue")
+//                print("This is run on the background queue")
                 let thumbnail = drawPDFfromURL(url: url!)
                 DispatchQueue.main.async {
-                    print("This is run on the main queue, after the previous code in outer block")
+//                    print("This is run on the main queue, after the previous code in outer block")
                     self.mainImageView.image = thumbnail
                 }
             }

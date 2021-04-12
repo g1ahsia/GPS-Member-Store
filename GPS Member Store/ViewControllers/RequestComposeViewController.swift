@@ -39,6 +39,8 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     
     var attachedImages = [UIImage]()
     
+    var spinner = UIActivityIndicatorView(style: .gray)
+    
     var request = Request.init(id: 0, typeId: 0, areaId: 0, name: "", price: 0, quantity: 0, description: "", expiryDate: "", attachments: [], updatedDate: "", storeId: "", storeName: "")
 
 //    var kbSize = CGSize(width: 0.0, height: 0.0)typeSelectionButtonTapped
@@ -191,9 +193,14 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         descView.delegate = self
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         blackCover.addGestureRecognizer(tap)
-        self.setupLayout()
         
         hideKeyboardWhenTappedOnView()
+        
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(spinner)
+        
+        self.setupLayout()
+
     }
     
     @objc private func cancelButtonTapped(sender: UIButton!) {
@@ -251,7 +258,9 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
     
 
     @objc private func sendButtonTapped(sender: UIButton!) {
+        spinner.startAnimating()
         sender.isEnabled = false
+        sender.alpha = 0.5
         print("sending request")
         ATTACHMENTS = []
         for imageView in attachedImageViews {
@@ -288,6 +297,8 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
                 NotificationCenter.default.post(name: Notification.Name("CreatedRequest"), object: nil)
                 DispatchQueue.main.async {
                     self.send.isEnabled = true
+                    self.send.alpha = 1.0
+                    self.spinner.stopAnimating()
                     self.dismiss(animated: true) {
                     }
                 }
@@ -314,8 +325,12 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         headerTableView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
         headerTableView.topAnchor.constraint(equalTo: contentScrollView.topAnchor).isActive = true
         headerTableView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        headerTableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
-
+        if #available(iOS 14, *) {
+            headerTableView.heightAnchor.constraint(equalToConstant: 300).isActive = true
+        }
+        else {
+            headerTableView.heightAnchor.constraint(equalToConstant: 430).isActive = true
+        }
         scrollViewBottomConstraint = contentScrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         scrollViewBottomConstraint?.isActive = true
         
@@ -357,6 +372,9 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         areaPickerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         areaPickerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         areaPickerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        spinner.centerXAnchor.constraint(equalTo: send.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: send.centerYAnchor).isActive = true
     }
     func textViewDidChange(_ textView: UITextView) {
         descPlaceholder.isHidden = !textView.text.isEmpty
@@ -384,8 +402,13 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         
         // Cursor
         let textViewCursor = descView.caretRect(for: descView.selectedTextRange!.start).origin
-        let cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 250 + 30)
-
+        var cursorPoint = CGPoint(x: 0, y: 0);
+        if #available(iOS 14, *) {
+            cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 340)
+        }
+        else {
+            cursorPoint = CGPoint(x: textViewCursor.x + textViewOrigin.x, y: textViewCursor.y + contentScrollView.frame.origin.y - contentScrollView.contentOffset.y + 480)
+        }
         let keyboardTop = self.view.frame.size.height - keyboardHeight
         print("keyboardTop ", keyboardTop)
         
@@ -605,6 +628,22 @@ extension RequestComposeViewController: UIImagePickerControllerDelegate, UINavig
 }
 
 extension RequestComposeViewController: UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if #available(iOS 14, *) {
+            return 50
+        }
+        else {
+            switch indexPath.row {
+                case 5:
+                    return 180
+                default:
+                    return 50
+            }
+        }
+    }
+
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6

@@ -15,6 +15,8 @@ class PDFViewController: UIViewController {
 //    var pdfView: PDFView!
     var fileUrl : String?
     
+    var spinner = UIActivityIndicatorView(style: .gray)
+    
     var pdfView : PDFView = {
         var view = PDFView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         return view
@@ -34,16 +36,18 @@ class PDFViewController: UIViewController {
     }
 
     override func viewDidLoad() {
+        view.backgroundColor = SNOW
         super.viewDidLoad()
-        
         view.addSubview(pdfView)
         view.addSubview(close)
-
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(spinner)
         setupLayout()
     }
         
     private func setupLayout() {
         if let fileUrl = fileUrl {
+            spinner.startAnimating()
             NetworkManager.fetchPDF(urlString: fileUrl) { (data) in
                 DispatchQueue.main.async {
                     let pdfDOC = PDFDocument(data: data)
@@ -56,11 +60,14 @@ class PDFViewController: UIViewController {
                     self.pdfView.autoScales = true
                     self.pdfView.maxScaleFactor = 4.0
                     self.pdfView.minScaleFactor = self.pdfView.scaleFactorForSizeToFit
+                    self.spinner.stopAnimating()
                 }
             }
         }
         close.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16).isActive = true
         close.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 16).isActive = true
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
 
 
     }

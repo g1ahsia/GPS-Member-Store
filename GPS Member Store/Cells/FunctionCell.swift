@@ -8,10 +8,12 @@
 
 import Foundation
 import UIKit
+import BadgeSwift
 
 class FunctionCell: UICollectionViewCell {
     var mainImage : UIImage?
     var name : String?
+    var badgeNum : Int?
     
     var mainImageBackground : UIView = {
         var view = UIView()
@@ -42,16 +44,21 @@ class FunctionCell: UICollectionViewCell {
         return textView
     }()
     
+    var badge = BadgeSwift()
+
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.addSubview(mainImageBackground)
         mainImageBackground.addSubview(mainImageView)
         self.addSubview(nameView)
         
-//        self.layer.borderColor = UIColor .red.cgColor
-//        self.layer.borderWidth = 1
-
-        self.clipsToBounds = true;
+        badge.frame = CGRect(x: self.contentView.frame.width - 9, y: -9, width: 18, height: 18)
+        self.addSubview(badge)
+        self.contentView.clipsToBounds = false
+        badge.textColor = .white
+        badge.font = UIFont.boldSystemFont(ofSize: 12)
+        badge.isHidden = true
     }
 
     override func layoutSubviews() {
@@ -61,6 +68,15 @@ class FunctionCell: UICollectionViewCell {
         }
         if let name = name {
             nameView.text = name
+        }
+        if let badgeNum = badgeNum {
+            if (badgeNum > 0) {
+                badge.text = String(badgeNum)
+                badge.isHidden = false
+            }
+            else {
+                badge.isHidden = true
+            }
         }
         
         mainImageBackground.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

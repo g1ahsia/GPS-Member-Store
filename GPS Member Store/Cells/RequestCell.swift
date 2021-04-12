@@ -90,8 +90,7 @@ class RequestCell: UITableViewCell {
     
     override func prepareForReuse() {
         super .prepareForReuse()
-//        attachments = nil
-        mainImageView.image = nil
+        mainImageView.image = #imageLiteral(resourceName: "img_holder")
         mainImage = nil
     }
     
@@ -119,12 +118,6 @@ class RequestCell: UITableViewCell {
         if let date = updatedDate {
             dateLabel.text = date
         }
-//        if let attachments = attachments {
-//            if (attachments.count > 0) {
-//                mainImageView.downloaded(from: attachments[0]) {
-//                }
-//            }
-//        }
         mainImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         mainImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         mainImageView.heightAnchor.constraint(equalToConstant: 80).isActive = true
@@ -157,25 +150,4 @@ class RequestCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    func setImage() {
-//        if attachments!.count > 0 {
-//            DispatchQueue.main.async {
-//                let jsonUrlString = self.attachments![0]
-//                guard let url = URL(string: jsonUrlString) else { return }
-//                URLSession.shared.dataTask(with: url) { (data, response, err) in
-//                    guard let data = data else { return }
-//
-//                    if err == nil {
-//                        let image = UIImage(data: data)
-//
-//                        DispatchQueue.main.async {
-//                            self.mainImageView.image = image
-//                        }
-//                    }
-//                }.resume()
-//            }
-//        }
-//    }
-
 }

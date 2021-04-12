@@ -85,6 +85,23 @@ class LoginViewController: UIViewController {
         button.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    var versionLabel : UILabel = {
+        var label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = .clear
+        label.font = UIFont(name: "NotoSansTC-Regular", size: 15)
+        label.textAlignment = .right
+        label.textColor = MYTLE
+        return label
+    }()
+    
+    func version() -> String {
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        let build = dictionary["CFBundleVersion"] as! String
+        return "\(version) build \(build)"
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -100,10 +117,13 @@ class LoginViewController: UIViewController {
         view.addSubview(accountTableView)
         view.addSubview(forgetPassword)
         view.addSubview(login)
+        view.addSubview(versionLabel)
         view.addSubview(invisibleView)
         setupLayout()
         
         hideKeyboardWhenTappedOnView()
+        
+        versionLabel.text = version()
     }
     
     @objc private func menuButtonTapped(sender: UIButton!) {
@@ -134,7 +154,18 @@ class LoginViewController: UIViewController {
                 if (result["status"] as! Int == 1) {
                     self.dismiss(animated: true) {
                         NotificationCenter.default.post(name: Notification.Name("Initialize"), object: nil)
+                        NotificationCenter.default.post(name: Notification.Name("setCookies"), object: nil, userInfo: nil)
                     }
+                    let parameters: [String: Any] = [
+                        "token" : FCM_TOKEN,
+                        "platform" : "ios"
+                    ]
+                    NetworkManager.registerStoreUserToken(parameters: parameters) { (result) in
+                        if (result["status"] as! Int == 1) {
+                            print("fcm token added")
+                        }
+                    }
+
                 }
                 else if (result["status"] as! Int == -1) {
                     GlobalVariables.showAlert(title: "登入", message: ERR_CONNECTING, vc: self)
@@ -188,6 +219,10 @@ class LoginViewController: UIViewController {
         login.topAnchor.constraint(equalTo: forgetPassword.bottomAnchor, constant: 20).isActive = true
         login.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         login.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        
+        versionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        versionLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        versionLabel.heightAnchor.constraint(equalToConstant: 44).isActive = true
     }
 
 }

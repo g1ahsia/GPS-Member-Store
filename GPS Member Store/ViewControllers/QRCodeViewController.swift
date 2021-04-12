@@ -134,23 +134,26 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
     }
     
     private func setupLayout() {
-        QRCodeBackground.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
+//        QRCodeBackground.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
         QRCodeBackground.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        QRCodeBackground.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
-        QRCodeBackground.heightAnchor.constraint(equalTo: QRCodeBackground.widthAnchor).isActive = true
-        
+//        QRCodeBackground.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
+//        QRCodeBackground.heightAnchor.constraint(equalTo: QRCodeBackground.widthAnchor).isActive = true
+        QRCodeBackground.widthAnchor.constraint(equalTo: QRCodeBackground.heightAnchor).isActive = true
+        QRCodeBackground.bottomAnchor.constraint(equalTo: descView.topAnchor, constant: -20).isActive = true
+        QRCodeBackground.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
         mainImageView.leftAnchor.constraint(equalTo: QRCodeBackground.leftAnchor, constant: 45).isActive = true
         mainImageView.topAnchor.constraint(equalTo: QRCodeBackground.topAnchor, constant: 45).isActive = true
         mainImageView.rightAnchor.constraint(equalTo: QRCodeBackground.rightAnchor, constant: -45).isActive = true
         mainImageView.bottomAnchor.constraint(equalTo: QRCodeBackground.bottomAnchor, constant: -45).isActive = true
 
         descView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 20).isActive = true
-        descView.topAnchor.constraint(equalTo: QRCodeBackground.bottomAnchor, constant: 20).isActive = true
+        descView.bottomAnchor.constraint(equalTo: point.topAnchor, constant: -20).isActive = true
         descView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -20).isActive = true
         descView.heightAnchor.constraint(equalToConstant: 80).isActive = true
 
         point.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        point.topAnchor.constraint(equalTo: descView.bottomAnchor, constant: 20).isActive = true
+        point.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         point.widthAnchor.constraint(equalToConstant: 108).isActive = true
         point.heightAnchor.constraint(equalToConstant: 64).isActive = true
         
@@ -229,6 +232,7 @@ class QRCodeViewController: UIViewController, UITextViewDelegate {
     
     private func createQRCode() {
         NetworkManager.createQRCode(points: selectedPoint) { (qrCode) in
+            print("abc", qrCode)
             DispatchQueue.main.async {
                 let imageData = qrCode.image
                 if let decodedData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters) {

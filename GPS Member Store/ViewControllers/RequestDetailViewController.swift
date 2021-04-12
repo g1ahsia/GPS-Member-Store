@@ -99,7 +99,7 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "message", for: indexPath) as! MessageCell
         cell.viewController = self
-        if (indexPath.row > messages.count - 1) {
+        if (indexPath.row == 0) {
             cell.sender = request?.storeName
             cell.message = "商品名稱：" + request!.name + "\n" +
                             "商品價格：" + String(request!.price) + "\n" +
@@ -111,17 +111,17 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.attachedImages = self.cachedImages[threadId] ?? []
         }
         else {
-            cell.sender = messages[indexPath.row].storeName + messages[indexPath.row].storeUserName
-            cell.message = messages[indexPath.row].message
-            cell.date = messages[indexPath.row].date
-            cell.attachedImages = self.cachedImages[messages[indexPath.row].id] ?? []
+            cell.sender = messages[indexPath.row - 1].storeName + messages[indexPath.row - 1].storeUserName
+            cell.message = messages[indexPath.row - 1].message
+            cell.date = messages[indexPath.row - 1].date
+            cell.attachedImages = self.cachedImages[messages[indexPath.row - 1].id] ?? []
         }
         cell.layoutSubviews()
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (indexPath.row > messages.count - 1) {
+        if (indexPath.row == 0) {
             let textView = UITextView()
             textView.font = UIFont(name: "NotoSansTC-Regular", size: 15)
             textView.textContainerInset = .zero; // fix the silly UITextView bug
@@ -140,9 +140,9 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
             textView.font = UIFont(name: "NotoSansTC-Regular", size: 15)
             textView.textContainerInset = .zero; // fix the silly UITextView bug
             textView.textContainer.lineFragmentPadding = 0; // fix the silly UITextView bug
-            textView.text = messages[indexPath.row].message
+            textView.text = messages[indexPath.row - 1].message
             let size = textView.sizeThatFits(CGSize(width: self.view.frame.size.width - 32, height: CGFloat.greatestFiniteMagnitude))
-            let images = self.cachedImages[messages[indexPath.row].id] ?? []
+            let images = self.cachedImages[messages[indexPath.row - 1].id] ?? []
             return 16 + 40 + size.height + (CGFloat(images.count) * (200 + 16)) + 16
         }
     }

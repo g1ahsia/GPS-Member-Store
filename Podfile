@@ -10,6 +10,11 @@ target 'GPS Member Store' do
   pod 'AWSS3'
   pod 'AWSCognito'
   pod 'AWSCore'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Messaging'
+  pod 'CryptoSwift'
+  pod 'BadgeSwift', '~> 8.0'
+
 
   target 'GPS Member StoreTests' do
     inherit! :search_paths
