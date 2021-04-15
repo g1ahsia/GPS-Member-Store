@@ -209,7 +209,7 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
         for urlString in urlStrings {
             
             let url = URL(string: urlString)!
-            print("Sending a request " + urlString )
+            print("Sending a request \(indexPath.row)" + urlString)
 
             let downloadTask:URLSessionDownloadTask =
                 URLSession.shared.downloadTask(with: url, completionHandler: { [self]
@@ -256,35 +256,26 @@ extension RequestDetailViewController: UITableViewDelegate, UITableViewDataSourc
 
     
     @objc func reloadData () {
-//        if (role == Role.Consumer) {
-            NetworkManager.fetchRequestMessages(id: threadId) { (messages) in
-                self.messages = messages
-                DispatchQueue.main.async {
-                    self.messageDetailTableView.reloadData()
-                }
-                
-                if (messages.count > 0) {
-                    for index in 0...messages.count - 1 {
-                        let attachments = self.messages[index].attachments
-                        let messageId = self.messages[index].id
-                        DispatchQueue.main.async {
-                            self.loadImages(attachments, indexPath: NSIndexPath(row: index, section: 0) as IndexPath, messageId: messageId)
-                        }
+        NetworkManager.fetchRequestMessages(id: threadId) { (messages) in
+            self.messages = messages
+            DispatchQueue.main.async {
+                self.messageDetailTableView.reloadData()
+            }
+            // load message attached images
+            if (messages.count > 0) {
+                for index in 0...messages.count - 1 {
+                    let attachments = self.messages[index].attachments
+                    let messageId = self.messages[index].id
+                    DispatchQueue.main.async {
+                        print("loading images for index \(index)")
+                        self.loadImages(attachments, indexPath: NSIndexPath(row: index + 1, section: 0) as IndexPath, messageId: messageId)
                     }
                 }
-                DispatchQueue.main.async {
-                    self.loadImages(self.request!.attachments, indexPath: NSIndexPath(row: messages.count, section: 0) as IndexPath, messageId: self.threadId)
-                }
             }
-//        }
-//        else {
-//            NetworkManager.fetchStoreMessages(id: threadId) { (messages) in
-//                self.messages = messages
-//                DispatchQueue.main.async {
-//                    self.messageDetailTableView.reloadData()
-//                }
-//            }
-//        }
+            // load request attached images
+            DispatchQueue.main.async {
+                self.loadImages(self.request!.attachments, indexPath: NSIndexPath(row: 0, section: 0) as IndexPath, messageId: self.threadId)
+            }
+        }
     }
-
 }

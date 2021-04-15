@@ -261,7 +261,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         spinner.startAnimating()
         sender.isEnabled = false
         sender.alpha = 0.5
-        print("sending request")
+        print("initiated request")
         ATTACHMENTS = []
         for imageView in attachedImageViews {
             attachedImages.append(imageView.image!)
@@ -275,11 +275,12 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
                 uploadImage(withImage: image, group: myGroup)
             }
             myGroup.notify(queue: .main) {
-                print("Finished all requests.")
+                print("Finished uploading images")
                 self.sendMessage()
             }
         }
         else {
+            print("sending request")
             self.sendMessage()
         }
     }
@@ -292,6 +293,7 @@ class RequestComposeViewController: UIViewController, UITextViewDelegate {
         request.description = descView.text
         
         NetworkManager.createRequest(typeId: request.typeId, areaId: request.areaId, name: request.name, price: request.price, quantity: request.quantity, expiryDate: request.expiryDate, description: request.description, attachments: ATTACHMENTS) { (result) in
+            print("got result")
             print(result)
             if (result["status"] as! Int == 1) {
                 NotificationCenter.default.post(name: Notification.Name("CreatedRequest"), object: nil)
