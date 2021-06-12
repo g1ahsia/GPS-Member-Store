@@ -173,7 +173,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         if (notificationType == 1) {
             NotificationCenter.default.post(name: Notification.Name("presentMessageDetailVC"), object: nil, userInfo: userInfo)
         }
-        else {
+        else if (notificationType == 2) {
             NotificationCenter.default.post(name: Notification.Name("presentRequestDetailVC"), object: nil, userInfo: userInfo)
         }
     }

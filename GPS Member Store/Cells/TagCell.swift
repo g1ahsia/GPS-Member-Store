@@ -49,7 +49,6 @@ class TagCell: UITableViewCell {
             checkMarkImageView.isHidden = true
             nameLabel.textColor = MYTLE
         }
-
     }
     
     override func layoutSubviews() {

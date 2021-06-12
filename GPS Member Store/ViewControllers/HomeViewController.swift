@@ -58,7 +58,7 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     lazy var functionCollectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = UICollectionView.ScrollDirection.vertical
-        let itemWidth = (UIScreen.main.bounds.width - 80) / 3
+        let itemWidth = Int((UIScreen.main.bounds.width - 80) / 3)
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth + 35)
         layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         layout.minimumInteritemSpacing = 20
@@ -213,10 +213,10 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
             .domain: "apps.youthbio.com.tw",
             .path: "/gps",
             .name: "user_name",
-            .value: String(describing: USERNAME.cString(using: String.Encoding.utf8))
-
+            .value: String(describing: USERNAME.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+)
 //            .secure: "FALSE",
-//            .expires: NSDate(timeIntervalSinceNow: 31556926)
+//            .expires: NSDate(timeIntervalSinceNow: 31556926)po
         ])!
         let vip_id_cookie = HTTPCookie(properties: [
             .domain: "apps.youthbio.com.tw",
@@ -246,7 +246,7 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9;
+        return 10;
     }
     
     @available(iOS 6.0, *)
@@ -286,6 +286,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.name = "點數發送"
             break
         case 8:
+            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_10")
+            cell.name = "處方箋"
+            break
+        case 9:
             cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_9")
             cell.name = "登出"
             break
@@ -365,9 +369,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             case 7:
                 QRCodeButtonTapped()
             case 8:
+                let prescriptionsVC = PrescriptionsViewController()
+                self.navigationController?.pushViewController(prescriptionsVC, animated: true)
+                break
+            case 9:
                 GlobalVariables.showAlertWithOptions(title: "登出", message: "確定要登出", confirmString: "登出", vc: self) {
                     print("已登出")
-                    
                     UserDefaults.standard.removeObject(forKey: "myToken")
                     NotificationCenter.default.post(name: Notification.Name("Logout"), object: nil)
                 }

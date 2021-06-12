@@ -12,7 +12,7 @@ target 'GPS Member Store' do
   pod 'AWSCore'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
-  pod 'CryptoSwift'
+  #pod 'CryptoSwift'
   pod 'BadgeSwift', '~> 8.0'
 
 
