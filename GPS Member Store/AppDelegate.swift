@@ -176,6 +176,10 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         else if (notificationType == 2) {
             NotificationCenter.default.post(name: Notification.Name("presentRequestDetailVC"), object: nil, userInfo: userInfo)
         }
+        else if (notificationType == 7) {
+            NotificationCenter.default.post(name: Notification.Name("presentPrescriptionVC"), object: nil, userInfo: userInfo)
+        }
+
     }
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics

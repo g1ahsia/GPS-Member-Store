@@ -13,6 +13,8 @@ class ViewController: UIViewController {
     
     var tabBarCtrl: UITabBarController!
     
+    var homeNav = UINavigationController()
+    
     var messageNav = UINavigationController()
     
     var requestNav = UINavigationController()
@@ -43,11 +45,13 @@ class ViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentLoginVC(notification:)), name: Notification.Name("Logout"), object: nil)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(self.createTabBarController), name:Notification.Name("Initialize"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.createTabBarController), name:Notification.Name("createTabBarController"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentMessageDetailVC(notification:)), name: Notification.Name("presentMessageDetailVC"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentRequestDetailVC(notification:)), name: Notification.Name("presentRequestDetailVC"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.presentPrescriptionVC(notification:)), name: Notification.Name("presentPrescriptionVC"), object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.presentElectronicDocVC(notification:)), name: Notification.Name("presentElectronicDocVC"), object: nil)
         
@@ -91,9 +95,9 @@ class ViewController: UIViewController {
         let homeVC = HomeViewController()
         homeVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
 
-        let homeNav = UINavigationController()
         homeNav.navigationBar.tintColor = ATLANTIS_GREEN
         homeNav.setNavigationBarHidden(false, animated: false)
+        homeNav.viewControllers.removeAll()
         homeNav.pushViewController(homeVC, animated: true)
 
         let customTabBarItem:UITabBarItem = UITabBarItem(title: "首頁", image: #imageLiteral(resourceName: " tab_ic_home_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_home_green"))
@@ -129,7 +133,6 @@ class ViewController: UIViewController {
         requestNav.pushViewController(requestVC, animated: true)
         customTabBarItem4 = UITabBarItem(title: "調撥平台", image: #imageLiteral(resourceName: " tab_ic_truck_grey"), selectedImage: #imageLiteral(resourceName: " tab_ic_truck_green"))
         requestNav.tabBarItem = customTabBarItem4
-        
 
         let consumerSearchVC = ConsumerSearchViewController()
         consumerSearchVC.purpose = ConsumerSearchPurpose.LookUp
@@ -150,6 +153,11 @@ class ViewController: UIViewController {
                 tabBarFunctions.remove(at: index)
             }
         }
+        if (!PRIVILEGE.contains(7)) {
+            if let index = tabBarFunctions.firstIndex(of: productSearchNav) {
+                tabBarFunctions.remove(at: index)
+            }
+        }
         if (!PRIVILEGE.contains(14)) {
             if let index = tabBarFunctions.firstIndex(of: messageNav) {
                 tabBarFunctions.remove(at: index)
@@ -161,6 +169,10 @@ class ViewController: UIViewController {
             }
         }
         tabBarCtrl.viewControllers = tabBarFunctions
+
+        for subview in self.view.subviews {
+            subview.removeFromSuperview()
+        }
 
         self.view.addSubview(tabBarCtrl.view)
 
@@ -201,17 +213,28 @@ class ViewController: UIViewController {
         let threadId = (userInfo?["threadId"] as! NSString).integerValue
 
         NetworkManager.fetchRequest(threadId: threadId) { (request) in
-            let requestDetailVC = RequestDetailViewController()
-            requestDetailVC.title = REQUEST_SUBJECTS[request.typeId - 1]
-            requestDetailVC.request = request
-            requestDetailVC.threadId = request.id
-            requestDetailVC.reloadData()
             DispatchQueue.main.async {
+                let requestDetailVC = RequestDetailViewController()
+                requestDetailVC.title = REQUEST_SUBJECTS[request.typeId - 1]
+                requestDetailVC.request = request
+                requestDetailVC.threadId = request.id
+                requestDetailVC.reloadData()
                 self.requestNav.popToRootViewController(animated: true)
                 self.requestNav.pushViewController(requestDetailVC, animated: true)
             }
         }
     }
+    
+    @objc func presentPrescriptionVC(notification: Notification) {
+        tabBarCtrl.selectedIndex = 0
+        let userInfo = notification.userInfo;
+        let prescriptionId = (userInfo?["prescriptionId"] as! NSString).integerValue
+        let prescriptionVC = PrescriptionViewController()
+        prescriptionVC.prescriptionId = prescriptionId
+        self.homeNav.popToRootViewController(animated: true)
+        self.homeNav.pushViewController(prescriptionVC, animated: true)
+    }
+
     
     @objc func presentElectronicDocVC(notification: Notification) {
         let userInfo = notification.userInfo;

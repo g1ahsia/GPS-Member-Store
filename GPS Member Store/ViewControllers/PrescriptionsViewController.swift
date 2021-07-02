@@ -9,9 +9,10 @@
 import Foundation
 import UIKit
 
-class PrescriptionsViewController: UIViewController {
+class PrescriptionsViewController: UIViewController, UISearchBarDelegate {
     var unProcessedPrescriptions = [Prescription]()
     var processedPrescriptions = [Prescription]()
+
     let button1 = UIButton()
     let button2 = UIButton()
     let buttonSelector = UIView()
@@ -71,6 +72,25 @@ class PrescriptionsViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         (UIApplication.shared.delegate as! AppDelegate).restrictRotation = .portrait
+        
+        unProcessedPrescriptions = []
+        processedPrescriptions = []
+
+        NetworkManager.fetchPrescriptions(keyword : "") { (prescriptions) in
+            DispatchQueue.main.async {
+                for prescription in prescriptions {
+                    if (prescription.status == 0) {
+                        self.unProcessedPrescriptions.append(prescription)
+                    }
+                    else {
+                        self.processedPrescriptions.append(prescription)
+                    }
+                }
+                self.unproccessedPrescriptionTableView.reloadData()
+                self.proccessedPrescriptionTableView.reloadData()
+
+            }
+        }
     }
     
     override func viewDidLoad() {
@@ -95,13 +115,18 @@ class PrescriptionsViewController: UIViewController {
         mainScrollView.addSubview(unproccessedPrescriptionTableView)
         mainScrollView.addSubview(proccessedPrescriptionTableView)
 
-        menuView.addSubview(productSearchBar)
         menuView.addSubview(buttonSelector)
         menuView.addSubview(button1)
         menuView.addSubview(button2)
+        
+        productSearchBar.delegate = self
+
+        view.addSubview(productSearchBar)
         view.addSubview(menuView)
         view.addSubview(mainScrollView)
         setupLayout()
+        unproccessedPrescriptionTableView.tableFooterView = UIView(frame: .zero)
+        proccessedPrescriptionTableView.tableFooterView = UIView(frame: .zero)
     }
     
     private func setupLayout() {
@@ -155,7 +180,6 @@ class PrescriptionsViewController: UIViewController {
             print("button Action 1", sender.buttonType)
             mainScrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             buttonSelector.frame = CGRect(x: 2, y: 2, width: (UIScreen.main.bounds.width - 40 - 10)/2, height: 36)
-
         }
         else if (sender == button2) {
             print("button Action 2", sender.buttonType)
@@ -163,6 +187,40 @@ class PrescriptionsViewController: UIViewController {
             buttonSelector.frame = CGRect(x: 2 + buttonSelector.frame.size.width + 2, y: 2, width: (UIScreen.main.bounds.width - 40 - 10)/2, height: 36)
 
         }
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
+        self.perform(#selector(self.reload), with: nil, afterDelay: 0.5)
+
+    }
+    
+    @objc func reload() {
+        unProcessedPrescriptions = []
+        processedPrescriptions = []
+    
+        NetworkManager.fetchPrescriptions(keyword: productSearchBar.text ?? "") { prescriptions in
+            DispatchQueue.main.async {
+                for prescription in prescriptions {
+                    if (prescription.status == 0) {
+                        self.unProcessedPrescriptions.append(prescription)
+                    }
+                    else {
+                        self.processedPrescriptions.append(prescription)
+                    }
+                }
+                self.unproccessedPrescriptionTableView.reloadData()
+                self.proccessedPrescriptionTableView.reloadData()
+
+            }
+        }
+    }
+
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("hehe")
+
+        self.view.endEditing(true)
     }
 
 }
@@ -176,12 +234,12 @@ extension PrescriptionsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView == unproccessedPrescriptionTableView) {
-//            return unProcessedPrescriptions.count
-            return 5
+            return unProcessedPrescriptions.count
+//            return 5
         }
         else {
-//            return processedPrescriptions.count
-            return 5
+            return processedPrescriptions.count
+//            return 5
         }
     }
     
@@ -189,19 +247,17 @@ extension PrescriptionsViewController: UITableViewDelegate, UITableViewDataSourc
         
         if (tableView == unproccessedPrescriptionTableView) {
             let cell = tableView.dequeueReusableCell(withIdentifier: "prescription", for: indexPath) as! MissionCell
-//            cell.imageUrl = unProcessedPrescriptions[indexPath.row].imageUrl
-//            cell.name = unProcessedPrescriptions[indexPath.row].name
-//            cell.desc = unProcessedPrescriptions[indexPath.row].desc
-            cell.mainImage = #imageLiteral(resourceName: "img_holder")
+            cell.name = unProcessedPrescriptions[indexPath.row].patientName
+            cell.desc = unProcessedPrescriptions[indexPath.row].createdDate
+            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_10")
             cell.layoutSubviews()
             return cell
         }
         else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "prescription", for: indexPath) as! MissionCell
-//            cell.imageUrl = processedPrescriptions[indexPath.row].imageUrl
-//            cell.name = processedPrescriptions[indexPath.row].name
-//            cell.desc = processedPrescriptions[indexPath.row].desc
-            cell.mainImage = #imageLiteral(resourceName: "img_holder")
+            cell.name = processedPrescriptions[indexPath.row].patientName
+            cell.desc = processedPrescriptions[indexPath.row].createdDate
+            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_10")
             cell.layoutSubviews()
             return cell
         }
@@ -210,6 +266,21 @@ extension PrescriptionsViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let prescriptionVC = PrescriptionViewController()
-        self.navigationController?.pushViewController(prescriptionVC, animated: true)
+        
+        if (tableView == unproccessedPrescriptionTableView) {
+            prescriptionVC.prescriptionId = unProcessedPrescriptions[indexPath.row].id
+            self.navigationController?.pushViewController(prescriptionVC, animated: true)
+        }
+        else {
+            prescriptionVC.prescriptionId = processedPrescriptions[indexPath.row].id
+            self.navigationController?.pushViewController(prescriptionVC, animated: true)
+        }
     }
+}
+
+
+extension PrescriptionViewController: UISearchBarDelegate {
+    
+    
+
 }

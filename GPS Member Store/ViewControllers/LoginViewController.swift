@@ -143,17 +143,14 @@ class LoginViewController: UIViewController {
     @objc private func loginButtonTapped(sender: UIButton!) {
         let cell0 = accountTableView.cellForRow(at: NSIndexPath(row: 0, section: 0) as IndexPath) as! FormCell
         let cell1 = accountTableView.cellForRow(at: NSIndexPath(row: 1, section: 0) as IndexPath) as! FormCell
-//        if (!GlobalVariables.validateMobile(phoneNum: cell0.answerField.text)) {
-//            GlobalVariables.showAlert(title: title, message: ERR_INCORRECT_PHONE_NUMBER_FORMAT, vc: self)
-//            return
-//        }
+
         NetworkManager.userLogin(account: cell0.answerField.text!, password: cell1.answerField.text!) { (result) in
             print(result)
             DispatchQueue.main.async {
 
                 if (result["status"] as! Int == 1) {
                     self.dismiss(animated: true) {
-                        NotificationCenter.default.post(name: Notification.Name("Initialize"), object: nil)
+                        NotificationCenter.default.post(name: Notification.Name("createTabBarController"), object: nil)
                         NotificationCenter.default.post(name: Notification.Name("setCookies"), object: nil, userInfo: nil)
                     }
                     let parameters: [String: Any] = [

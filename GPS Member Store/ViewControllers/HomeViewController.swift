@@ -29,6 +29,13 @@ class OnShiftWKHTTPCookieStoreObserver: NSObject, WKHTTPCookieStoreObserver {
 
 
 class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+    var features = [Feature]()
+    var eBillCell : FunctionCell?
+    var eDocsCell : FunctionCell?
+    var stockCell : FunctionCell?
+    var salesCell : FunctionCell?
+    var prescriptionCell : FunctionCell?
+
     var controller = UIViewController()
     var logoImageView : UIImageView = {
         let imageView = UIImageView()
@@ -43,7 +50,6 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         label.isUserInteractionEnabled = false
         label.font = UIFont(name: "PingFangTC-Medium", size: 28)
         label.textColor = ATLANTIS_GREEN
-//        label.text = "松仁藥局"
         return label
     }()
     
@@ -84,13 +90,9 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         return web
     }()
 
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-//        if (self.accountTableView.indexPathForSelectedRow != nil) {
-//            self.accountTableView.deselectRow(at: self.accountTableView.indexPathForSelectedRow!, animated: true)
-//        }
         
         NetworkManager.fetchStore(id: STOREID) { (fetchedStore) in
             DispatchQueue.main.async {
@@ -104,7 +106,6 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-//        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
     override func viewDidLoad() {
@@ -133,6 +134,56 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         
         setupLayout()
         fetchBadges()
+        
+        let userDefaults = UserDefaults.standard
+
+        let myToken = userDefaults.string(forKey: "myToken")
+        let myPrivilege = userDefaults.array(forKey: "myPrivilege") as? [Int] ?? [Int]()
+
+        if ((myToken) != nil) {
+            PRIVILEGE = myPrivilege
+        }
+
+        if (PRIVILEGE.contains(4)) {
+            let feature = Feature.init(privilege: 4, name: "電子公文", image: #imageLiteral(resourceName: "Member_Store_Main_1"))
+            features.append(feature)
+        }
+
+        if (PRIVILEGE.contains(9)) {
+            let feature = Feature.init(privilege: 9, name: "電子帳單", image: #imageLiteral(resourceName: "Member_Store_Main_1"))
+            features.append(feature)
+        }
+        if (PRIVILEGE.contains(10)) {
+            let feature = Feature.init(privilege: 10, name: "訂貨系統", image: #imageLiteral(resourceName: "Member_Store_Main_5"))
+            features.append(feature)
+        }
+        if (PRIVILEGE.contains(11)) {
+            let feature = Feature.init(privilege: 11, name: "庫存調查", image: #imageLiteral(resourceName: "Member_Store_Main_3"))
+            features.append(feature)
+        }
+        if (PRIVILEGE.contains(12)) {
+            let feature = Feature.init(privilege: 12, name: "批售價查詢", image: #imageLiteral(resourceName: "Member_Store_Main_6"))
+            features.append(feature)
+        }
+        if (PRIVILEGE.contains(13)) {
+            let feature = Feature.init(privilege: 13, name: "銷貨單", image: #imageLiteral(resourceName: "Member_Store_Main_4"))
+            features.append(feature)
+        }
+        if (PRIVILEGE.contains(17)) {
+            let feature = Feature.init(privilege: 17, name: "發送點數", image: #imageLiteral(resourceName: "Member_Store_Main_8"))
+            features.append(feature)
+        }
+        if (PRIVILEGE.contains(18)) {
+            let feature18 = Feature.init(privilege: 18, name: "處方箋", image: #imageLiteral(resourceName: "Member_Store_Main_10"))
+            features.append(feature18)
+        }
+        let feature1 = Feature.init(privilege: -1, name: "修改密碼", image: #imageLiteral(resourceName: "Member_Store_Main_7"))
+        features.append(feature1)
+
+        let feature2 = Feature.init(privilege: -2, name: "登出", image: #imageLiteral(resourceName: "Member_Store_Main_9"))
+        features.append(feature2)
+
+        functionCollectionView.reloadData()
     }
     private func setupLayout() {
         logoImageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
@@ -166,35 +217,34 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
             DispatchQueue.main.async {
                 print(BADGES)
                 
+//                BADGES = [1, 2, 3, 4, 5, 6, 7]
+                
                 NotificationCenter.default.post(name: Notification.Name("setMessageBadge"), object: nil, userInfo: nil)
                 NotificationCenter.default.post(name: Notification.Name("setRequestBadge"), object: nil, userInfo: nil)
                 
-                let cell1 = self.functionCollectionView.cellForItem(at: NSIndexPath(item: 0, section: 0) as IndexPath) as! FunctionCell
-                cell1.badgeNum = BADGES[0]
-                cell1.layoutSubviews()
-                
-                let cell2 = self.functionCollectionView.cellForItem(at: NSIndexPath(item: 1, section: 0) as IndexPath) as! FunctionCell
-                cell2.badgeNum = BADGES[1]
-                cell2.layoutSubviews()
-
-                let cell3 = self.functionCollectionView.cellForItem(at: NSIndexPath(item: 2, section: 0) as IndexPath) as! FunctionCell
-                cell3.badgeNum = BADGES[2]
-                cell3.layoutSubviews()
-
-                let cell4 = self.functionCollectionView.cellForItem(at: NSIndexPath(item: 3, section: 0) as IndexPath) as! FunctionCell
-                cell4.badgeNum = BADGES[3]
-                cell4.layoutSubviews()
-                
-                BADGE_MESSAGE = BADGES[0] + BADGES[1] + BADGES[2] + BADGES[3] + BADGES[4] + BADGES[5]
+                if ((self.eBillCell) != nil) {
+                    self.eBillCell!.badgeNum = BADGES[0]
+                    self.eBillCell!.layoutSubviews()
+                }
+                if ((self.eDocsCell) != nil) {
+                    self.eDocsCell!.badgeNum = BADGES[1]
+                    self.eDocsCell!.layoutSubviews()
+                }
+                if ((self.stockCell) != nil) {
+                    self.stockCell!.badgeNum = BADGES[2]
+                    self.stockCell!.layoutSubviews()
+                }
+                if ((self.salesCell) != nil) {
+                    self.salesCell!.badgeNum = BADGES[3]
+                    self.salesCell!.layoutSubviews()
+                }
+                if ((self.prescriptionCell) != nil) {
+                    self.prescriptionCell!.badgeNum = BADGES[6]
+                    self.prescriptionCell!.layoutSubviews()
+                }
+                BADGE_MESSAGE = BADGES[0] + BADGES[1] + BADGES[2] + BADGES[3] + BADGES[4] + BADGES[5] + BADGES[6]
                 
                 UIApplication.shared.applicationIconBadgeNumber = BADGE_MESSAGE
-
-//                UserDefaults.standard.set(BADGE_MESSAGE, forKey: "BADGE_MESSAGE")
-//
-//                let userDefaults = UserDefaults.standard
-//
-//                let BADGE_MESSAGE = userDefaults.string(forKey: "BADGE_MESSAGE")
-
             }
         }
     }
@@ -206,8 +256,6 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
             .path: "/gps",
             .name: "user_code",
             .value: "ABCDE12345"
-//            .secure: "FALSE",
-//            .expires: NSDate(timeIntervalSinceNow: 31556926)
         ])!
         let username_cookie = HTTPCookie(properties: [
             .domain: "apps.youthbio.com.tw",
@@ -244,54 +292,31 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
 }
 
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10;
+        return features.count;
     }
     
     @available(iOS 6.0, *)
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "function", for: indexPath) as! FunctionCell
-        switch indexPath.row {
-        case 0:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_1")
-            cell.name = "電子帳單"
-            break
-        case 1:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_2")
-            cell.name = "電子公文"
-            break
-        case 2:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_3")
-            cell.name = "庫存調查"
-            break
-        case 3:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_4")
-            cell.name = "銷貨單"
-            break
-        case 4:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_5")
-            cell.name = "訂貨系統"
-            break
-        case 5:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_6")
-            cell.name = "批售價查詢"
-            break
-        case 6:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_7")
-            cell.name = "更改密碼"
-            break
-        case 7:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_8")
-            cell.name = "點數發送"
-            break
-        case 8:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_10")
-            cell.name = "處方箋"
-            break
+        cell.mainImage = features[indexPath.row].image
+        cell.name = features[indexPath.row].name
+        
+        switch features[indexPath.row].privilege {
         case 9:
-            cell.mainImage = #imageLiteral(resourceName: "Member_Store_Main_9")
-            cell.name = "登出"
+            eBillCell = cell
+            break
+        case 0:
+            eDocsCell = cell
+            break
+        case 11:
+            stockCell = cell
+            break
+        case 13:
+            salesCell = cell
+            break
+        case 18:
+            prescriptionCell = cell
             break
         default:
             break
@@ -299,8 +324,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        switch indexPath.row {
+        let feature = features[indexPath.row]
+        
+        switch feature.privilege {
             case 0:
+                let electronicDocVC = ElectronicDocViewController()
+                self.navigationController?.pushViewController(electronicDocVC, animated: true)
+                let param = ["electronicDocs" : 0]
+                NetworkManager.updateStoreBadges(parameters: param) { (result) in
+                    print(result)
+                    self.fetchBadges()
+                }
+                break
+            case 9:
                 let url = URL.init(string: "http://apps.youthbio.com.tw/gps/#/e-bill")!
                 let request = URLRequest.init(url: url)
                 self.navigationController?.pushViewController(controller, animated: true)
@@ -311,17 +347,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     self.fetchBadges()
                 }
                 break
-            case 1:
-                let electronicDocVC = ElectronicDocViewController()
-                self.navigationController?.pushViewController(electronicDocVC, animated: true)
-                let param = ["electronicDocs" : 0]
-                NetworkManager.updateStoreBadges(parameters: param) { (result) in
-                    print(result)
-                    self.fetchBadges()
-                }
-
+            case 10:
+                let url = URL.init(string: "https://apps.youthbio.com.tw/gps/#/order")!
+                let request = URLRequest.init(url: url)
+                webView.load(request)
+                self.navigationController?.pushViewController(controller, animated: true)
                 break
-            case 2:
+            case 11:
                 let url = URL.init(string: "https://apps.youthbio.com.tw/gps/#/stock")!
                 let request = URLRequest.init(url: url)
                 webView.load(request)
@@ -330,30 +362,10 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     print(result)
                     self.fetchBadges()
                 }
-
                 self.navigationController?.pushViewController(controller, animated: true)
-//                NotificationCenter.default.post(name: Notification.Name("getBadges"), object: nil, userInfo: nil)
                 break
-            case 3:
-                let url = URL.init(string: "https://apps.youthbio.com.tw/gps/#/sales")!
-                let request = URLRequest.init(url: url)
-                webView.load(request)
                 
-                let param = ["sales" : 0]
-                NetworkManager.updateStoreBadges(parameters: param) { (result) in
-                    print(result)
-                    self.fetchBadges()
-                }
-
-                self.navigationController?.pushViewController(controller, animated: true)
-                break
-            case 4:
-                let url = URL.init(string: "https://apps.youthbio.com.tw/gps/#/order")!
-                let request = URLRequest.init(url: url)
-                webView.load(request)
-                self.navigationController?.pushViewController(controller, animated: true)
-                break
-            case 5:
+            case 12:
                 self.navigationController?.setNavigationBarHidden(false, animated: false)
                 let url = URL.init(string: "https://apps.youthbio.com.tw/gps/#/commodity")!
                 let request = URLRequest.init(url: url)
@@ -362,17 +374,34 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 let barcode = UIBarButtonItem(title: "掃描Barcode", style: .done, target: self, action: #selector(self.barcodeButtonTapped))
                 controller.navigationItem.rightBarButtonItem  = barcode
                 break
-            case 6:
+
+            case 13:
+                let url = URL.init(string: "https://apps.youthbio.com.tw/gps/#/sales")!
+                let request = URLRequest.init(url: url)
+                webView.load(request)
+                let param = ["sales" : 0]
+                NetworkManager.updateStoreBadges(parameters: param) { (result) in
+                    print(result)
+                    self.fetchBadges()
+                }
+                self.navigationController?.pushViewController(controller, animated: true)
+                break
+            case 17:
+                QRCodeButtonTapped()
+            case 18:
+                let prescriptionsVC = PrescriptionsViewController()
+                self.navigationController?.pushViewController(prescriptionsVC, animated: true)
+                let param = ["prescription" : 0]
+                NetworkManager.updateStoreBadges(parameters: param) { (result) in
+                    print(result)
+                    self.fetchBadges()
+                }
+                break
+            case -1:
                 let changePasswordVC = ChangePasswordViewController()
                 self.navigationController?.pushViewController(changePasswordVC, animated: true)
                 break
-            case 7:
-                QRCodeButtonTapped()
-            case 8:
-                let prescriptionsVC = PrescriptionsViewController()
-                self.navigationController?.pushViewController(prescriptionsVC, animated: true)
-                break
-            case 9:
+            case -2:
                 GlobalVariables.showAlertWithOptions(title: "登出", message: "確定要登出", confirmString: "登出", vc: self) {
                     print("已登出")
                     UserDefaults.standard.removeObject(forKey: "myToken")
