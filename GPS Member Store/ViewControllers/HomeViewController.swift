@@ -143,12 +143,10 @@ class HomeViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         if ((myToken) != nil) {
             PRIVILEGE = myPrivilege
         }
-
         if (PRIVILEGE.contains(4)) {
             let feature = Feature.init(privilege: 4, name: "電子公文", image: #imageLiteral(resourceName: "Member_Store_Main_1"))
             features.append(feature)
         }
-
         if (PRIVILEGE.contains(9)) {
             let feature = Feature.init(privilege: 9, name: "電子帳單", image: #imageLiteral(resourceName: "Member_Store_Main_1"))
             features.append(feature)
@@ -327,7 +325,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let feature = features[indexPath.row]
         
         switch feature.privilege {
-            case 0:
+            case 4:
                 let electronicDocVC = ElectronicDocViewController()
                 self.navigationController?.pushViewController(electronicDocVC, animated: true)
                 let param = ["electronicDocs" : 0]
